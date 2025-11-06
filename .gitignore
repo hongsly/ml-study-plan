@@ -23,6 +23,7 @@ PUBLIC-REPO-SETUP.md
 
 # IDE/Editor configuration
 .claude/
+TOKEN
 
 # System files
 .DS_Store
