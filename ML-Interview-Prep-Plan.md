@@ -404,33 +404,65 @@ This is where you need the most practice:
 
 ---
 
-**Day 3: Parallelism Strategies & Hardware (2 hours)**
+**Day 3: Parallelism Strategies & Hardware** ✅ **COMPLETED (2025-11-06)**
 
 **Topics** (6 topics):
 9. FSDP (Fully Sharded Data Parallel) - how it works
 10. **Communication costs** - FSDP vs model parallelism (Gap Q185)
-11. Gradient accumulation
-12. Memory hierarchy (HBM, cache)
+11. Gradient accumulation (via microbatches in PP)
+12. Memory hierarchy (HBM, L2, L1, registers)
 13. **Arithmetic intensity** (Gap Q183)
 14. **Interconnect bandwidth** (Gap Q185)
 
-**Study**:
-- [ ] Read: PyTorch FSDP tutorial - 30 min
-  - URL: https://pytorch.org/tutorials/intermediate/FSDP_tutorial.html
-  - Key concepts: Sharding strategy, backward pass synchronization
-- [ ] Read: Roofline model primer - 20 min
-  - URL: https://en.wikipedia.org/wiki/Roofline_model (or Berkeley paper)
-  - Key concepts: Arithmetic intensity = FLOPs/byte, memory-bound vs compute-bound
-- [ ] Watch: NVIDIA GTC talk on GPU optimization (short version, 15-20 min) - 40 min
-  - Search: "NVIDIA GTC LLM training" or "NVIDIA GPU memory bandwidth"
-  - Focus on: Memory hierarchy, NVLink, tensor cores
+**Study Completed**:
+- [X] Read: Tim Dettmers "GPU Memory Bandwidth" - 20 min
+  - URL: https://timdettmers.com/2023/01/30/which-gpu-for-deep-learning/
+  - Key insight: Memory bandwidth is single best GPU performance indicator
+  - Example: A100 vs V100 speedup = 1.73× ≈ bandwidth ratio (1555/900)
+- [X] Skim: Roofline model (Wikipedia) - 15 min
+  - Formula: Performance = min(Peak Compute, Bandwidth × Arithmetic Intensity)
+  - LLMs hit slanted roof (memory-bound, not compute-bound)
+- [X] Review: FSDP concepts - 10 min
+  - Recognized: FSDP = ZeRO Stage 3 (PyTorch implementation)
+  - Skipped PyTorch syntax (not needed for concept understanding)
 
-**Practice**:
-- [ ] Sketch: Communication patterns for data/model/tensor parallelism - 30 min
-  - Draw: All-reduce, reduce-scatter, all-gather patterns
-  - Calculate: Communication costs for simple example (4 GPUs, 1B model)
+**Practice Completed**:
+- [X] Sketched: Communication patterns for DP, FSDP, TP, PP - 25 min
+  - All-reduce (DP), all-gather + reduce-scatter (FSDP)
+  - All-reduce within TP group (TP), point-to-point (PP)
+- [X] Analyzed: Big O scaling for each parallelism strategy - 45 min
+  - DP: O(P), FSDP: O(P), TP: O(B×S×H×L), PP: O(B×S×H×N)
+  - Compared communication volume, frequency, bandwidth requirements
+  - Synthesized trade-offs for interview answers
 
-**Target**: Understand parallelism trade-offs and hardware bottlenecks at interview level
+**Knowledge Check** (15 min):
+- [X] 70% Day 3 content + 30% Review
+- [X] Score: **99.0% (9.9/10)** - A+
+  - Q1-Q7 (Day 3): 99.3% - Excellent understanding of hardware bottlenecks
+  - Q8-Q10 (Review): 98.3% - Perfect retention of ZeRO and TP concepts
+  - **User correction**: Caught bubble time approximation, should be (N-1)/(M+N-1) not (N-1)/M ✅
+  - **User correction**: Noted TP > FSDP ranking for GPT-3 (not FSDP > TP) ✅
+
+**Quick Reference Created**:
+- [X] Day10-Quick-Reference.md - Comprehensive 11-section cheat sheet
+  - GPU performance fundamentals, Roofline model
+  - Communication patterns (4 strategies)
+  - Complexity comparison table with GPT-3 examples
+  - Scaling trade-offs (pros/cons/when to use)
+  - Interview Q&A (ready-to-use answers)
+  - Communication volume calculation details ⭐ NEW
+
+**Day 3 Final Status**: ✅ **EXCEEDED TARGETS**
+- ⏱️ Total time: ~2.25 hours (slightly over 2-hour target, but high efficiency)
+- 📊 Final readiness: **90%+** for hardware/communication interview questions
+- 🎯 Topics mastered: 6/6 at interview-ready level
+- 💡 Key insights:
+  - Memory bandwidth > TFLOPS for LLM performance
+  - TP limited to 8 GPUs per node (hardware constraint)
+  - PP has lowest communication volume but bubble time overhead
+  - FSDP trades 1.5× communication for N× memory savings
+
+**Target**: Understand parallelism trade-offs and hardware bottlenecks at interview level ✅ **ACHIEVED**
 
 ---
 
@@ -535,7 +567,33 @@ This is where you need the most practice:
 
 ---
 
-**Day 1-3: ML Technology Deep Dives (4-5 hours)**
+**Day 1: PyTorch Basics (2-3 hours)** ⭐ **NEW - For OpenAI/Anthropic/DeepMind interviews**
+
+**Rationale**: Basic PyTorch literacy needed for research-heavy ML roles. Goal is reading comprehension, not production coding.
+
+**Study** (1 hour):
+- [ ] PyTorch Quickstart Tutorial (30 min)
+  - URL: https://pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html
+  - Focus: Tensors, Dataset/DataLoader, nn.Module structure
+- [ ] Autograd Mechanics (30 min)
+  - URL: https://pytorch.org/tutorials/beginner/basics/autogradqs_tutorial.html
+  - Understand: .backward(), .grad, computational graph
+
+**Practice** (1.5 hours):
+- [ ] Implement logistic regression in PyTorch (60 min)
+  - Define nn.Module class
+  - Forward pass, loss calculation, optimizer step
+  - Compare to your Week 1 Day 2 numpy implementation
+- [ ] Read PyTorch FSDP code (30 min)
+  - URL: https://github.com/pytorch/pytorch/blob/main/torch/distributed/fsdp/fully_sharded_data_parallel.py
+  - Goal: Recognize patterns from Week 2 Day 3 (all-gather, reduce-scatter)
+  - Don't need to understand every line—just high-level structure
+
+**Target**: Basic PyTorch literacy (can read code in interviews, understand distributed patterns)
+
+---
+
+**Day 2-3: ML Technology Deep Dives (4-5 hours)**
 
 **Pre-study**: Topic Coverage Check (20 min)
 - [ ] List ML infra technologies: Kafka, Flink, Airflow, Feature stores, Model serving, etc.

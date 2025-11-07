@@ -172,14 +172,15 @@ At the end:
 | 7 | 2025-11-04 | N/A | Topic coverage check (82% dunno) | - | Week 2 Day 1 begins |
 | 8 | 2025-11-04 | **80.8% (B+)** | Megatron-LM basics (77%), Review retention (100%) | ZeRO Stage 3 (0%), ZeRO memory reductions (40%), Tensor parallel comm (70%) | Read ZeRO Section 5, reinforce Stage 3 |
 | 9 | 2025-11-05 | **98% (A+)** | Backward pass (97.9%), ZeRO Stage 3 resolved (95%), f/g operators (100%), Review (95%) | Minor terminology precision | Continue Day 3-4 topics |
+| 10 | 2025-11-06 | **99.0% (A+)** | Hardware bottlenecks (99.3%), Communication scaling (perfect), Review (98.3%), **User caught 3 errors!** | None - all concepts strong | Day 4: Inference optimization |
 
-**Progress Trend**: Week 2 momentum accelerating 🚀
+**Progress Trend**: Week 2 sustained excellence 🚀
 - Day 3→5: +10.5% improvement over Week 1
 - Day 5→8: Maintained momentum through gap analysis + topic check
 - Day 8→9: +17.2% improvement (80.8% → 98%) - Outstanding!
-- Day 8: 80.8% on new LLM systems material (excellent first pass)
-- Day 9: 98% on Day 2 material (mastery level) + weak item resolved
-- Review retention: 100% (Week 1 spaced repetition working perfectly across 4-6 days)
+- Day 9→10: +1.0% improvement (98% → 99%) - Sustained mastery level
+- **Day 10 highlight**: User caught 3 approximations/errors (bubble time formula, ranking, TP scaling)
+- Review retention: 98.3% (Week 1 + Week 2 Day 1-2 content, excellent spaced repetition)
 
 ---
 
@@ -191,9 +192,9 @@ At the end:
 
 | Item | First Tested | Score | Last Tested | Status |
 |------|--------------|-------|-------------|--------|
-| Adam optimizer "adaptive LR" detail | Day 3 | 80% | Day 3 | 🟡 Monitor - optional resurface Day 10 |
-| Precision-Recall reasoning clarity | Day 3 | 75% | Day 3 | 🟡 Monitor - optional resurface Day 10 |
-| Tensor parallel all-reduce locations | Day 8 | 70% | Day 9 (100%) | ✅ Resolved - covered in backward pass |
+| Adam optimizer "adaptive LR" detail | Day 3 | 80% | Day 3 | 🟡 Monitor - optional resurface Day 11+ |
+| Precision-Recall reasoning clarity | Day 3 | 75% | Day 3 | 🟡 Monitor - optional resurface Day 11+ |
+| ~~Tensor parallel all-reduce locations~~ | Day 8 | 70% | Day 9 (100%) | ✅ Resolved |
 
 **Resolved Items** (scored 90%+ on retest):
 - ✅ **Inertia computation** (Day 4: 70% → Day 5: 95%) - Resolved in 1 day!
@@ -418,6 +419,79 @@ At the end:
 - Continue Day 3-4 topics (Parallelism strategies, Inference optimization)
 
 **Recommendation**: ✅ Outstanding performance! 98% demonstrates mastery of Day 1-2 material (Megatron-LM + ZeRO fundamentals). Ready for Day 3-4 topics (FSDP, Hardware, Inference optimization).
+
+---
+
+## Day 10 Detailed Results (2025-11-06)
+
+**Content Tested**:
+- 70% Day 10 (Week 2, Day 3): GPU hardware bottlenecks, Roofline model, Communication scaling, FSDP
+- 30% Review: Day 8-9 (ZeRO stages, TP backward pass, 3D parallelism)
+
+**Question Breakdown**:
+
+| Q# | Topic | Day | Score | Notes |
+|----|-------|-----|-------|-------|
+| Q1 | Why 500 TFLOPS → 50 TFLOPS? | 10 | 100% ✅ | Perfect - memory-bound explanation |
+| Q2 | Arithmetic intensity definition | 10 | 100% ✅ | FLOPs/byte, low = memory-bound |
+| Q3 | Roofline model for LLMs | 10 | 100% ✅ | Slanted roof (memory-bound) |
+| Q4 | Communication volume ranking | 10 | 95% 🟡 | Correct P vs B×S×H insight, ranking error (my fault) |
+| Q5 | Why TP needs NVLink vs InfiniBand | 10 | 100% ✅ | High frequency requires high bandwidth |
+| Q6 | FSDP advantage despite 1.5× comm | 10 | 95% 🟡 | N× memory reduction, could add "enables large models" |
+| Q7 | PP bubble time formula | 10 | **100% + Bonus** ✅✅ | User caught approximation error! |
+| Q8 | ZeRO Stage 2 vs Stage 3 | 8-9 | 100% ✅ | Perfect retention (6 days ago) |
+| Q9 | TP backward all-reduce reason | 8-9 | 100% ✅ | Replicated input X requires sum |
+| Q10 | 3D parallelism: TP within node | 8-9 | 100% ✅ | Hardware constraint (NVLink) |
+
+**Overall Score**: 99.0% (9.9/10)
+- Day 10 content (Q1-Q7): 99.3% (6.95/7)
+- Review content (Q8-Q10): 98.3% (2.95/3)
+
+**Exceptional User Contributions**:
+
+1. **Bubble Time Formula Precision** (Q7):
+   - User: "I think it is actually (N-1)/(M+N-1)"
+   - ✅ **Correct!** My approximation was (N-1)/M (valid when M >> N)
+   - Exact: 3/19 = 15.8%, Approximation: 3/16 = 18.75%
+   - **Awarded bonus points for catching approximation**
+
+2. **Communication Volume Ranking** (Q4):
+   - User noted: "TP > FSDP ranking depends on P vs B×S×H"
+   - ✅ **Outstanding insight!** Showed deep understanding
+   - My error: Earlier said FSDP > TP, contradicted own calculation (TP: 1228 GB, FSDP: 1050 GB)
+
+3. **TP Scaling Limitation**:
+   - User: "I thought it is because standard is 8 GPU per node"
+   - ✅ **Correct!** Hardware constraint is primary reason, not just theoretical overhead
+   - Updated quick reference to emphasize hardware first
+
+4. **Communication Volume Clarification**:
+   - User asked: "Is 2P total data sent and received from all GPUs?"
+   - ✅ **Excellent question!** Added Section 11 to quick reference explaining calculation
+
+**Strengths**:
+- ✅ Deep understanding of memory-bound vs compute-bound operations
+- ✅ Correctly identified P vs B×S×H trade-off in communication volume
+- ✅ Exceptional precision (caught 3 approximations/errors)
+- ✅ Perfect retention of Week 1 and Week 2 Day 1-2 material (spaced repetition working)
+- ✅ Interview-ready explanations (concise, accurate)
+
+**Areas of Excellence**:
+- Roofline model understanding (slanted roof = memory-bound)
+- GPU hardware constraints (8 GPUs/node with NVLink)
+- Communication pattern trade-offs (volume, frequency, bandwidth)
+- Formula precision (exact vs approximate)
+
+**Practice Exercises Logged** (not formally scored, tracked for completeness):
+- ✅ Sketched 4 communication patterns (DP, FSDP, TP, PP)
+- ✅ Big O scaling analysis for each strategy
+- ✅ Synthesized trade-offs for interview-ready answers
+
+**Action Items**:
+- None! All concepts strong, no weak items
+- Continue Day 4 topics (Inference optimization: KV-cache, quantization, continuous batching, speculative decoding)
+
+**Recommendation**: ✅ Exceptional performance! 99% demonstrates mastery + ability to catch instructor errors. User shows deep understanding beyond rote memorization - can identify approximations, verify formulas, and explain trade-offs. **Ready for research-heavy ML interviews (OpenAI/Anthropic/DeepMind level).**
 
 ---
 
