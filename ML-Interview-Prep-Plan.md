@@ -628,29 +628,49 @@ This is where you need the most practice:
 
 ---
 
-**Day 7 (Day 14): MLE + Hypothesis Testing (2-2.5 hours)**
+**Day 7 (Day 14): MLE + Hypothesis Testing (2-2.5 hours)** ✅ **COMPLETED (2025-11-10)**
 
 **Study** (80-100 min):
-- [ ] **MLE Derivations** (40 min) - Gap Q29 (0%)
-  - Exponential distribution: λ̂ = 1/mean
-  - Gaussian distribution: μ̂, σ̂²
-  - Practice deriving from scratch
-- [ ] **Chi-square test** (20 min) - Section 3.8
-  - Goodness of fit, independence testing
-- [ ] **Hypothesis Testing Core** (30 min) - Critical Unsure
-  - T-test vs Z-test (n<30 vs n≥30, assumptions)
-  - Normal distribution calculations (P(X>2), Z-scores) - Gap Q27
+- [X] **MLE Derivations** (40 min) - Gap Q29 (0%)
+  - Exponential distribution: λ̂ = 1/mean ✅
+  - Gaussian distribution: μ̂, σ̂² ✅
+  - Watched StatQuest videos + practice derivations
+- [X] **Chi-square test** (20 min) - Section 3.8
+  - Goodness of fit, independence testing ✅
+- [X] **Hypothesis Testing Core** (30 min) - Critical Unsure
+  - T-test vs Z-test (n<30 vs n≥30, assumptions) ✅
+  - Normal distribution calculations (P(X>2), Z-scores) ✅
 
 **Knowledge Check** (15 min):
-- [ ] 10 questions: 7 Day 7 content, 3 review (Day 6)
+- [X] 10 questions: 7 Day 7 content, 3 review (Day 6)
+  - Score: **86.5% (B+/A-)**
+  - New content: 88.6% (7 questions)
+  - Review content: 81.7% (3 questions)
 
 **Quick Reference** (20-30 min):
-- [ ] Create `references/Day14-Quick-Reference.md`: MLE & Hypothesis Testing
+- [X] Created `references/Day14-Quick-Reference.md`: MLE & Hypothesis Testing
 
 **Update Documents** (10 min):
-- [ ] Update all 4 files (same as Day 6)
+- [X] Updated all files + SM-2 schedule
 
-**Target**: Move 4 topics from Dunno/Unsure → Know (MLE, chi-square, t-test, normal dist)
+**Day 14 Results Summary** (2025-11-10):
+- ⏱️ **Total time**: ~2 hours (study + knowledge check + docs)
+- 💡 **Key learnings**:
+  - MLE exponential: λ̂ = 1/mean (log-likelihood trick)
+  - MLE Gaussian: μ̂ = x̄, σ̂² = Σ(xᵢ-μ̂)²/n (n, not n-1!)
+  - T-test: wider tails than z-test (accounts for σ estimation uncertainty)
+  - Chi-square: Σ(O-E)²/E, df=(r-1)(c-1) for contingency table
+- 📝 **Created**: Day14-Quick-Reference.md (comprehensive 15-section guide)
+- 📊 **Knowledge Check: 86.5% (B+/A-)** - Strong understanding, minor gaps in assumptions
+- 🔄 **SM-2 updates**: 3 review items updated, 3 new topics added (now tracking 40 items)
+
+**Success Criteria**: ✅ All met
+- ✅ Can derive MLE for exponential and Gaussian distributions
+- ✅ Can explain when to use t-test vs z-test with assumptions
+- ✅ Understand chi-square test for goodness of fit and independence
+- ✅ Can calculate normal distribution probabilities using Z-scores
+
+**Target**: Move 3 topics from Dunno/Unsure → Know (MLE, chi-square, t-test) ✅ **ACHIEVED**
 
 ---
 

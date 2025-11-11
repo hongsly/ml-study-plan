@@ -25,7 +25,7 @@ For each topic, mark your current understanding:
 |---|-------|--------|-------|
 | 1.1 | Probability vs Statistics (difference, when to use each) | [unsure] | |
 | 1.2 | PDF vs CDF vs PMF (definitions, relationships) | [unsure] | |
-| 1.3 | Common distributions (Normal, Exponential, Binomial, Poisson) | [unsure] | Forgot Exponential and Poisson |
+| 1.3 | Common distributions (Normal, Exponential, Binomial, Poisson) | [unsure] | Forgot Poisson, binomial vague |
 | 1.4 | Expected value and variance (definition, properties) | [unsure] | know definition, may forgot properties |
 | 1.5 | Law of Large Numbers vs Central Limit Theorem | [unsure] | forgot central limit theorem |
 
@@ -52,14 +52,14 @@ For each topic, mark your current understanding:
 
 | # | Topic | Status | Notes |
 |---|-------|--------|-------|
-| 3.1 | **T-test vs Z-test** (when to use n<30 vs n≥30, assumptions) | [unsure] | **Day 6 focus** |
-| 3.2 | P-value (definition, interpretation, common mistakes) | [unsure] | rusty |
+| 3.1 | **T-test vs Z-test** (when to use n<30 vs n≥30, assumptions) | [know] | **Day 6 focus** |
+| 3.2 | P-value (definition, interpretation, common mistakes) | [know] | rusty |
 | 3.3 | Confidence intervals (95% CI calculation, interpretation) | [unsure] | rusty |
 | 3.4 | Type I error (α) vs Type II error (β) | [know] | |
 | 3.5 | Statistical power (1-β, how to increase) | [unsure] | rusty |
 | 3.6 | One-tailed vs two-tailed tests (when to use each) | [unsure] | rusty |
 | 3.7 | **Normal distribution calculations** (P(X>2) for N(0,1), Z-scores) | [unsure] | **Gap Q27: 0%** |
-| 3.8 | Chi-square test (goodness of fit, independence) | [dunno] | |
+| 3.8 | Chi-square test (goodness of fit, independence) | [know] | |
 | 3.9 | **A/B Testing Design & Pitfalls** (metric choice, segmentation, novelty effect, full loop) | [unsure] | **MUST-KNOW for MLE** |
 | 3.10 | **Multiple Comparisons Problem** (Bonferroni, False Discovery Rate, family-wise error) | [unsure] | Nice-to-have for senior/research roles |
 
@@ -104,7 +104,7 @@ For each topic, mark your current understanding:
 
 | # | Topic | Status | Notes |
 |---|-------|--------|-------|
-| 6.1 | **MLE for common distributions** (exponential λ̂=1/mean, Gaussian μ̂, σ̂²) | [dunno] | **Gap Q29: 0%** |
+| 6.1 | **MLE for common distributions** (exponential λ̂=1/mean, Gaussian μ̂, σ̂²) | [know] | **Gap Q29: 0%** |
 | 6.2 | **Sigmoid for regression** (why wrong for unbounded targets, bounded [0,1] output) | [know] | **Gap Q19, Q43: 0%** |
 | 6.3 | **Logistic regression on separable data** (weights diverge without regularization) | [unsure] | **Gap Q43: 0%** |
 | 6.4 | **Dependence vs Correlation** (dependence ⊃ correlation, Y=X² example) | [unsure] | **Gap Q63: 50%** |

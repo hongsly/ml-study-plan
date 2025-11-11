@@ -20,11 +20,9 @@
 - Key formulas or techniques learned
 
 **30% Previous Content** (Spaced repetition):
-- Based on forgetting curve intervals:
-  - **1 day ago**: 40% of review questions
-  - **3 days ago**: 30% of review questions
-  - **7 days ago**: 20% of review questions
-  - **14+ days ago**: 10% of review questions
+- Selected from `data/knowledge-schedule.md` where `Next Review <= Current Date`
+- Prioritize items with oldest/lowest next review dates
+- SM-2 algorithm automatically determines optimal review timing
 
 ### Question Types
 
@@ -70,32 +68,216 @@ At the end:
 - Summary of strong areas
 - Summary of areas needing review
 - Recommendation (proceed / review specific topics / review day)
+- **Update `data/knowledge-schedule.md`** with SM-2 calculations (EF, interval, next review)
 
 ---
 
-## Forgetting Curve Schedule
+## SM-2 Spaced Repetition Workflow
 
-### Example for Day 5:
+**Implemented**: 2025-11-09 (Day 13)
 
-**Today's content (70%)**:
-- Day 5 new material
+**File**: `data/knowledge-schedule.md`
 
-**Review questions (30%)**:
-- 40% from Day 4 (1 day ago)
-- 30% from Day 3 (2 days ago)
-- 20% from Day 2 (3 days ago)
-- 10% from Day 1 (4 days ago)
+**Algorithm**: SuperMemo 2 (SM-2) for optimal review scheduling
 
-### Example for Day 10:
+### Overview
 
-**Today's content (70%)**:
-- Day 10 new material
+SM-2 automatically calculates when to review each topic based on:
+- **EF (Easiness Factor)**: How easy the topic is for you (1.3-2.5+, default 2.5)
+- **I (Interval)**: Days until next review
+- **n**: Number of successful consecutive reviews
+- **Performance history**: Your actual scores over time
 
-**Review questions (30%)**:
-- 40% from Day 9 (1 day ago)
-- 30% from Day 7 (3 days ago)
-- 20% from Day 3 (7 days ago)
-- 10% from Days 1-2 (8-9 days ago)
+### Daily Routine
+
+#### Before Knowledge Check (2-3 min):
+
+1. **Read schedule file**:
+   ```bash
+   Read data/knowledge-schedule.md
+   ```
+
+2. **Identify review items**:
+   - Filter for items where `Next Review <= Current Date`
+   - Select 3-5 items with oldest/lowest next_review dates
+   - Example: If current date is 2025-11-10:
+     ```
+     llm_megatron: Next Review = 2025-11-10 ✓ (due today)
+     llm_tensor_parallel_comm: Next Review = 2025-11-10 ✓ (due today)
+     stats_4.3: Next Review = 2025-11-24 ✗ (not due yet)
+     ```
+
+3. **Generate questions (10 total)**:
+   - **30% review**: 3 questions from items identified in step 2
+   - **70% new**: 7 questions from today's new content
+   - Maintain mix of conceptual, implementation, applied questions
+
+#### After Knowledge Check (3-5 min):
+
+For each reviewed item, calculate new values:
+
+**Step 1: Map score to quality**
+
+| Score Range | Quality (q) | SM-2 Rating | Interval Action |
+|-------------|-------------|-------------|-----------------|
+| ≤30% | 1 | Again (fail) | Reset to n=1, I=1 |
+| 31-70% | 2 | Hard | Increase slowly |
+| 71-90% | 3 | Good | Normal increase |
+| >90% | 4 | Easy | Large increase |
+
+**Step 2: Calculate new EF (Easiness Factor)**
+
+```
+EF' = EF + (0.1 - (5-q)×(0.08 + (5-q)×0.02))
+EF' = max(1.3, EF')  # Floor at 1.3
+```
+
+**Step 3: Calculate new interval**
+
+⚠️ **CRITICAL**: Update I **BEFORE** incrementing n (order matters!)
+
+```
+If q < 3 (score <60%, failed):
+    I = 1 day
+    n = 1
+Else if n = 0 (first review):
+    I = 1 day
+    n = 1
+Else if n = 1:
+    I = 6 days
+    n = 2
+Else (n >= 2):
+    I = I_previous × EF'
+    n = n + 1
+```
+
+**Common mistake**: Setting I based on the NEW n value instead of OLD n value.
+- ❌ Wrong: n=1→2, then set I=6×EF (uses n=2)
+- ✅ Correct: n=1, set I=6, then n=2 (uses n=1 to determine I)
+
+**Step 4: Update schedule**
+
+```
+Last Review = Current Date
+Next Review = Current Date + I days
+Append score to Score History
+Write updated row to data/knowledge-schedule.md
+```
+
+### Example Calculation
+
+**Scenario**: Reviewed `stats_5.3` (Gambler's ruin) on 2025-11-10
+
+**Old values**: EF=2.5, n=2, I=6, Last Review=2025-11-04
+
+**User score**: 85% → quality=4 (Easy)
+
+**Calculations**:
+```
+Step 1: quality = 4 (Easy, since 85% > 80%)
+
+Step 2: Calculate new EF
+EF' = 2.5 + (0.1 - (5-4)×(0.08 + (5-4)×0.02))
+    = 2.5 + (0.1 - 1×(0.08 + 1×0.02))
+    = 2.5 + (0.1 - 0.10)
+    = 2.5 + 0.0
+    = 2.5 ✓
+
+Step 3: Calculate new interval
+Since q=4 >= 3 (passed) and n=2 (current):
+    I' = 6 × 2.5 = 15 days  (use OLD n=2 to determine formula)
+    n' = 2 + 1 = 3          (increment after calculating I)
+
+Step 4: Update values
+Last Review = 2025-11-10
+Next Review = 2025-11-10 + 15 = 2025-11-25
+Score History = "75,85" (appended 85)
+```
+
+**Updated row in knowledge-schedule.md**:
+```
+| stats_5.3 | Gambler's ruin problem | Stats | 2.5 | 15 | 3 | 2025-11-10 | 2025-11-25 | 75,85 |
+```
+
+### Initialization Guidelines
+
+**For new items** (after the knowledge check -- considered the first review):
+```
+EF = 2.5 (default)
+I = 1
+n = 1
+Next Review: tomorrow
+Score History: knowledge check score
+```
+
+**For items from study history** (Days 1-13):
+- **High performers (>90% avg)**: EF=2.6, n=3, I=15-18 days
+- **Good performers (80-90%)**: EF=2.5, n=2, I=6-12 days
+- **Weak items (<80%)**: EF=2.3, n=1, I=1-6 days
+
+### Special Cases
+
+**Failure (score <60%)**:
+```
+n = 1 (reset)
+I = 1 day (review tomorrow)
+EF decreases (formula applies)
+```
+
+**Perfect streak (multiple 100% scores)**:
+```
+EF gradually increases above 2.5
+Intervals grow: 1→6→15→38→95 days (roughly 2.5× each time)
+```
+
+**Overdue review**:
+- If you miss a review date, just review when you can
+- Calculate EF/interval normally based on performance
+- SM-2 is forgiving of delays
+
+### Quality Mapping Examples
+
+| Example Score | Quality | Reasoning |
+|---------------|---------|-----------|
+| 25% | 1 (Again) | Answered "I don't know" or completely wrong |
+| 50% | 2 (Hard) | Got concept but missed key details |
+| 75% | 3 (Good) | Correct but minor gaps in explanation |
+| 95% | 4 (Easy) | Perfect answer, could elaborate, interview-ready |
+
+### Adding New Items Daily
+
+**After each study session**, add newly studied topics to the schedule:
+
+**Process**:
+1. Identify 3-5 key concepts from today's study
+2. Create topic_id (format: `section_subtopic`, e.g., `stats_6.1`, `llm_flash_attention`)
+3. Initialize with defaults:
+   ```
+   EF = 2.5
+   n = 0 (not reviewed yet)
+   I = 0
+   Next Review = Current Date (will be reviewed in next knowledge check)
+   Score History = "" (empty until first review)
+   ```
+4. Add row to `data/knowledge-schedule.md`
+
+**Example** (after Day 14 studying MLE, Chi-square, T-test):
+```markdown
+| stats_6.1 | MLE for exponential distribution | Stats | 2.5 | 0 | 0 | 2025-11-10 | 2025-11-10 | |
+| stats_3.8 | Chi-square test | Stats | 2.5 | 0 | 0 | 2025-11-10 | 2025-11-10 | |
+| stats_3.1 | T-test vs Z-test | Stats | 2.5 | 0 | 0 | 2025-11-10 | 2025-11-10 | |
+```
+
+These items will be available for review in the next knowledge check (tomorrow).
+
+### Tips
+
+1. **Show your work**: Always calculate EF/I explicitly, don't skip steps
+2. **Verify calculations**: User can spot-check math if uncertain
+3. **Be consistent**: Use same quality mapping every time
+4. **Don't game it**: Rate honestly - SM-2 works best with accurate feedback
+5. **Track patterns**: If same item fails multiple times, need deeper study
+6. **Add new items daily**: Keep schedule updated with newly studied concepts
 
 ---
 
@@ -106,6 +288,8 @@ At the end:
 3. **Interview simulation**: Mimics interview question patterns
 4. **Confidence building**: Proves retention and improvement over time
 5. **Adjustment signal**: Low scores indicate need to slow down or review
+6. **Automated scheduling**: SM-2 algorithm handles review timing optimization
+7. **Adaptive learning**: EF values adjust based on actual performance history (easier items → longer intervals, harder items → more frequent review)
 
 ---
 
@@ -115,7 +299,7 @@ At the end:
 ```
 1. Theory refresh (if applicable)
 2. Implementation practice
-3. ✅ KNOWLEDGE CHECK (10-15 min) ← NEW STEP
+3. ✅ KNOWLEDGE CHECK (10-15 min) ← Includes SM-2 schedule updates
 4. Create quick reference sheet
 5. Update progress files
 ```
@@ -128,6 +312,8 @@ At the end:
 ---
 
 ## Sample Knowledge Check (Day 4 Example)
+
+**Note**: This is a historical example from before SM-2 implementation. With SM-2, review question selection is now automated via `data/knowledge-schedule.md` based on due dates rather than manual day-based intervals.
 
 ### Today's Content (70% - Regularization, Regression Metrics, K-Means):
 
@@ -176,6 +362,7 @@ At the end:
 | 11 | 2025-11-07 | **97.5% (A+)** | All 6 inference techniques (97.9%), Memory formulas (100%), Trade-off analysis (perfect), Review (96.7%) | Speculative decoding batch reasoning (75%, clarified) | Continue Week 2 momentum |
 | 12 | 2025-11-08 | **99.6% (A+)** | **Perfect calculations (100%)** - Parameters (GPT-2/3), Memory (7B/10B models), Batch size optimization, Chinchilla law, Review (97.7%) | None - minor rounding in KV-cache (820 vs 800 KB) | **Week 2 LLM Systems COMPLETE: 83% readiness** |
 | 13 | 2025-11-09 | **99.5% (A+)** | **Regression diagnostics (99.3%)** - DW, BP, SW, VIF tests perfect, Covariance vs correlation (100%), Review (100%) | None - all topics >95%, caught error in Q6 (impossible correlation value) | Statistics Day 1: Diagnostics mastered |
+| 14 | 2025-11-10 | **86.5% (B+/A-)** | MLE derivations (100%, 100%, 85%), Chi-square test (100%), Normal dist calculations (90%), Covariance review (100%) | T-test assumptions (70%), DW interpretation (75%), AUC for imbalanced data (70%) | Statistics Day 2: Strong fundamentals, minor gaps in test assumptions |
 
 **Progress Trend**: Week 2 sustained excellence 🚀
 - Day 3→5: +10.5% improvement over Week 1
@@ -185,36 +372,36 @@ At the end:
 - Day 10→11: -1.5% (99.0% → 97.5%) - Still A+ range, excellent retention
 - Day 11→12: +2.1% improvement (97.5% → 99.6%) - **Perfect calculations**
 - Day 12→13: -0.1% (99.6% → 99.5%) - **Sustained mastery level (99%+ range)**
+- Day 13→14: -13.0% (99.5% → 86.5%) - Expected dip for new complex material (MLE, hypothesis testing)
 - **Week 2 Days 1-5 average**: 92% across Days 8-12 (LLM Systems)
-- **Week 2 Day 6+ (Statistics)**: 99.5% (Day 13)
+- **Week 2 Day 6-7 (Statistics)**: Average 93% (Day 13: 99.5%, Day 14: 86.5%)
 - **Day 10 highlight**: User caught 3 approximations/errors (bubble time formula, ranking, TP scaling)
 - **Day 11 highlight**: User caught 2 major errors (communication volume per-device, speculative decoding ragged tensor problem)
 - **Day 12 highlight**: Perfect calculations, caught blog post imprecision on PP activation memory, clarified gradient memory storage
 - **Day 13 highlight**: Perfect diagnostics understanding, caught impossible correlation in test question (r=2)
-- Review retention: 99% average (excellent spaced repetition across Week 1 + Week 2)
+- **Day 14 highlight**: Perfect MLE derivations (100%), identified σ̂² vs σ̂ distinction, user scored conservatively on ROC/AUC (70%)
+- Review retention: 88% average (Day 14 review: 81.7%, slight dip from 99% average due to new stat topics)
 
 ---
 
 ## Weak Items Tracking
 
-**Purpose**: Items scored <80% get re-tested in future knowledge checks until mastered
+**Purpose**: Track items needing additional review until mastered
 
-**Active Weak Items** (will resurface in future checks):
+**SM-2 Integration**: With SM-2 implemented (Day 13+), weak items are automatically tracked via EF (Easiness Factor):
+- **EF < 1.8**: Struggling items (review every 1-3 days until improved)
+- **EF 1.8-2.2**: Moderate difficulty (review every 3-8 days)
+- **EF > 2.5**: Strong items (review every 12+ days)
 
-| Item | First Tested | Score | Last Tested | Status |
-|------|--------------|-------|-------------|--------|
-| Adam optimizer "adaptive LR" detail | Day 3 | 80% | Day 3 | 🟡 Monitor - optional resurface Day 11+ |
-| Precision-Recall reasoning clarity | Day 3 | 75% | Day 3 | 🟡 Monitor - optional resurface Day 11+ |
-| ~~Tensor parallel all-reduce locations~~ | Day 8 | 70% | Day 9 (100%) | ✅ Resolved |
+Items with low scores (<60%) automatically reset to n=1, I=1 (review tomorrow). No manual tracking needed.
+
+**Historical Weak Items** (pre-SM-2, for reference):
 
 **Resolved Items** (scored 90%+ on retest):
 - ✅ **Inertia computation** (Day 4: 70% → Day 5: 95%) - Resolved in 1 day!
 - ✅ **ZeRO Stage 3 all-gather pattern** (Day 8: 0% → Day 9: 100%) - Resolved in 1 day!
 - ✅ **ZeRO memory reductions** (Day 8: 40% → Day 9: 95%) - Resolved in 1 day! (Corrected scoring: "up to 4×/8×" was correct)
-
-**Resurfacing Schedule**:
-- 🔴 Score <80%: Resurface in 3 days, then 7 days, then 14 days until 90%+
-- 🟡 Score 80-89%: Resurface in 7 days if needed
+- ✅ **Tensor parallel all-reduce locations** (Day 8: 70% → Day 9: 100%) - Resolved in 1 day!
 
 ---
 
