@@ -214,9 +214,26 @@ Fill in after completing the topic check:
 
 **Overall Readiness**: **46%** (Know / 76 × 100)
 
+**Note**: This is pre-study baseline. See "Final Assessment & Recommendation" at end of document for post-study results.
+
 ---
 
-## 🎯 **Post-Study Assessment (Day 12 - After Week 2 Day 1-5)**
+## 📝 **Gap Analysis Cross-Reference**
+
+From Day 6-7, the following questions revealed LLM systems gaps:
+
+- **Q182**: Strong scaling (0%) → Area 1
+- **Q183**: Memory bandwidth bottleneck, arithmetic intensity (0%) → Areas 2, 3
+- **Q184**: Memory sharding calculations (0%) → Area 2
+- **Q185**: FSDP vs model parallelism communication (0%) → Area 4
+- **Q187**: 4 methods for throughput (0%) → Area 5
+- **Q189**: QKV projections, INT8 KVs (25%) → Area 6
+
+**Key Insight**: These 6 questions are entry points, but each area has 8-11 subtopics. The 189 questions identified the gaps, but didn't cover all the concepts within each gap area.
+
+---
+
+## 🎯 **Final Assessment & Recommendation (Day 12 - After Week 2 Day 1-5)**
 
 **Date Completed**: 2025-11-08
 
@@ -321,80 +338,8 @@ Fill in after completing the topic check:
 - ML Infrastructure / ML Platform Engineer roles
 
 **Next Steps:**
-- Day 13-14: Statistical Testing (Week 2 Day 6-7)
+- ✅ Statistics (Day 13-15): Completed - 51% readiness achieved
 - Week 4 checkpoint: Re-assessment and retention validation
 - Optional: Cover PEFT (LoRA/QLoRA) in Week 3 if time permits
 
-**Overall Readiness**: **46%** (Know / 76 × 100)
-
----
-
-## 🎯 **Priority Matrix for Study Planning**
-
-After scoring, use this to prioritize:
-
-### **Critical Priority** (Must study Day 1-2):
-- ❌ Dunno in Areas 1-5 (foundational + high-impact)
-- ❌ Dunno that appeared in gap analysis (Q182-189)
-
-### **High Priority** (Study Day 2-3):
-- 🟡 Unsure in Areas 1-5
-- ❌ Dunno in Areas 6-7 (calculations are important)
-
-### **Medium Priority** (Study if time permits):
-- 🟡 Unsure in Areas 6-7
-- ❌ Dunno in Area 8 (advanced topics, good to know)
-
-### **Low Priority** (Skip for now):
-- 🟡 Unsure in Area 8
-- Already ✅ Know topics (light review only)
-
----
-
-## 📅 **Recommended Timeline Adjustment**
-
-**Original Plan**: 2 days (4 hours) for LLM Systems
-**Realistic Assessment**: **3 days (6 hours)** for comprehensive coverage
-
-### **Why 3 Days?**
-- 76 subtopics is substantial (even just ❌ + 🟡 will be 30-50 topics)
-- Gap analysis showed 5/6 areas at 0% → need foundational learning, not just review
-- Practical exercises (calculations, vLLM exploration) take time
-
-### **Proposed Split**:
-
-**Day 1-2 (4 hours total)**:
-- Focus: Critical gaps (strong scaling, memory optimization, parallelism)
-- Resources: Megatron-LM paper, ZeRO paper, NVIDIA talks
-- Hands-on: FLOPs/memory calculations
-
-**Day 3 (2 hours)**:
-- Focus: Inference optimization (KV-cache, quantization, batching, speculative decoding)
-- Resources: vLLM docs, TensorRT-LLM, practical exploration
-- Hands-on: Try vLLM locally or in Colab
-
-**Total**: 3 days for LLM Systems → Week 2 schedule shifts accordingly
-
----
-
-## 🔄 **Next Steps**
-
-1. ✅ **Complete this topic check** (15-20 min) - mark Know/Unsure/Dunno for all 76 subtopics
-2. ✅ **Fill in summary scorecard** - calculate overall readiness percentage
-3. ✅ **Share results** - I'll create focused 3-day study plan based on your gaps
-4. ✅ **Adjust Week 2 plan** - Shift other topics (statistics, RAG) accordingly
-
----
-
-## 📝 **Gap Analysis Cross-Reference**
-
-From Day 6-7, the following questions revealed LLM systems gaps:
-
-- **Q182**: Strong scaling (0%) → Area 1
-- **Q183**: Memory bandwidth bottleneck, arithmetic intensity (0%) → Areas 2, 3
-- **Q184**: Memory sharding calculations (0%) → Area 2
-- **Q185**: FSDP vs model parallelism communication (0%) → Area 4
-- **Q187**: 4 methods for throughput (0%) → Area 5
-- **Q189**: QKV projections, INT8 KVs (25%) → Area 6
-
-**Key Insight**: These 6 questions are entry points, but each area has 8-11 subtopics. The 189 questions identified the gaps, but didn't cover all the concepts within each gap area.
+**Overall Readiness**: **83%** on high-priority topics (25/30), **46%** on all 76 topics

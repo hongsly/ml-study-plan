@@ -363,8 +363,9 @@ These items will be available for review in the next knowledge check (tomorrow).
 | 12 | 2025-11-08 | **99.6% (A+)** | **Perfect calculations (100%)** - Parameters (GPT-2/3), Memory (7B/10B models), Batch size optimization, Chinchilla law, Review (97.7%) | None - minor rounding in KV-cache (820 vs 800 KB) | **Week 2 LLM Systems COMPLETE: 83% readiness** |
 | 13 | 2025-11-09 | **99.5% (A+)** | **Regression diagnostics (99.3%)** - DW, BP, SW, VIF tests perfect, Covariance vs correlation (100%), Review (100%) | None - all topics >95%, caught error in Q6 (impossible correlation value) | Statistics Day 1: Diagnostics mastered |
 | 14 | 2025-11-10 | **86.5% (B+/A-)** | MLE derivations (100%, 100%, 85%), Chi-square test (100%), Normal dist calculations (90%), Covariance review (100%) | T-test assumptions (70%), DW interpretation (75%), AUC for imbalanced data (70%) | Statistics Day 2: Strong fundamentals, minor gaps in test assumptions |
+| 15 | 2025-11-11 | **92.0% (A-)** | Regularization/priors (90%), A/B testing (100%, 95%), Distributions (75%, 90%, 100%), CLT/LLN (70%), Review perfect (100%, 100%, 100%) | Binomial variance formula (75%), CLT concrete examples (70%) | Statistics Day 3: Strong fundamentals, perfect review retention |
 
-**Progress Trend**: Week 2 sustained excellence 🚀
+**Progress Trend**: Week 2-3 sustained excellence 🚀
 - Day 3→5: +10.5% improvement over Week 1
 - Day 5→8: Maintained momentum through gap analysis + topic check
 - Day 8→9: +17.2% improvement (80.8% → 98%) - Outstanding!
@@ -373,14 +374,17 @@ These items will be available for review in the next knowledge check (tomorrow).
 - Day 11→12: +2.1% improvement (97.5% → 99.6%) - **Perfect calculations**
 - Day 12→13: -0.1% (99.6% → 99.5%) - **Sustained mastery level (99%+ range)**
 - Day 13→14: -13.0% (99.5% → 86.5%) - Expected dip for new complex material (MLE, hypothesis testing)
+- Day 14→15: +5.5% improvement (86.5% → 92.0%) - Recovery to A- range
 - **Week 2 Days 1-5 average**: 92% across Days 8-12 (LLM Systems)
-- **Week 2 Day 6-7 (Statistics)**: Average 93% (Day 13: 99.5%, Day 14: 86.5%)
+- **Week 2 Days 6-7 (Statistics)**: Average 93% (Day 13: 99.5%, Day 14: 86.5%)
+- **Week 3 Day 1 (Statistics)**: 92.0% (strong fundamentals, perfect review retention)
 - **Day 10 highlight**: User caught 3 approximations/errors (bubble time formula, ranking, TP scaling)
 - **Day 11 highlight**: User caught 2 major errors (communication volume per-device, speculative decoding ragged tensor problem)
 - **Day 12 highlight**: Perfect calculations, caught blog post imprecision on PP activation memory, clarified gradient memory storage
 - **Day 13 highlight**: Perfect diagnostics understanding, caught impossible correlation in test question (r=2)
 - **Day 14 highlight**: Perfect MLE derivations (100%), identified σ̂² vs σ̂ distinction, user scored conservatively on ROC/AUC (70%)
-- Review retention: 88% average (Day 14 review: 81.7%, slight dip from 99% average due to new stat topics)
+- **Day 15 highlight**: Perfect review retention (100% on all 3 overdue items), Megatron 77%→100%, Precision-Recall 88-92%→100%
+- Review retention: 93% average (Day 15 review: 100%, excellent recovery from Day 14's 81.7%)
 
 ---
 
@@ -965,4 +969,181 @@ Items with low scores (<60%) automatically reset to n=1, I=1 (review tomorrow). 
 
 ---
 
-**Last Updated**: 2025-11-09
+## Day 14 Detailed Results (2025-11-10)
+
+**Content Tested**:
+- 70% Day 14: MLE Derivations (Exponential, Gaussian), Hypothesis Testing (t-test vs z-test), Chi-square test
+- 30% Review: Day 13 (Durbin-Watson, Covariance), Day 12 (ROC-AUC for imbalanced data)
+
+**Question Breakdown**:
+
+| Q# | Topic | Day | Score | Notes |
+|----|-------|-----|-------|-------|
+| Q1 | MLE exponential derivation | 14 | 100% ✅ | Perfect: log-likelihood → n/λ - Σxᵢ = 0 → λ̂ = 1/x̄ |
+| Q2 | MLE exponential numerical | 14 | 100% ✅ | Correct: mean=3 → λ̂ = 1/3 |
+| Q3 | MLE Gaussian (μ, σ) | 14 | 85% ✅ | μ̂ correct, σ̂ formula has sqrt (should be σ̂² = Σ(xᵢ-μ)²/n, then take sqrt) |
+| Q4 | T-test vs Z-test assumptions | 14 | 70% 🟡 | Core correct (n<30, unknown σ), missing: normality assumption for both, t-dist wider tails |
+| Q5 | Durbin-Watson interpretation (review) | 13 | 75% 🟡 | DW=2.3 understanding unclear, shows **slight** negative autocorrelation (>2.5 threshold) |
+| Q6 | Normal distribution CDF | 14 | 90% ✅ | Correct understanding of z-score → CDF (Φ), minor wording |
+| Q7 | Chi-square calculation | 14 | 100% ✅ | Perfect: χ² = (60-70)²/70 + (30-20)²/20, null = claimed defect rate |
+| Q8 | Durbin-Watson violation effect (review) | 13 | 75% 🟡 | Partial understanding: underestimate std correct, but unclear on specific effects |
+| Q9 | ROC-AUC imbalanced data (review) | 12 | 70% 🟡 | Correct direction (precision-recall better), but unsure/less detail |
+| Q10 | Covariance vs Correlation scale (review) | 13 | 100% ✅ | Perfect: covariance shrinks 100×, correlation unchanged |
+
+**Overall Score**: 86.5% (865/1000) - B+/A-
+- Day 14 content (Q1-Q4, Q6-Q7): 90.8% (5.45/6) - Strong MLE, solid hypothesis testing
+- Review content (Q5, Q8-Q10): 80.0% (2.4/3) - Good but with uncertainty on DW/ROC
+
+**Study Method**:
+1. **MLE Derivations (40 min)**:
+   - Watched StatQuest videos on exponential and Gaussian distributions
+   - Practiced derivations: likelihood → log-likelihood → differentiate → solve
+   - Key insight: MLE for Gaussian uses n (not n-1) in denominator
+
+2. **Hypothesis Testing Core (30 min)**:
+   - T-test vs Z-test: when to use each (unknown σ vs known σ, n<30 vs n≥30)
+   - T-distribution has wider tails to account for uncertainty in estimating σ
+   - Normal distribution calculations using z-scores and CDF
+
+3. **Chi-square Test (20 min)**:
+   - Test statistic: χ² = Σ(Oᵢ - Eᵢ)²/Eᵢ
+   - Applications: goodness of fit, independence testing
+
+**Strengths**:
+- ✅ **Excellent MLE derivations** - Exponential derivation perfect, λ̂ = 1/x̄
+- ✅ **Chi-square mastery** - Calculation and interpretation correct
+- ✅ **Core t-test vs z-test** - Knows when to use which (n<30, unknown σ)
+- ✅ **Covariance/correlation retention** - Perfect understanding of scale dependence
+
+**Weak Areas**:
+- 🟡 **MLE Gaussian notation** (85%): Had sqrt in formula (should be σ̂² first, then sqrt separately)
+- 🟡 **Hypothesis test assumptions** (70%): Missing normality assumption and t-dist wider tails explanation
+- 🟡 **Durbin-Watson interpretation** (75%): DW=2.3 is "slight" negative autocorrelation, not clear on threshold
+- 🟡 **DW violation effects** (75%): Understands std underestimation but unclear on specific inference effects
+- 🟡 **ROC-AUC imbalanced** (70%): Right direction but uncertain about precision-recall curve alternative
+
+**Key Insights from Answers**:
+1. **MLE mastery**: Derivation steps clear, log-likelihood trick well understood
+2. **T-test knowledge**: Core understanding present (n<30, unknown σ) but assumptions need reinforcement
+3. **Uncertainty on diagnostics**: DW threshold and violation effects need clarification
+4. **Self-awareness**: User indicated uncertainty ("I am not so sure", "I am not very clear") - good calibration
+
+**Score Context**:
+- Expected dip from Day 13's 99.5% due to new complex material
+- Still B+/A- showing solid fundamentals despite gaps
+- Review retention 80% acceptable for nuanced statistics topics
+
+**Action Items**:
+1. Clarify t-test vs z-test assumptions (normality for both, t-dist wider tails)
+2. Reinforce DW thresholds: 1.5-2.5 acceptable, >2.5 negative autocorrelation
+3. Clarify ROC-AUC vs Precision-Recall for imbalanced data
+
+---
+
+## Day 15 Detailed Results (2025-11-11)
+
+**Content Tested**:
+- 70% Day 15: Regularization as Bayesian Prior, A/B Testing (metrics, Simpson's paradox, pitfalls), Distributions (Binomial, Geometric, Poisson), CLT vs LLN
+- 30% Review: Overdue items prioritized by due date (llm_megatron 6d overdue, ml_precision_recall 6d overdue, stats_3.1 due today)
+
+**Question Breakdown**:
+
+| Q# | Topic | Day | Score | Notes |
+|----|-------|-----|-------|-------|
+| Q1 | Regularization as Bayesian prior | 15 | 90% ✅ | L2→Gaussian N(0,τ²), λ~1/τ², minor: could mention MAP = maximize (log likelihood + log prior) |
+| Q2 | A/B testing metrics | 15 | 100% ✅ | Perfect: North star vs tactical, single primary metric avoids multiple comparisons |
+| Q3 | Simpson's paradox | 15 | 95% ✅ | Excellent: Identified paradox, explained hidden factor (user distribution imbalance) |
+| Q4 | Binomial distribution | 15 | 75% 🟡 | Formula correct (C(n,k)p^k(1-p)^(n-k)), mean correct (np), **variance missing** |
+| Q5 | Geometric distribution | 15 | 90% ✅ | Formula correct ((1-p)^(k-1)·p), mean correct (1/p), relationship to exponential clear |
+| Q6 | Poisson distribution | 15 | 100% ✅ | Perfect: λ scaling (12→6 for 30min), PMF e^(-λ)λ^k/k!, expected=6 |
+| Q7 | CLT vs LLN applications | 15 | 70% 🟡 | LLN example correct (sample mean estimates population mean), CLT example vague ("assume param from normal") |
+| Q8 | Megatron-LM tensor parallelism (review) | 11 | 100% ✅ | **Perfect!** Column-parallel A→Y, row-parallel B→Z, all-reduce at end (recovered from 77%) |
+| Q9 | Precision-Recall curve (review) | 4 | 100% ✅ | **Perfect!** When to use (low base rate, TN less important), precision=0.8, recall=8/11 (recovered from 88-92%) |
+| Q10 | T-test vs Z-test (review) | 14 | 100% ✅ | **Perfect!** Use t-test (n=25<30, unknown σ), t-dist wider tails (recovered from 78%) |
+
+**Overall Score**: 92.0% (920/1000) - A-
+- Day 15 content (Q1-Q7): 88.6% (6.2/7) - Strong fundamentals, minor gaps on variance and CLT examples
+- Review content (Q8-Q10): 100% (3/3) - **Perfect retention! All 3 overdue items recovered to 100%**
+
+**Study Method**:
+1. **Regularization as Bayesian Prior (20 min)**:
+   - Read: https://bjlkeng.io/posts/probabilistic-interpretation-of-regularization/
+   - MAP = maximize P(θ|D) = maximize [P(D|θ) × P(θ)]
+   - L2 regularization ≈ Gaussian prior N(0,τ²), λ = 1/(2τ²)
+   - L1 regularization ≈ Laplace prior, λ = 1/b
+   - **Resource note**: StatQuest video didn't cover priors; bjlkeng.io post worked well
+
+2. **A/B Testing Design & Pitfalls (30 min)**:
+   - Used Gemini-generated report (original resources too long: Microsoft video >30min, survey paper too long)
+   - North star metrics (core value) vs tactical metrics (easy to measure)
+   - Segmentation: pre/post randomization for interpretation
+   - Pitfalls: Novelty effect, multiple comparisons, selection bias, Simpson's paradox
+   - Key takeaway: Single primary metric prevents multiple comparisons problem
+
+3. **Statistics Fundamentals (30 min)**:
+   - Watched video series for each distribution (Khan Academy links incomplete)
+   - **Binomial**: C(n,k)p^k(1-p)^(n-k), mean=np, variance=np(1-p)
+   - **Geometric**: (1-p)^(k-1)·p, mean=1/p, discretized exponential
+   - **Poisson**: e^(-λ)λ^k/k!, mean=λ, events in fixed interval
+   - **CLT vs LLN**:
+     - LLN: sample mean → population mean (point estimation)
+     - CLT: sample mean ~ Normal (enables inference: CI, hypothesis tests)
+
+**Strengths**:
+- ✅ **Perfect review retention** - All 3 overdue items scored 100%!
+  - llm_megatron: 77% → 100% (+23%, 6 days overdue)
+  - ml_precision_recall: 88-92% → 100% (6 days overdue)
+  - stats_3.1 (t-test): 78% → 100% (+22%, due today)
+- ✅ **A/B testing mastery** - Metrics, segmentation, all 4 major pitfalls understood
+- ✅ **Simpson's paradox** - Correctly identified hidden confounding variable
+- ✅ **Distribution formulas** - Binomial, Geometric, Poisson all correct
+- ✅ **Regularization/prior connection** - L2→Gaussian, L1→Laplace, λ~1/τ² relationship
+
+**Weak Areas**:
+- 🟡 **Binomial variance** (75%): Formula missing (np(1-p)), but understood derivation after explanation
+- 🟡 **CLT concrete examples** (70%): Initially vague ("assume param from normal"), improved after clarification
+
+**Post-Check Clarifications Requested by User**:
+1. **"Could you explain why this is the variance [np(1-p)]?"**
+   - Clarified: Single Bernoulli has Var=p(1-p)
+   - Binomial = sum of n independent Bernoulli
+   - Variances add for independent RVs → Var = n·p(1-p)
+   - Intuition: Maximized at p=0.5, minimized at p=0 or p=1
+   - Example: 100 coins, mean=50, var=25, σ=5 → expect 50±10 (2σ)
+
+2. **"Distribution of sample means becomes normal -- that is just the theorem itself. Do you have more concrete example?"**
+   - Clarified with 3 concrete examples:
+     - **Confidence intervals**: Non-normal satisfaction scores (1-5, skewed) → sample mean ~ N(μ,σ²/n) → can use 95% CI = x̄ ± 1.96(s/√n)
+     - **A/B testing**: Binary conversion data (Bernoulli, not normal) → sample proportions become normal by CLT → can use z-test
+     - **Quality control**: Unknown widget weight distribution (maybe bimodal) → daily averages follow normal → can set μ±3σ control limits
+   - **Key insight**: CLT makes statistics work! Most real data isn't normal, but CLT lets us use normal distribution tools
+
+**Key Insights from Session**:
+1. **Regularization = probabilistic prior**: Bayesian framework unifies regularization with prior beliefs
+2. **A/B testing critical pitfall**: Simpson's paradox shows why segmentation and covariate balance matter
+3. **Variance addition principle**: For independent RVs, variances add (key for Binomial from Bernoulli)
+4. **CLT enables modern statistics**: Without CLT, most statistical tests wouldn't work on real (non-normal) data
+5. **User engaged deeply**: Asked for derivations and concrete examples, not satisfied with surface-level answers
+
+**Review System Performance**:
+- **Outstanding recovery**: All 3 overdue items recovered to 100% (including 6-day overdue items)
+- Review retention: 100% on Day 15 (vs 80% on Day 14) - excellent recovery
+- Overall review retention average: 93%
+- **SM-2 system validation**: Weak items resurfaced at right time and mastered
+
+**Resource Feedback**:
+- ❌ **Regularization**: StatQuest L2 video doesn't cover Bayesian priors
+- ❌ **A/B testing**: Microsoft video way longer than 30min, survey PDF too long for 30min, Evan Miller post not comprehensive
+- ❌ **Distributions**: Khan Academy has no direct links
+- ✅ **Solutions that worked**: bjlkeng.io post, Gemini report, video series per distribution
+
+**Statistics Gap Closure Progress**:
+- Day 13 start: 18.6% readiness (8 Know / 43 topics)
+- Day 14 end: ~37% estimated (16 Know / 43 topics)
+- Day 15 end: ~45-50% estimated (19-22 Know / 43 topics)
+- Progress: +10-13 topics mastered in 3 days
+- Remaining: Bayesian vs Frequentist, Markov Chains, advanced probability
+
+---
+
+**Last Updated**: 2025-11-11

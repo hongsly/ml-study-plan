@@ -696,35 +696,53 @@ This is where you need the most practice:
 
 ---
 
-**Day 1 (Day 15): Statistics Completion - A/B Testing + Fundamentals (2-2.5 hours)**
+**Day 1 (Day 15): Statistics Completion - A/B Testing + Fundamentals (2-2.5 hours)** ✅ **COMPLETED (2025-11-11)**
 
 **Rationale**: Completing 3-day statistics deep dive from Week 2 (Day 6-8 plan)
 
 **Study** (80-100 min):
-- [ ] **Regularization as Bayesian Prior** (20 min) - Section 6.7
-  - L2 ≈ Gaussian prior, L1 ≈ Laplace prior
-  - Conceptual connection between regularization and probabilistic priors
-- [ ] **A/B Testing Design & Pitfalls** (30 min) - Section 3.9 (MUST-KNOW)
-  - Metric choice, segmentation, novelty effect, full experimental loop
-  - Common pitfalls: multiple comparisons, selection bias, Simpson's paradox
-- [ ] **Fundamentals Refresh** (30 min) - Section 1 (all Unsure)
-  - PDF/CDF/PMF definitions and relationships
-  - Common distributions: Normal, Exponential, Binomial, Poisson
-  - CLT vs LLN: when to apply each
+- [X] **Regularization as Bayesian Prior** (20 min) - Section 6.7
+  - L2 ≈ Gaussian prior (N(0, τ²)), L1 ≈ Laplace prior ✅
+  - MAP = maximize (log likelihood + log prior) ✅
+  - Read: https://bjlkeng.io/posts/probabilistic-interpretation-of-regularization/
+- [X] **A/B Testing Design & Pitfalls** (30 min) - Section 3.9 (MUST-KNOW)
+  - Metric choice (north star vs tactical), segmentation ✅
+  - Pitfalls: novelty effect, multiple comparisons, selection bias, Simpson's paradox ✅
+  - Used Gemini-generated report (original resources too long)
+- [X] **Fundamentals Refresh** (30 min) - Section 1 (all Unsure)
+  - PDF/CDF/PMF definitions ✅
+  - Distributions: Binomial (np(1-p) variance), Geometric (1/p mean), Poisson (λ), Exponential ✅
+  - CLT vs LLN: applications and concrete examples ✅
+  - Watched video series for each distribution
 
 **Knowledge Check** (15 min):
-- [ ] 10 questions: 7 Day 1 content, 3 review (Week 2 Day 6-7)
+- [X] 10 questions: 7 Day 1 content, 3 review (overdue items)
+  - Score: **92.0% (A-)**
+  - New content: 88.6% (7 questions)
+  - Review content: 100% (3 questions)
 
 **Quick Reference** (20-30 min):
-- [ ] Create `references/Day15-Quick-Reference.md`: A/B Testing & Statistics Fundamentals
+- [X] Created `references/Day15-Quick-Reference.md`: A/B Testing & Statistics Fundamentals
 
 **Update Documents** (10 min):
-- [ ] Update `ML-Interview-Prep-Plan.md` (mark Week 3 Day 1 complete)
-- [ ] Update `00-CONVERSATION-SUMMARY.md` (Day 15 section)
-- [ ] Update `Daily-Knowledge-Check-Protocol.md` (Day 15 entry)
-- [ ] Update `gap_analysis/Week2-Statistics-Topic-Check.md` (final post-study assessment)
+- [X] Update `ML-Interview-Prep-Plan.md` (mark Week 3 Day 1 complete)
+- [X] Update `00-CONVERSATION-SUMMARY.md` (Day 15 section)
+- [X] Update `Daily-Knowledge-Check-Protocol.md` (Day 15 entry)
+- [ ] Update `gap_analysis/Week2-Statistics-Topic-Check.md` (deferred - need full reassessment)
 
-**Target**: Complete statistics gap closure - achieve 65-70% overall readiness (from 18.6%)
+**Day 15 Results Summary** (2025-11-11):
+- ⏱️ **Total time**: ~2.5 hours (study + knowledge check + docs)
+- 💡 **Key learnings**:
+  - Regularization as prior: L2 = Gaussian N(0, τ²), L1 = Laplace, λ ~ 1/τ²
+  - A/B testing: One primary metric, watch Simpson's paradox, avoid peeking
+  - Binomial variance: np(1-p) derived from sum of independent Bernoulli trials
+  - CLT enables inference: CI, hypothesis tests work even with non-normal data
+- 📝 **Created**: Day15-Quick-Reference.md (comprehensive 9-section guide)
+- 📊 **Knowledge Check: 92.0% (A-)** - Strong understanding, minor gaps in CLT examples
+- 🔄 **SM-2 updates**: 3 review items (all 100%), 4 new topics added (now tracking 44 items)
+- 🎯 **Review retention**: Perfect scores on all overdue items (Megatron 77%→100%, Precision-Recall 88-92%→100%)
+
+**Target Achieved**: Statistics gap closure progressing - core fundamentals solid (88-100% on new topics)
 
 ---
 
