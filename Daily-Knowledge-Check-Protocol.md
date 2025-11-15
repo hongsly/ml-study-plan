@@ -21,7 +21,7 @@
 
 **30% Previous Content** (Spaced repetition):
 - Selected from `data/knowledge-schedule.md` where `Next Review <= Current Date`
-- Prioritize items with oldest/lowest next review dates
+- Randomly choose, slightly prioritize items with larger overdue
 - SM-2 algorithm automatically determines optimal review timing
 
 ### Question Types
@@ -120,9 +120,9 @@ For each reviewed item, calculate new values:
 
 | Score Range | Quality (q) | SM-2 Rating | Interval Action |
 |-------------|-------------|-------------|-----------------|
-| ≤30% | 1 | Again (fail) | Reset to n=1, I=1 |
-| 31-70% | 2 | Hard | Increase slowly |
-| 71-90% | 3 | Good | Normal increase |
+| ≤60% | 1 | Again (fail) | Reset to n=1, I=1 |
+| 61-79% | 2 | Hard | Increase slowly |
+| 80-90% | 3 | Good | Normal increase |
 | >90% | 4 | Easy | Large increase |
 
 **Step 2: Calculate new EF (Easiness Factor)**
@@ -137,7 +137,7 @@ EF' = max(1.3, EF')  # Floor at 1.3
 ⚠️ **CRITICAL**: Update I **BEFORE** incrementing n (order matters!)
 
 ```
-If q < 3 (score <60%, failed):
+If q = 1 (failed):
     I = 1 day
     n = 1
 Else if n = 0 (first review):
@@ -170,11 +170,11 @@ Write updated row to data/knowledge-schedule.md
 
 **Old values**: EF=2.5, n=2, I=6, Last Review=2025-11-04
 
-**User score**: 85% → quality=4 (Easy)
+**User score**: 95% → quality=4 (Easy)
 
 **Calculations**:
 ```
-Step 1: quality = 4 (Easy, since 85% > 80%)
+Step 1: quality = 4 (Easy, since 95% > 90%)
 
 Step 2: Calculate new EF
 EF' = 2.5 + (0.1 - (5-4)×(0.08 + (5-4)×0.02))
@@ -184,19 +184,19 @@ EF' = 2.5 + (0.1 - (5-4)×(0.08 + (5-4)×0.02))
     = 2.5 ✓
 
 Step 3: Calculate new interval
-Since q=4 >= 3 (passed) and n=2 (current):
+Since q=4 (passed) and n=2 (current):
     I' = 6 × 2.5 = 15 days  (use OLD n=2 to determine formula)
     n' = 2 + 1 = 3          (increment after calculating I)
 
 Step 4: Update values
 Last Review = 2025-11-10
 Next Review = 2025-11-10 + 15 = 2025-11-25
-Score History = "75,85" (appended 85)
+Score History = "75,95" (appended 95)
 ```
 
 **Updated row in knowledge-schedule.md**:
 ```
-| stats_5.3 | Gambler's ruin problem | Stats | 2.5 | 15 | 3 | 2025-11-10 | 2025-11-25 | 75,85 |
+| stats_5.3 | Gambler's ruin problem | Stats | 2.5 | 15 | 3 | 2025-11-10 | 2025-11-25 | 75,95 |
 ```
 
 ### Adding New Items Daily
@@ -218,7 +218,7 @@ Score History = "75,85" (appended 85)
 
 ### Special Cases
 
-**Failure (score <60%)**:
+**Failure (score <=60%)**:
 ```
 n = 1 (reset)
 I = 1 day (review tomorrow)
@@ -235,15 +235,6 @@ Intervals grow: 1→6→15→38→95 days (roughly 2.5× each time)
 - If you miss a review date, just review when you can
 - Calculate EF/interval normally based on performance
 - SM-2 is forgiving of delays
-
-### Quality Mapping Examples
-
-| Example Score | Quality | Reasoning |
-|---------------|---------|-----------|
-| 25% | 1 (Again) | Answered "I don't know" or completely wrong |
-| 50% | 2 (Hard) | Got concept but missed key details |
-| 75% | 3 (Good) | Correct but minor gaps in explanation |
-| 95% | 4 (Easy) | Perfect answer, could elaborate, interview-ready |
 
 ### Tips
 
@@ -287,8 +278,6 @@ Intervals grow: 1→6→15→38→95 days (roughly 2.5× each time)
 ---
 
 ## Sample Knowledge Check (Day 4 Example)
-
-**Note**: This is a historical example from before SM-2 implementation. With SM-2, review question selection is now automated via `data/knowledge-schedule.md` based on due dates rather than manual day-based intervals.
 
 ### Today's Content (70% - Regularization, Regression Metrics, K-Means):
 
@@ -341,6 +330,7 @@ Intervals grow: 1→6→15→38→95 days (roughly 2.5× each time)
 | 15 | 2025-11-11 | **92.0% (A-)** | Regularization/priors (90%), A/B testing (100%, 95%), Distributions (75%, 90%, 100%), CLT/LLN (70%), Review perfect (100%, 100%, 100%) | Binomial variance formula (75%), CLT concrete examples (70%) | Statistics Day 3: Strong fundamentals, perfect review retention |
 | 16 | 2025-11-12 | **92.5% (A-)** | PyTorch basics (BCELoss 100%, training loop 95%, no_grad 95%, parameters 95%, backward 90%), Review excellent (KNN 95%, Boosting 100%, MLE 100%) | Training loop order (85% - both work), FSDP sync (70%), FSDP prefetch (60%) | PyTorch Day 1: Strong fundamentals, FSDP concepts need exposure |
 | 17 | 2025-11-13 | **95.1% (A)** | Kafka (96.25% - consumer groups, ISR, acks), Feature Stores (93.3% - online/offline, point-in-time 100%), Review excellent (95% - parametric/non-parametric 100%, KV-cache 95%, quantization 85%) | Training-serving skew elaboration (85%), GPTQ vs AWQ usage (85% - research-level) | ML Infrastructure Day 1: Excellent first-day absorption, point-in-time correctness perfect |
+| 18 | 2025-11-14 | **95.5% (A+)** | Airflow (97.5% - executors 100%, catchup 100%, idempotency 95%), Feature Store transformations (98.3% - batch vs streaming perfect), Review mixed (90% - Kafka 100%, Feature Store 100%, backward pass 70%) | Backward pass all-reduce locations (70% - concatenate vs sum confusion) | ML Infrastructure Day 2: Outstanding new content (97.9%), one conceptual gap in review |
 
 **Progress Trend**: Week 2-3 sustained excellence 🚀
 - Day 3→5: +10.5% improvement over Week 1
@@ -353,9 +343,12 @@ Intervals grow: 1→6→15→38→95 days (roughly 2.5× each time)
 - Day 13→14: -13.0% (99.5% → 86.5%) - Expected dip for new complex material (MLE, hypothesis testing)
 - Day 14→15: +5.5% improvement (86.5% → 92.0%) - Recovery to A- range
 - Day 15→16: +0.5% improvement (92.0% → 92.5%) - Steady A- range
+- Day 16→17: +2.6% improvement (92.5% → 95.1%) - ML Infrastructure day 1
+- Day 17→18: +0.4% improvement (95.1% → 95.5%) - Sustained A+ range
 - **Week 2 Days 1-5 average**: 92% across Days 8-12 (LLM Systems)
 - **Week 2 Days 6-7 (Statistics)**: Average 93% (Day 13: 99.5%, Day 14: 86.5%)
-- **Week 3 Days 1-2**: Average 92.25% (Day 15: 92.0%, Day 16: 92.5%)
+- **Week 3 Days 1-4**: Average 93.8% (Day 15: 92.0%, Day 16: 92.5%, Day 17: 95.1%, Day 18: 95.5%)
+- **ML Infrastructure (Day 17-18)**: Averaging 95.3% on brand new territory - excellent absorption
 - **Day 10 highlight**: User caught 3 approximations/errors (bubble time formula, ranking, TP scaling)
 - **Day 11 highlight**: User caught 2 major errors (communication volume per-device, speculative decoding ragged tensor problem)
 - **Day 12 highlight**: Perfect calculations, caught blog post imprecision on PP activation memory, clarified gradient memory storage
@@ -1197,4 +1190,99 @@ Items with low scores (<60%) automatically reset to n=1, I=1 (review tomorrow). 
 
 ---
 
-**Last Updated**: 2025-11-13
+## Day 18 Detailed Results (2025-11-14)
+
+**Context**: Week 3, Day 4 - ML Infrastructure deep dive continued (Airflow + Feature Store transformations)
+
+**Content Tested**:
+- 70% Day 18: Airflow (DAGs, idempotency, executors, catchup) + Feature Store transformations (streaming vs batch)
+- 30% Review: Priority overdue items (llm_backward_pass 2d overdue, kafka_architecture due today, feature_store_architecture due today)
+
+**Question Breakdown**:
+
+| Q# | Topic | Day | Score | Notes |
+|----|-------|-----|-------|-------|
+| Q1 | DAG definition and dependencies | 18 | 95% ✅ | Perfect understanding of DAG structure and dependencies, minor: "not circle" → "no cycles" |
+| Q2 | Idempotency in Airflow | 18 | 95% ✅ | Excellent DB transaction analogy, perfect example with now(), minor: could add concrete fix (DELETE+INSERT/UPSERT) |
+| Q3 | Airflow executors comparison | 18 | 100% ✅ | **Perfect**: All three executors, correct use cases, K8s for sporadic tasks exactly right |
+| Q4 | Catchup and backfills | 18 | 100% ✅ | **Perfect**: catchup=True/False, start_date vs execution_date, clear use cases |
+| Q5 | 90-day avg (batch vs streaming) | 18 | 100% ✅ | **Perfect**: Batch transformation, correct reasoning (long time span, not real-time) |
+| Q6 | Fraud detection - last 5 min | 18 | 95% ✅ | Correct: Streaming, good reasoning, tools: Kafka ✅, Tecton/Flink are options |
+| Q7 | Offline vs Online stores | 18 | 100% ✅ | **Perfect**: Distinction, storage backends, use cases (training vs serving) |
+| Q8 | Backward pass in Megatron-LM (review) | 9 | 70% 🟡 | General flow correct, **critical error**: "concatenate dL/dY" (should be all-reduce/sum), missing WHERE all-reduces happen |
+| Q9 | Kafka consumer group crash (review) | 17 | 100% ✅ | **Perfect**: Rebalancing, partition reassignment, offset resume from committed position |
+| Q10 | Point-in-time correctness (review) | 17 | 100% ✅ | **Perfect**: Temporal join semantics, data leakage explanation, train/serve impact |
+
+**Overall Score**: 95.5% (9.55/10) - A+
+
+**Retention Analysis**:
+- Day 18 content (Q1-Q7): 97.9% (6.85/7) - Outstanding first-day absorption
+  - Airflow (Q1-Q4): 97.5% (3.9/4) - Interview-ready on DAGs, idempotency, executors, catchup
+  - Feature Store transformations (Q5-Q7): 98.3% (2.95/3) - Perfect understanding of batch vs streaming
+- Review content (Q8-Q10): 90.0% (2.7/3) - Strong retention with one conceptual gap
+
+**Key Insights**:
+- ✅ **Airflow fundamentals interview-ready**: DAGs, idempotency, executors, catchup all strong (97.5%)
+- ✅ **Feature transformation patterns mastered**: Batch vs streaming trade-offs perfectly understood (98.3%)
+- ✅ **Kafka/Feature Store retention**: 100% on yesterday's content (Day 17 review)
+- 🟡 **Backward pass mechanics**: Needs clarification on all-reduce locations (70% → needs review)
+- ✅ **Outstanding learning velocity**: 97.9% on brand new ML infrastructure content (Day 2)
+
+**Strengths**:
+- Airflow executor comparison (100% - all three executors, perfect use cases)
+- Catchup/backfill mechanics (100% - execution_date vs start_date clear)
+- Batch vs streaming decision framework (98.3% - clear trade-offs, correct examples)
+- Idempotency concept (95% - DB transaction analogy, now() example)
+- DAG structure (95% - dependencies, acyclic property)
+- Kafka consumer group resilience (100% - perfect rebalancing explanation)
+- Point-in-time correctness (100% - flawless data leakage explanation)
+
+**Weak Areas**:
+- 🟡 **Backward pass all-reduce locations** (70%): Confused concatenation with all-reduce, missing WHERE all-reduces happen
+  - **Issue**: Said "concatenate dL/dY_left and dL/dY_right" in backward pass
+  - **Correct**: All-reduce (sum) after row-parallel layer, all-reduce after column-parallel layer
+  - **Key rule**: Backward pass uses all-reduce (sum), never concatenate
+  - **Action**: Review where all-reduces occur in Megatron-LM backward pass
+
+**Practice Exercises Completed** (~2 hours, not formally scored):
+- ✅ Studied Airflow: DAGs, idempotency best practices, templating, catchup, executors
+- ✅ Studied Feature Store transformations: Streaming vs batch patterns, Feast architecture, materialization
+- ✅ Read Airflow official docs: Best Practices, Templates Reference, Core Concepts
+- ✅ Read Made With ML Feature Store guide: Streaming vs batch comparison
+
+**New Topics to Add to SM-2 Schedule** (5 topics organized efficiently):
+1. airflow_dag_fundamentals (DAG definition, dependencies, acyclic property) - Score: 95%
+2. airflow_idempotency (best practices, templating, UPSERT patterns) - Score: 95%
+3. airflow_executors (Local/Celery/Kubernetes comparison, use cases) - Score: 100%
+4. airflow_catchup_backfill (catchup=True/False, execution_date, start_date) - Score: 100%
+5. feature_store_transformations (streaming vs batch, trade-offs, when to use) - Score: 98.3%
+
+**SM-2 Updates to Apply**:
+- Update 3 review items:
+  - llm_backward_pass: 98% → 70% (drop in understanding, needs more frequent review)
+  - kafka_architecture: 92.5% → 100% (perfect retention after 1 day)
+  - feature_store_architecture: 97.5% → 100% (perfect retention after 1 day, building on it)
+- Add 5 new Airflow + Feature Store transformation topics (first review tomorrow 2025-11-15)
+
+**Action Items**:
+- 🟡 **Review backward pass mechanics**: Focus on WHERE all-reduces happen (row-parallel → all-reduce dL/dY, column-parallel → all-reduce dL/dX)
+- ✅ All Day 18 concepts interview-ready (Airflow, Feature Store transformations)
+- Continue Day 19 topics: Docker + Kubernetes basics
+
+**Recommendation**: ✅ **Outstanding performance!** 95.5% with 97.9% on new content demonstrates exceptional learning velocity on ML infrastructure. Highlights:
+1. **Airflow executors**: Perfect comparison (100%) - ready for system design questions
+2. **Batch vs streaming**: Clear decision framework (98.3%) - interview-ready trade-off analysis
+3. **Catchup mechanics**: Perfect understanding (100%) - can explain backfill behavior
+4. **Yesterday's retention**: 100% on Kafka and Feature Store (Day 17 review)
+5. **One conceptual gap**: Backward pass all-reduce locations need clarification (70%)
+
+**ML Infrastructure Gap Closure Progress**:
+- Day 17 start: 0% Know, 37.5% Unsure, 62.5% Dunno (64-item gap analysis)
+- Day 17 end: ~20% estimated (5 topics: Kafka fundamentals, Feature Store basics)
+- Day 18 end: ~35% estimated (10 topics: +Airflow fundamentals, +Feature Store transformations)
+- Target by Day 19: 60-70% readiness
+- Progress: Strong momentum, 2 critical tools (Kafka, Airflow) + feature engineering patterns covered
+
+---
+
+**Last Updated**: 2025-11-14

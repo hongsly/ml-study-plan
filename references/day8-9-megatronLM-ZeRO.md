@@ -109,8 +109,8 @@ class g(torch.autograd.Function):
 
 ```
 Forward:
-  X (replicated) → f → [W1_left | W1_right] (column-parallel) → GeLU → Y
-  Y (partitioned: Y1, Y2) → [W2_top | W2_bot] (row-parallel) → g → Z (replicated)
+  X (replicated) → f.forward (identity) → [W1_left | W1_right] (column-parallel) → GeLU → Y
+  Y (partitioned: Y1, Y2) → [W2_top | W2_bot] (row-parallel) → g.forward (all-reduce) → Z (replicated)
 
 Backward:
   ∂L/∂Z (replicated) → g.backward (identity) → [W2_top^T | W2_bot^T]

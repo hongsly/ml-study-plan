@@ -812,23 +812,24 @@ This is where you need the most practice:
   - When to use vs database
 - [x] Knowledge check (30 min): 95.1% (A) - 7 new, 3 review
 
-**Completion Summary**:
-- Study time: 1.5 hours (Kafka + Feature Stores concepts)
-- Knowledge check score: 95.1% (A)
-  - Kafka: 96.25% - Consumer groups, ISR, acks configuration
-  - Feature Stores: 93.3% - Online/offline, point-in-time correctness (100%)
-  - Review retention: 95% - Parametric/non-parametric, KV-cache, quantization
-- Topics added to SM-2: 5 (kafka_architecture, kafka_producers_consumers, kafka_metadata_management, feature_store_architecture, feature_store_benefits)
-- Quick reference created: references/Day17-Quick-Reference.md
-
-**Day 4 (Day 18, Friday 2025-11-14) - 2 hours:**
-- [ ] Airflow fundamentals (1 hour)
+**Day 4 (Day 18, Friday 2025-11-14) - 2 hours:** ✅ **COMPLETED**
+- [x] Airflow fundamentals (1 hour)
   - DAGs, operators, tasks, scheduling
   - Idempotency & backfills (critical for interviews)
   - Executors: Local, Celery, Kubernetes
-- [ ] Feature Stores deep dive (30 min)
+- [x] Feature Stores deep dive (30 min)
   - Feature transformation patterns (streaming vs batch)
   - Feast architecture & materialization
+- [x] Knowledge check (15 min): 95.5% (A+) - 7 new, 3 review
+
+**Completion Summary**:
+- Study time: ~2 hours (Airflow + Feature Store transformations)
+- Knowledge check score: 95.5% (A+)
+  - Airflow: 97.5% - Executors 100%, catchup 100%, idempotency 95%, DAGs 95%
+  - Feature Store transformations: 98.3% - Perfect batch vs streaming decision framework
+  - Review retention: 90% - Kafka 100%, Feature Store 100%, backward pass 70% (gap identified)
+- Topics added to SM-2: 5 (airflow_dag_fundamentals, airflow_idempotency, airflow_executors, airflow_catchup_backfill, feature_store_transformations)
+- Quick reference created: references/day18-airflow-featureStoreTransform.md
 
 **Day 5 (Day 19, Saturday 2025-11-15) - 2 hours:**
 - [ ] Docker basics (30 min)

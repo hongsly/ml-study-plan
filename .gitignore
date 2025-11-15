@@ -29,6 +29,7 @@ TOKEN
 .DS_Store
 Icon
 **/Icon
+venv/
 
 # Jupyter checkpoints
 .ipynb_checkpoints/
