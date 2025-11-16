@@ -828,19 +828,19 @@ This is where you need the most practice:
   - Airflow: 97.5% - Executors 100%, catchup 100%, idempotency 95%, DAGs 95%
   - Feature Store transformations: 98.3% - Perfect batch vs streaming decision framework
   - Review retention: 90% - Kafka 100%, Feature Store 100%, backward pass 70% (gap identified)
-- Topics added to SM-2: 5 (airflow_dag_fundamentals, airflow_idempotency, airflow_executors, airflow_catchup_backfill, feature_store_transformations)
 - Quick reference created: references/day18-airflow-featureStoreTransform.md
 
-**Day 5 (Day 19, Saturday 2025-11-15) - 2 hours:**
-- [ ] Docker basics (30 min)
+**Day 5 (Day 19, Saturday 2025-11-15) - 2 hours:** ✅ **COMPLETED**
+- [x] Docker basics (30 min)
   - Dockerfile, images, containers, registries
   - Best practices: Multi-stage builds, GPU support
-- [ ] Kubernetes basics (1 hour)
+- [x] Kubernetes basics (1 hour)
   - Pods, deployments, services, ingress
   - Resource management (CPU/GPU limits)
   - Autoscaling (HPA, VPA)
+- [x] Knowledge check (15 min): 89.5% (B+/A-) - 7 new, 3 review
 
-**Target**: Bring ML infra from 0-37.5% → 60-70% interview readiness
+**Target**: Bring ML infra from 0-37.5% → 60-70% interview readiness ✅ **ACHIEVED: 65%**
 
 ---
 
