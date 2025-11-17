@@ -844,26 +844,72 @@ This is where you need the most practice:
 
 ---
 
-**Day 6-7: System Design Practice (3-4 hours)** ⚠️ **MOVED FROM DAY 4-5**
+**Day 6 (Day 20, Saturday 2025-11-16) - 2 hours:** ✅ **COMPLETED**
 
-**Practice Problems** (3-4 problems × 45-60 min each):
-- [ ] Problem 1: Design YouTube recommendation system
+**Mock Interview**: YouTube Recommendation System (60 min)
+- [x] Problem 1: Design YouTube recommendation system
   - Focus: Candidate generation, ranking, serving architecture
+  - Score: 78/100 (B+) - Strong for first practice
+  - Solution: 3-stage cascade (100M → 1K → 100 → 20)
+  - Data pipeline: Kafka→Flink→Redis + Spark batch
+  - Training: watch_time / duration, 5% randomized traffic, IPS
+  - A/B testing: Per-user, 1-2 weeks
+
+**Extended Discussions** (60 min):
+- [x] Latency vs QPS relationship (batching increases throughput)
+- [x] Two-tower pre-computation (user vs item embeddings)
+- [x] A/B test sample size calculation
+- [x] Training data bias solutions
+
+**Knowledge Check** (15 min): 91% (A-/A) - REVISED from 89.5%
+- Review: 95% (VIF, Airflow idempotency, continuous batching)
+- New: 87.1% (system design concepts)
+- Critical gap: Throughput calculations - REVISED to 85% after clarification
+- **User insight**: "1K predictions = 1 REQUEST, not 1K requests!" ✅
+
+**Follow-up Session (2025-11-17, 30 min)**: ⭐ **TYPICAL NUMBERS CHEATSHEET ADDED**
+- [x] Identified real gap: Not formula knowledge, but realistic numbers to plug in
+- [x] Created comprehensive cheatsheet with typical values:
+  - Server configs (cores, memory, GPU types, costs)
+  - Batch sizes (ANN=1, XGBoost=1K candidates, DNN=32-256)
+  - Latencies (Redis=0.1-1ms, XGBoost=5-10ms, ANN=10-20ms, DNN=50ms)
+  - Parallelism factors (CPU-bound=10-16×, memory-bound=4-8×)
+  - Decision tree for "I don't know the numbers"
+  - Quick estimation examples (XGBoost, DNN, ANN)
+  - Common pitfalls & interview-ready template
+- [x] Added 227-line section to `references/day20-system-design-youtube-rec.md`
+- **Key meta-learning**: User demonstrated strong self-awareness of learning gaps
+
+**Completion Summary**:
+- Mock interview score: 78/100 (B+)
+  - Strengths: Requirements (9/10), architecture (8/10), communication (8/10)
+  - Needs work: Scaling calculations (6.5/10) ❌ → **GAP CLOSED with cheatsheet** ✅
+- Knowledge check: 91% (A-/A) - revised after throughput correction
+  - Perfect: Data pipelines (100%), bias handling (100%), A/B testing (100%)
+  - Improved: Throughput calc (70% → 85% after 1K predictions clarification)
+  - Weak: GPU scaling (50%) - can improve with practice
+- Key learning: **Throughput = 1 REQUEST (scoring N candidates) / Latency**, not N/Latency!
+- **Critical addition**: Typical Numbers Cheatsheet now available for future system design interviews
+
+**Day 7 (Day 21, Sunday 2025-11-17) - 2 hours:**
+
+**Practice Problems** (2-3 problems × 45-60 min each):
 - [ ] Problem 2: Design fraud detection system
-  - Focus: Real-time inference, feature engineering, model monitoring
+  - Focus: Real-time inference, feature engineering, model monitoring, XGBoost vs DNN
 - [ ] Problem 3: Design search ranking system
   - Focus: Retrieval, ranking stages, personalization
 - [ ] Problem 4 (optional): Design ad click prediction system
   - Focus: Feature engineering, two-tower model, online learning
 
-**For each problem**:
-- [ ] Write full solution (data, features, model, serving, monitoring)
-- [ ] Draw architecture diagram
-- [ ] Compare with sample solutions (ML-System-Design-Questions.md)
+**Focus Areas for Day 21**:
+- [ ] **CRITICAL**: Scaling calculations (QPS → servers → cost) for every component
+- [ ] **CRITICAL**: Throughput formula (Batch Size / Latency)
+- [ ] Specific tool names (Kafka, Flink, Redis, FAISS)
+- [ ] Cost estimation ($/year for all components)
 
-**Memorize**:
-- [ ] Common architectures: Two-tower, cascade, lambda architecture
-- [ ] Scale numbers: QPS targets (1K, 10K, 100K+), latency (p50, p99), throughput
+**Memorize** ✅:
+- [x] Common architectures: Two-tower, cascade, lambda architecture
+- [x] Scale numbers: QPS targets (1K, 10K, 100K+), latency (<10ms, 10-100ms, 100-500ms)
 
 ---
 

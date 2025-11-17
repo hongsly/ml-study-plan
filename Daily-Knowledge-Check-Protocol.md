@@ -332,6 +332,7 @@ Intervals grow: 1→6→15→38→95 days (roughly 2.5× each time)
 | 17 | 2025-11-13 | **95.1% (A)** | Kafka (96.25% - consumer groups, ISR, acks), Feature Stores (93.3% - online/offline, point-in-time 100%), Review excellent (95% - parametric/non-parametric 100%, KV-cache 95%, quantization 85%) | Training-serving skew elaboration (85%), GPTQ vs AWQ usage (85% - research-level) | ML Infrastructure Day 1: Excellent first-day absorption, point-in-time correctness perfect |
 | 18 | 2025-11-14 | **95.5% (A+)** | Airflow (97.5% - executors 100%, catchup 100%, idempotency 95%), Feature Store transformations (98.3% - batch vs streaming perfect), Review mixed (90% - Kafka 100%, Feature Store 100%, backward pass 70%) | Backward pass all-reduce locations (70% - concatenate vs sum confusion) | ML Infrastructure Day 2: Outstanding new content (97.9%), one conceptual gap in review |
 | 19 | 2025-11-15 | **89.5% (B+/A-)** | Docker (image/container 95%, build/run 95%), Kubernetes (HPA 95%, resources 90%), Review perfect (regression 95%, bandwidth 100%, PyTorch 100%) | Multi-stage builds ML use case (70%), K8s Deployment definition (75%), GPU specifics (80%) | ML Infrastructure Day 3: Strong fundamentals (85.7%), perfect review retention (98.3%) |
+| 20 | 2025-11-16 | **91% (A-/A)** | Data pipelines (100%), Bias handling (100%), A/B testing (100%), Two-tower (90%), Throughput calc (85% - revised), Review excellent (Airflow 100%, continuous batching 100%, VIF 85%) | GPU scaling calculation (50% - missed given numbers) | System Design Day 1: Mock interview 78/100 (B+), perfect conceptual understanding, correctly understood 1K predictions = 1 request |
 
 **Progress Trend**: Week 2-3 sustained excellence 🚀
 - Day 3→5: +10.5% improvement over Week 1
@@ -347,9 +348,11 @@ Intervals grow: 1→6→15→38→95 days (roughly 2.5× each time)
 - Day 16→17: +2.6% improvement (92.5% → 95.1%) - ML Infrastructure day 1
 - Day 17→18: +0.4% improvement (95.1% → 95.5%) - Sustained A+ range
 - Day 18→19: -6.0% (95.5% → 89.5%) - Expected dip for new infrastructure topics (Docker/K8s)
+- Day 19→20: +1.5% (89.5% → 91%) - Recovery to A-/A range (revised after throughput calc correction)
 - **Week 2 Days 1-5 average**: 92% across Days 8-12 (LLM Systems)
 - **Week 2 Days 6-7 (Statistics)**: Average 93% (Day 13: 99.5%, Day 14: 86.5%)
 - **Week 3 Days 1-5 average**: 93.5% across Days 15-19 (Statistics completion + ML Infrastructure deep dive)
+- **Week 3 Day 6 (System Design)**: 91% knowledge check (revised) + 78/100 mock interview (B+) - strong first practice
 - **ML Infrastructure (Day 17-18)**: Averaging 95.3% on brand new territory - excellent absorption
 - **Day 10 highlight**: User caught 3 approximations/errors (bubble time formula, ranking, TP scaling)
 - **Day 11 highlight**: User caught 2 major errors (communication volume per-device, speculative decoding ragged tensor problem)
@@ -358,7 +361,9 @@ Intervals grow: 1→6→15→38→95 days (roughly 2.5× each time)
 - **Day 14 highlight**: Perfect MLE derivations (100%), identified σ̂² vs σ̂ distinction, user scored conservatively on ROC/AUC (70%)
 - **Day 15 highlight**: Perfect review retention (100% on all 3 overdue items), Megatron 77%→100%, Precision-Recall 88-92%→100%
 - **Day 16 highlight**: Removed duplicate topic (llm_tensor_parallel_comm), excellent PyTorch fundamentals (87.9%), perfect review retention (98.3%)
-- Review retention: 95% average (Day 16 review: 98.3%, sustained excellence)
+- **Day 17-19 highlight**: ML Infrastructure gap closure 0%→65% in 3 days (Kafka, Feature Stores, Airflow, Docker, K8s)
+- **Day 20 highlight**: First system design practice - mock interview 78/100 (B+), perfect data pipeline/bias understanding (100%), **user caught throughput calculation error** (1K predictions = 1 request, not 10K QPS!), critical gap: reading given numbers in problem statements (50%)
+- Review retention: 95% average (Day 20 review: 95% - VIF, Airflow, continuous batching)
 
 ---
 
@@ -1359,3 +1364,144 @@ Items with low scores (<60%) automatically reset to n=1, I=1 (review tomorrow). 
 - Ready for: ML system design interviews with infrastructure component questions
 
 **Last Updated**: 2025-11-15
+
+---
+
+## Day 20 Detailed Results (2025-11-16)
+
+**Overall Score**: 89.5% (8.95/10) - A-/B+
+
+**Session Type**: ML System Design Practice + Knowledge Check
+
+**Question Breakdown**:
+
+| Q# | Topic | Day | Score | Notes |
+|----|-------|-----|-------|-------|
+| Q1 | VIF test (review) | Day 13 | 85% ✅ | Formula correct (1/(1-R²)), threshold >10 correct, acknowledged uncertainty ("Can't remember clearly") |
+| Q2 | Airflow idempotency (review) | Day 18 | 100% ✅✅ | **Perfect**: INSERT → UPSERT example, DAG retry/backfill rationale clear |
+| Q3 | Continuous batching (review) | Day 11 | 100% ✅✅ | **Perfect**: Iteration-level scheduling, ragged sequence GPU utilization example (A/B/C sequences) |
+| Q4 | GPU scaling calculation | 20 | 50% ❌ | Calculated single-thread (20 QPS) correctly, but missed "150 QPS per GPU with batching" → 200 GPUs needed, not 10 |
+| Q5 | Two-tower architecture | 20 | 90% ✅ | Perfect architecture + pre-computation insight, minor: didn't contrast with cross-feature |
+| Q6 | Position bias methods | 20 | 100% ✅✅ | **Perfect**: Both methods (randomized holdout 5%, IPS with 1/P(shown)), clear explanations |
+| Q7 | Data pipeline design | 20 | 100% ✅✅ | **Perfect**: Kafka→Flink→Redis + Spark→Iceberg, exactly right! |
+| Q8 | A/B test randomization | 20 | 100% ✅✅ | **Perfect**: Per-user (not per-request), carryover effects reasoning |
+| Q9 | XGBoost vs DNN throughput | 20 | 85% ✅ | Good latency analysis (50 CPUs for 100ms), correctly understood 1K candidates = 1 request, missing final step: QPS = 1/latency = 10 QPS (revised from 70% after user clarification) |
+| Q10 | Unbiased training data | 20 | 100% ✅✅ | **Perfect**: 5% randomized holdout explanation, why it matters |
+
+**Overall Score**: 91% (9.1/10) - A-/A (revised from 89.5% after Q9 correction)
+
+**Retention Analysis**:
+- Review content (Q1-Q3): 95% (2.85/3) - Excellent retention!
+  - VIF: 85% (acknowledged uncertainty but formula/threshold correct)
+  - Airflow idempotency: 100% (perfect example)
+  - Continuous batching: 100% (perfect ragged sequence explanation)
+- Day 20 new content (Q4-Q10): 89.3% (6.25/7) - Strong first-time learning!
+  - Scaling: 50% (missed batching throughput in given numbers)
+  - Architecture: 90% (two-tower pre-computation solid)
+  - Bias/Data: 100% (all 4 questions perfect!)
+  - Throughput calc: 85% (correctly understood 1K predictions = 1 request, missed final QPS calc)
+
+**Key Insights**:
+- ✅ **Data pipeline mastery** (Q7): Kafka→Flink→Redis is textbook perfect!
+- ✅ **Bias handling** (Q6, Q10): Understands both randomized holdout (5%) and IPS - impressive!
+- ✅ **A/B testing** (Q8): Correctly identified carryover effects
+- ✅ **Two-tower architecture** (Q5): Pre-computation insight strong
+- ❌ **Throughput calculations** (Q4, Q9): Critical gap - didn't apply "QPS = Batch Size / Latency"
+- ✅ **Review retention**: 95% on 3 overdue items
+
+**Mock Interview Performance** (60 min before knowledge check):
+- **Overall**: 78/100 (B+) - Strong for first system design practice
+- **Strengths**:
+  - Excellent clarifying questions (QPS, latency, scale)
+  - Sound architectural intuition (cascade design, two-tower, ANN search)
+  - Aware of biases (position bias, down-sampling, drift)
+  - Honest about gaps ("Not familiar with Flink")
+  - Responsive to feedback
+- **Areas to improve**:
+  - Scaling calculations (QPS per server → total servers needed → cost)
+  - Implementation details (specific tools: Kafka, Flink, Redis, FAISS)
+  - Offline evaluation strategies beyond holdout set
+
+**Critical Gap Identified**: Throughput Calculation
+
+**Problem**: Given latency, didn't calculate throughput correctly
+
+**Q4 Example**:
+- Given: 30K QPS, Stage 3 DNN 50ms latency, 150 QPS per GPU with batching
+- User answer: "50ms → 20 QPS single-thread → 30K/20 = 1500 processes → 10 GPUs?"
+- **Error**: Forgot problem states "150 QPS per GPU" (batching already factored in!)
+- **Correct**: 30,000 QPS / 150 QPS per GPU = **200 GPUs**
+
+**Q9 Example**:
+- Given: XGBoost (1K candidates to rank, 100ms) vs DNN (1K candidates to rank, 100ms)
+- User answer: "Option A: 50 CPUs for 100ms. Not sure how to get QPS limitation"
+- **User's correct insight (post-check)**: "1K predictions = 1 REQUEST, not 1K requests!"
+- **Corrected calculation**:
+  - XGBoost: 1 request (1K candidates) / 0.1s = **10 QPS per server** ✅
+  - DNN: 1 request (1K candidates) / 0.1s = **10 QPS per GPU** ✅
+  - Both have same throughput! Choose XGBoost for cost efficiency
+- **Key lesson**: Ranking N candidates = 1 request (not N requests)
+
+**Formula to memorize**:
+```
+Throughput (QPS) = Batch Size / Latency
+Servers Needed = Total QPS / QPS per Server
+Cost = Servers × $/hour × 8760 hours/year
+```
+
+**Strengths**:
+- Data pipeline patterns (100%): Kafka→Flink→Redis perfect
+- Bias handling (100%): Randomized holdout + IPS understood
+- A/B testing (100%): Per-user randomization rationale
+- Two-tower (90%): Pre-computation insight
+- Airflow idempotency (100%): Perfect example (INSERT→UPSERT)
+- Continuous batching (100%): Perfect ragged sequence explanation
+
+**Weak Areas**:
+- ❌ **GPU scaling from latency** (50%): Read problem statement carefully! Use given QPS if provided
+  - **Action**: Practice: Given latency → calculate QPS → scale to total QPS → cost
+- 🟡 **Throughput calculation** (70%): Know formula QPS = Batch Size / Latency
+  - **Action**: For every model, calculate: latency, batch size, QPS, servers needed, cost
+- 🟡 **VIF formula** (85%): Correct (1/(1-R²), threshold >10) but acknowledged uncertainty
+  - **Action**: Quick review of VIF interpretation
+
+**Practice Exercises Completed** (~2 hours):
+- ✅ Mock interview: YouTube Recommendation System (60 min)
+  - Clarifying questions (QPS, latency, scale, metrics)
+  - Proposed 3-stage cascade (100M → 1K → 100 → 20)
+  - Data pipeline: Kafka→Flink→Redis + Spark batch
+  - Training: watch_time / video_duration, IPS, 5% randomized traffic
+  - A/B testing: Per-user, 1-2 weeks, primary metric watch time
+- ✅ Extended discussions:
+  - Latency vs QPS relationship (batching increases throughput) (30 min)
+  - Two-tower pre-computation (user vs item embeddings) (15 min)
+  - A/B test sample size calculation (15 min)
+  - Training data bias solutions (randomized traffic, IPS) (15 min)
+
+**Assessment**:
+- **Mock Interview Score**: 78/100 (B+)
+  - Requirements clarification: 9/10 (A)
+  - System architecture: 8/10 (B+)
+  - ML problem framing: 7.5/10 (B+)
+  - Data pipeline: 7/10 (B)
+  - Model serving & deployment: 6.5/10 (C+) - Missing scaling calculations ❌
+  - Monitoring & evaluation: 7.5/10 (B+)
+  - Communication & trade-offs: 8/10 (B+)
+
+**Action Items**:
+- ❌ **CRITICAL: Practice throughput calculations** - QPS = Batch Size / Latency, every model every time
+- ❌ **CRITICAL: Scaling pattern** - QPS → servers → cost for every component
+- 🟡 Add to next practice: Name specific tools (Kafka not "streaming system")
+- 🟡 Review VIF formula interpretation (quick 5 min refresh)
+
+**Recommendation**: ✅ **Excellent fundamentals, need scaling calculation practice!** 89.5% knowledge check shows strong conceptual understanding (bias handling, data pipelines, A/B testing all perfect). Main gap: applying throughput formulas in novel scenarios. 
+
+**For Day 21**: Focus on scaling calculations for every component, cost estimation, and specific tool names.
+
+**ML System Design Readiness**: ~75-80% (up from 0% - Week 3 Day 6 first practice)
+- Strong: Data pipelines (100%), bias handling (100%), A/B testing (100%), architecture intuition (90%)
+- Good: Two-tower (90%), framing (87%), monitoring (87%)
+- Needs work: Scaling calculations (50-70%), cost estimation (not practiced)
+- Next: 2-3 more practices → 85%+ interview ready
+
+**Last Updated**: 2025-11-16
