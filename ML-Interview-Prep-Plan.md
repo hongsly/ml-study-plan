@@ -891,25 +891,44 @@ This is where you need the most practice:
 - Key learning: **Throughput = 1 REQUEST (scoring N candidates) / Latency**, not N/Latency!
 - **Critical addition**: Typical Numbers Cheatsheet now available for future system design interviews
 
-**Day 7 (Day 21, Sunday 2025-11-17) - 2 hours:**
+**Day 7 (Day 21, Sunday 2025-11-17) - 2 hours:** ✅ **COMPLETED**
 
 **Practice Problems** (2-3 problems × 45-60 min each):
-- [ ] Problem 2: Design fraud detection system
+- [x] Problem 2: Design fraud detection system
   - Focus: Real-time inference, feature engineering, model monitoring, XGBoost vs DNN
-- [ ] Problem 3: Design search ranking system
-  - Focus: Retrieval, ranking stages, personalization
-- [ ] Problem 4 (optional): Design ad click prediction system
-  - Focus: Feature engineering, two-tower model, online learning
+  - **Score**: 85/100 (A-) - Strong design across all areas
+  - **Architecture**: Kafka→Flink→Redis + Snowflake, XGBoost with dynamic batching ($6K/year)
+- [ ] Problem 3: Design search ranking system (skipped - optional)
+- [ ] Problem 4 (optional): Design ad click prediction system (skipped)
 
-**Focus Areas for Day 21**:
-- [ ] **CRITICAL**: Scaling calculations (QPS → servers → cost) for every component
-- [ ] **CRITICAL**: Throughput formula (Batch Size / Latency)
-- [ ] Specific tool names (Kafka, Flink, Redis, FAISS)
-- [ ] Cost estimation ($/year for all components)
+**Focus Areas for Day 21**: ✅ **ALL ACHIEVED**
+- [x] **CRITICAL**: Scaling calculations (QPS → servers → cost) for every component - Calculated LogReg, XGBoost, DNN with/without batching
+- [x] **CRITICAL**: Throughput formula (Batch Size / Latency) - Applied correctly, understood dynamic batching
+- [x] Specific tool names (Kafka, Flink, Redis, FAISS) - All used correctly
+- [x] Cost estimation ($/year for all components) - $600, $6K, $90K compared
+
+**Knowledge Check**: **97.0% (A+)**
+- Day 21 content: 99.3% (7 questions on fraud detection)
+- Review content: 91.7% (residual plots, roofline, throughput calc)
+
+**Completion Summary**:
+- Mock interview score: 85/100 (A-) - **+7 points from Day 20!**
+  - Feature engineering: 9.5/10 (20 comprehensive features)
+  - Cost analysis: 9/10 (LogReg $600, XGBoost $6K, DNN $90K)
+  - Architecture: 8.5/10 (Kafka→Flink→Redis, cold start handling, sliding windows)
+  - Dynamic batching: 9/10 (50× throughput improvement)
+- Knowledge check: 97% - **+6 points from Day 20 (91%)!**
+  - Perfect scores on model selection, features, Flink vs Snowflake, sliding windows, cold start, manual review
+- Key improvements:
+  - Feature engineering: 7/10 → 9.5/10
+  - Cost analysis: 6/10 → 9/10
+  - Throughput calculations: Now calculates with/without batching
+- Quick reference created: `references/day21-fraud-detection-system.md`
 
 **Memorize** ✅:
 - [x] Common architectures: Two-tower, cascade, lambda architecture
 - [x] Scale numbers: QPS targets (1K, 10K, 100K+), latency (<10ms, 10-100ms, 100-500ms)
+- [x] **NEW**: Dynamic batching is COST OPTIMIZATION (12-50× savings), not just scaling!
 
 ---
 

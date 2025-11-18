@@ -22,11 +22,14 @@
 - **Batch**: Seconds to hours (email spam detection, offline recommendations)
 
 ### Model Inference Latency
-- **Simple model (logistic regression)**: <1ms, handles 10K QPS per CPU core
-- **Medium model (XGBoost)**: 1-10ms, 1K-10K QPS per CPU core
-- **Medium DNN (100M params)**: 5-20ms, 100-500 QPS per GPU
-- **Large DNN (1B+ params)**: 50-200ms, 50-100 QPS per GPU
-- **LLM (GPT-3.5 size)**: 500ms-2s, 10-50 QPS per GPU
+
+**IMPORTANT**: Latencies below are for **single predictions or batched candidates for ONE user request**. For dynamic batching (multiple user requests), see section on "Dynamic Batching" in Typical Numbers Cheatsheet.
+
+- **Simple model (logistic regression)**: <1ms per prediction, handles 10K QPS per CPU core
+- **Medium model (XGBoost)**: 5-10ms per request (scoring 1K candidates for 1 user), 1K-5K QPS per CPU core
+- **Medium DNN (100M params)**: 5-20ms per prediction (no batching), 50ms per request (scoring 1K candidates for 1 user with vectorization), 100-500 QPS per GPU (with dynamic batching of 32-128 user requests)
+- **Large DNN (1B+ params)**: 50-200ms per batch (32-128 user requests), 50-100 QPS per GPU
+- **LLM (GPT-3.5 size)**: 500ms-2s per request (generation), 10-50 QPS per GPU (with batching)
 
 ### Throughput Calculation Formula
 
@@ -1027,12 +1030,18 @@ is ~1K QPS for this scale, so ~30 servers needed."
 | **DynamoDB lookup** | 1-5 ms | Network + disk |
 | **Simple computation** | <1 ms | Hashing, arithmetic |
 | **XGBoost (1K predictions)** | 5-10 ms | CPU, can batch efficiently |
+| **XGBoost (1 prediction)** | 5 ms | Single request, no batching |
 | **ANN search (1M vectors)** | 2-5 ms | Small scale (Spotify) |
 | **ANN search (100M vectors)** | 10-20 ms | Large scale (YouTube) |
-| **Small DNN (batch=1)** | 10 ms | GPU underutilized |
-| **Medium DNN (batch=128)** | 50 ms | Good GPU utilization |
+| **Small DNN (batch=1)** | 10 ms | GPU underutilized, single request |
+| **Medium DNN (batch=128)** | 50 ms | Good GPU utilization, **single request scoring 128-1000 candidates** |
 | **Large transformer (batch=32)** | 100 ms | BERT-Large, T5 |
 | **LLM token generation** | 20-50 ms/token | Auto-regressive |
+
+**CRITICAL CLARIFICATION** ⭐:
+- **"batch=128"** in DNN/XGBoost typically means **vectorized scoring of N candidates for 1 user** (within-request parallelism)
+- This is **NOT dynamic batching** (batching multiple user requests together)
+- For dynamic batching latencies, see "DNN (with dynamic batching)" examples below
 
 **Interview tip**: If you don't know exact latency, give a **range** (e.g., "10-50ms for medium DNN") and say you'd benchmark.
 
