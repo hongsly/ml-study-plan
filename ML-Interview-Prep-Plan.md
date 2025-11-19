@@ -947,23 +947,54 @@ This is where you need the most practice:
 **Day 1-2: Advanced RAG Architectures (2-3 hours)** ⭐ **MOVED FROM WEEK 3 DAY 6-7**
 
 **Pre-study**: Topic Coverage Check (20 min) - if needed
-- [ ] List RAG subtopics: Retrieval methods (sparse, dense, hybrid), Reranking, FiD, ColBERT, DPR, etc.
-- [ ] Self-assess: know/unsure/dunno for each
+- [x] ✅ **COMPLETED Day 22**: List RAG subtopics: Retrieval methods (sparse, dense, hybrid), Reranking, FiD, ColBERT, DPR, etc.
+- [x] ✅ **COMPLETED Day 22**: Self-assess: know/unsure/dunno for each
+  - **Result**: 86 topics assessed, 21.3% weighted baseline → Day 1 studied 11 topics (7 new + 4 consolidated)
 
 **Study**:
-- [ ] Read: FiD paper ("Leveraging Passage Retrieval with Generative Models for Open Domain QA") (1 hour)
-  - Focus: Architecture (encode independently, decode jointly), advantages over concatenation
-- [ ] Read: Hybrid retrieval overview (30 min)
-  - Sparse (BM25) + Dense (embeddings) fusion
-  - Reciprocal Rank Fusion (RRF) algorithm
 
-**Practice**:
-- [ ] Implement: Simple hybrid retrieval (1 hour)
-  - BM25 (using `rank_bm25` library) + Sentence-Transformers
-  - RRF fusion: score(d) = Σ 1/(k + rank_r(d))
-- [ ] Explore: LlamaIndex or LangChain hybrid retrieval examples (30 min)
+**Day 1 Topics** (7 new + 4 consolidated) - ✅ **COMPLETED Day 22**:
+- [x] ✅ RRF (Reciprocal Rank Fusion) - Formula: Score = Σ 1/(k + rank_r(d)), k=60
+- [x] ✅ SPLADE (Learned Sparse) - FLOPS regularization, vocabulary expansion
+- [x] ✅ DPR (Dense Passage Retrieval) - TWO types of negatives (in-batch + hard from BM25)
+- [x] ✅ Cross-encoder reranking - Two-stage: bi-encoder retrieve → cross-encoder rerank
+- [x] ✅ ColBERT (Late Interaction) - Token-level embeddings, MaxSim, 100× storage cost
+- [x] ✅ MMR (Maximal Marginal Relevance) - Diversity reranking with MINUS sign
+- [x] ✅ Lost-in-the-middle problem - LLMs ignore middle docs, mitigation strategies
+- [x] ✅ Consolidated 4 "unsure" topics: Dense/Sparse/Hybrid retrieval, Contrastive learning
 
-**Target**: Bring advanced RAG from 30% → 75%
+**Day 1 Achievement (Day 22)**: 96% knowledge check (98.9% on new content)
+- ✅ Studied 11 topics: RRF, SPLADE, DPR, Cross-encoder, ColBERT, MMR, Lost-in-the-middle + 4 consolidations
+- ✅ Created `references/Day22-Advanced-RAG-Day1.md` quick reference (8 pages)
+- ✅ All 6 topics added to SM-2 schedule (fixed: ColBERT separate from reranking)
+- 📊 Estimated progress: 21.3% → 40-45% weighted overall after Day 1
+
+**Day 2 Topics** (7 new patterns + 3 consolidations) - 🎯 **NEXT SESSION**:
+- [ ] **FiD (Fusion-in-Decoder)** - Gap Q177, encode independently/decode jointly, FiD vs Long Context trade-offs
+- [ ] **GraphRAG** - Knowledge graph + embeddings, multi-hop reasoning
+- [ ] **RAFT** - Retrieval-augmented fine-tuning, teach model to ignore distractors
+- [ ] **Agentic RAG** - LLM as agent, ReAct pattern, when to retrieve
+- [ ] **Multi-hop retrieval** - Iterative retrieve → extract → retrieve
+- [ ] **Parent document retrieval** - Retrieve small chunks, return full context
+- [ ] **Complex PDF parsing** - Tables, multi-column, layout-aware chunking
+- [ ] Review 3 "unsure": Multi-modal RAG, Query decomposition, Standard RAG pipeline
+
+**Day 3 Topics (Optional)** - Evaluation + Final Consolidation:
+- [ ] **Retrieval metrics** - Recall@K, Precision@K, MRR, NDCG (formulas + hand calculation)
+- [ ] **End-to-end RAG metrics** - Faithfulness, Answer Relevance, Context Quality (RAGAs)
+- [ ] **Context window optimization** - Truncation, compression, summarization strategies
+- [ ] Review remaining "unsure": FAISS, HyDE, Query rewriting/expansion, Chunking strategies
+
+**Practice** (Optional):
+- [ ] Implement: Simple hybrid retrieval (BM25 + Sentence-Transformers + RRF)
+- [ ] Calculate: Retrieval metrics by hand for sample scenario
+
+**Progress Targets**:
+- **Baseline**: 21.3% weighted (23.2% high-priority)
+- **After Day 1**: ~40-45% weighted ✅
+- **After Day 2**: Target 50-55% weighted, 65-70% high-priority
+- **After Day 3 (optional)**: Target 55-60% weighted overall, **82% high-priority**
+- **Success Criteria**: ≥82% high-priority (23/28 topics), ≥55% weighted overall
 
 ---
 

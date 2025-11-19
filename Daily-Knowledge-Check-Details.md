@@ -1192,3 +1192,73 @@ Cost = Servers × $/hour × 8760 hours/year
 **For Week 4**: Advanced RAG (Day 1-2), then gap re-assessment (Day 3-4). If 85%+ overall → start applying!
 
 **Last Updated**: 2025-11-17
+
+---
+
+## Day 22 Detailed Results (2025-11-18)
+
+**Context**: Week 4, Day 1 - Advanced RAG fundamentals (RRF, SPLADE, DPR, Cross-encoder, ColBERT, MMR, Lost-in-the-middle)
+
+**Content Tested**:
+- 75% Day 22 (9 questions): RRF formula/calculation, SPLADE vocabulary, DPR negatives, Cross-encoder trade-off, ColBERT storage, MMR formula, Lost-in-middle, Hybrid retrieval, Applied reasoning
+- 25% Review (3 questions): MLE Gaussian, Covariance vs Correlation, Throughput calculation
+
+**Question Breakdown**:
+
+| Q# | Topic | Day | Score | Notes |
+|----|-------|-----|-------|-------|
+| Q1 | MLE Gaussian derivation (review) | 14 | 90% ✅ | Math perfect, minor notation (simga typos, but correct μ̂ and σ̂²) |
+| Q2 | Covariance vs Correlation (review) | 13 | 75% 🟡 | Concept correct, missing formulas: Cov=E[(X-μx)(Y-μy)], Corr=Cov/(σx×σy) |
+| Q3 | Throughput calculation (review) | 20 | 100% ✅ | Perfect: 1000ms/40ms=25 batches/sec, 25×128=3200 QPS |
+| Q4 | RRF formula and calculation | 22 | 90% ✅ | Formula correct, math correct, **ranking backwards** (0.032>0.0307 → doc1=rank1, not rank2) |
+| Q5 | SPLADE vocabulary mismatch | 22 | 100% ✅ | Perfect example: "primate in rain forest" vs "monkeys in jungle" |
+| Q6 | DPR negative types | 22 | 100% ✅ | TWO types: in-batch (efficient, easier) + hard from BM25 (expensive, harder) |
+| Q7 | Cross-encoder vs Bi-encoder | 22 | 100% ✅ | Two-stage logic perfect: fast retrieval → slow accurate reranking |
+| Q8 | ColBERT storage cost | 22 | 100% ✅ | 1M×100×768×4=307 GB (100× larger than bi-encoder) |
+| Q9 | MMR formula | 22 | 100% ✅ | **FIXED minus sign!** λ×Sim(q,d) - (1-λ)×max Sim(d,d'), perfect λ interpretation |
+| Q10 | Lost-in-the-middle mitigation | 22 | 100% ✅ | 3 strategies: reorder, reduce docs, compress middle |
+| Q11 | Hybrid retrieval benefits | 22 | 100% ✅ | Exact match (jargon) + semantic match (synonyms) |
+| Q12 | Applied: 10M product search | 22 | 100% ✅ | Hybrid BM25+DPR, ColBERT too large, excellent SPLADE question |
+
+**Overall Score**: 96.0% (960/1000) - A+
+
+**Retention Analysis**:
+- Day 22 content (Q4-Q12): 98.9% (890/900) - Outstanding first-day absorption!
+- Review content (Q1-Q3): 88.3% (265/300) - Good retention with minor gaps
+
+**Key Insights**:
+- ✅ **RAG fundamentals mastered**: 98.9% on new content (RRF, SPLADE, DPR, reranking techniques)
+- ✅ **User fixed MMR formula error**: Changed + to - (minus sign) correctly
+- ✅ **Excellent applied reasoning**: Q12 (product search) showed strong decision-making
+- ✅ **Consolidation success**: 4 "unsure" topics (dense, sparse, hybrid, contrastive) all solidified
+- 🟡 **Minor gap**: RRF ranking interpretation (higher score = better rank)
+- 🟡 **Review gap**: Covariance/correlation formulas (75%) - need quick refresh
+
+**Strengths**:
+- RRF formula mastery (can calculate by hand)
+- DPR training understanding (two types of negatives)
+- ColBERT storage trade-off (10-50× larger)
+- MMR diversity reranking (corrected formula)
+- Hybrid retrieval benefits (exact + semantic)
+- Applied reasoning (when to use SPLADE vs hybrid)
+
+**Weak Areas**:
+- 🟡 **Covariance/correlation formulas** (75%): Needs quick refresh on Cov(X,Y)=E[(X-μx)(Y-μy)], Corr(X,Y)=Cov/(σx×σy)
+- 🟡 **RRF ranking** (90%): Remember higher RRF score = better ranking (rank 1, not rank 2)
+
+**Day 22 Topics Mastered** (11 total):
+- 7 New: RRF, SPLADE, DPR, Cross-encoder, ColBERT, MMR, Lost-in-the-middle
+- 4 Consolidated: Dense retrieval basics, Sparse retrieval (BM25), Hybrid retrieval, Contrastive learning
+
+**Action Items**:
+- None! All Day 1 concepts interview-ready
+- Continue Day 2 topics: FiD (Gap Q177), GraphRAG, RAFT, Agentic RAG
+
+**Recommendation**: ✅ **Excellent performance!** 96% with 98.9% on new content demonstrates strong RAG fundamentals absorption. User successfully consolidated 4 "unsure" topics and fixed MMR formula error. Ready for Day 2 advanced patterns (FiD, GraphRAG, RAFT).
+
+**Week 4 Advanced RAG Progress**:
+- Day 1: 11 topics mastered (baseline 21.3% weighted → estimated 40-45% after Day 1)
+- Target by Day 2-3: 55-60% weighted overall, 82% high-priority
+- On track for target achievement
+
+**Last Updated**: 2025-11-18
