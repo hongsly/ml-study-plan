@@ -336,6 +336,7 @@ Intervals grow: 1→6→15→38→95 days (roughly 2.5× each time)
 | 20 | 2025-11-16 | **91% (A-/A)** | Data pipelines (100%), Bias handling (100%), A/B testing (100%), Two-tower (90%), Throughput calc (85% - revised), Review excellent (Airflow 100%, continuous batching 100%, VIF 85%) | GPU scaling calculation (50% - missed given numbers) | System Design Day 1: Mock interview 78/100 (B+), perfect conceptual understanding, correctly understood 1K predictions = 1 request |
 | 21 | 2025-11-17 | **97.0% (A+)** | Cost analysis mastery, Feature engineering (20 features), Dynamic batching, Sliding windows, Manual review volumes, Class imbalance strategies, Review excellent (Kafka 100%, Docker 100%, HPA 100%) | Dynamic batching as first optimization (75% - clarified) | Week 3 complete: System design 85-90% ready |
 | 22 | 2025-11-18 | **96.0% (A+)** | RAG fundamentals (98.9% - RRF, SPLADE, DPR, reranking, ColBERT, MMR), Review retention (88.3% - MLE 90%, Covariance 75%, Throughput 100%) | RRF ranking interpretation (90%), Covariance formulas missing (75%) | Week 4 Day 1 complete: Advanced RAG Day 1 mastery, 11 topics studied (7 new + 4 consolidated) |
+| 23 | 2025-11-19 | **96.3% (A+)** | Day 2 Advanced RAG (98.6% - FiD 100%, GraphRAG 100%, RAFT 100%, Agentic 90%, Multi-hop 100%, Parent doc 100%, PDF parsing 100%), Review retention (91.7% - Breusch-Pagan 75%, f/g operators 100%, ColBERT 100%) | Breusch-Pagan test procedure (75% - missing method), Agentic RAG cost comparison (90% - implied but not stated) | Week 4 Day 2 complete: 7 new topics + 3 consolidations, Gap Q177 (FiD) closed 0%→100% |
 
 **Progress Trend**: Week 2-4 sustained excellence 🚀
 - Day 3→5: +10.5% improvement over Week 1
@@ -354,6 +355,7 @@ Intervals grow: 1→6→15→38→95 days (roughly 2.5× each time)
 - Day 19→20: +1.5% (89.5% → 91%) - Recovery to A-/A range (revised after throughput calc correction)
 - Day 20→21: +6.0% (91% → 97%) - Outstanding recovery to A+ range
 - Day 21→22: -1.0% (97% → 96%) - Minor dip, still A+ range, excellent RAG absorption
+- Day 22→23: +0.3% (96% → 96.3%) - Sustained A+ range, exceptional Day 2 content mastery (98.6%)
 - **Week 2 Days 1-5 average**: 92% across Days 8-12 (LLM Systems)
 - **Week 2 Days 6-7 (Statistics)**: Average 93% (Day 13: 99.5%, Day 14: 86.5%)
 - **Week 3 Days 1-5 average**: 93.5% across Days 15-19 (Statistics completion + ML Infrastructure deep dive)
@@ -370,7 +372,8 @@ Intervals grow: 1→6→15→38→95 days (roughly 2.5× each time)
 - **Day 20 highlight**: First system design practice - mock interview 78/100 (B+), perfect data pipeline/bias understanding (100%), **user caught throughput calculation error** (1K predictions = 1 request, not 10K QPS!), critical gap: reading given numbers in problem statements (50%)
 - **Day 21 highlight**: Fraud detection system design - 97% (A+), perfect review retention (100%), **user caught 4 major errors in Day 21 reference doc**: messy dynamic batching calcs, missing batch time explanation, manual review threshold inconsistency, WRONG class imbalance math (downsampling + weights DON'T cancel out!)
 - **Day 22 highlight**: Advanced RAG Day 1 - 96% (A+), nearly perfect new content (98.9%), excellent consolidation of 4 "unsure" topics, RRF formula mastered, ColBERT storage trade-off understood
-- Review retention: 95% average (Day 21 review: 100% - Kafka, Docker, HPA; Day 22 review: 88.3% - MLE, Covariance, Throughput)
+- **Day 23 highlight**: Advanced RAG Day 2 - 96.3% (A+), **exceptional new content mastery (98.6%)** - FiD 100% (Gap Q177 closed 0%→100%), GraphRAG 100% (local+global modes), RAFT 100%, all 7 topics interview-ready, **user caught H1 scoring error** (H1 is implicit negation of H0)
+- Review retention: 94% average (Day 22 review: 88.3% - MLE, Covariance, Throughput; Day 23 review: 91.7% - Breusch-Pagan, f/g operators, ColBERT)
 
 ---
 

@@ -1261,4 +1261,165 @@ Cost = Servers × $/hour × 8760 hours/year
 - Target by Day 2-3: 55-60% weighted overall, 82% high-priority
 - On track for target achievement
 
-**Last Updated**: 2025-11-18
+---
+
+## Day 23: Advanced RAG Day 2 (2025-11-19)
+
+**Score**: 96.3% (A+)
+**New Content**: 98.6% (7 questions: FiD, GraphRAG, RAFT, Agentic RAG, Multi-hop, Parent doc, PDF parsing)
+**Review**: 91.7% (3 questions: Breusch-Pagan, f/g operators, ColBERT)
+
+---
+
+### Review Questions (30%)
+
+**Q1: Breusch-Pagan Test** - **75%** 🟡
+**User's Answer**: "For detect non-homoscedaticity. H0: the residuals satisfy homoscedaticity condition, i.e. variance same range across different x."
+
+**Scoring**:
+- ✅ Correct: Detects heteroscedasticity (non-constant variance)
+- ✅ Correct: H₀ is homoscedasticity
+- ✅ Correct: H₁ implicit (negation of H₀) - **User caught scoring error!**
+- ❌ Missing: Test procedure (regress e²ᵢ on X, test if R² > 0)
+
+**Missing Detail**:
+```
+Breusch-Pagan Test Procedure:
+1. Run regression: Y = Xβ + ε
+2. Calculate squared residuals: e²ᵢ
+3. Regress e²ᵢ on X: e²ᵢ = Xγ + u
+4. Test: Is R² significantly > 0?
+   - If yes: Reject H₀, heteroscedasticity present
+   - If no: Fail to reject, assume homoscedasticity
+```
+
+---
+
+**Q2: Forward/Backward Operators** - **100%** ✅
+**User's Answer**: Detailed MLP example with Y = X @ A, Z = GeLU(Y) @ B, explained f (identity/all-reduce) and g (all-reduce/identity) with clear reasoning about column/row partitioning.
+
+**Perfect!** User demonstrated deep understanding with concrete example and correct reasoning about why communication patterns differ in forward vs backward pass.
+
+---
+
+**Q3: ColBERT Late Interaction** - **100%** ✅
+**User's Answer**: "ColBERT stores the full contextual embedding for entire sequence instead of just storing one embedding vector for the sequence. For (q, d) pair: for each q_i, find j that maximizes sim(q_i, d_j), ColBERT(d) = Sum_i maxSim(q_i, d_j). ColBERT storage will be 100x bi-encoder for seq length 100 without compression."
+
+**Perfect!** Clear explanation of token-level embeddings, MaxSim formula, and 100× storage cost.
+
+---
+
+### New Questions - Day 2 Content (70%)
+
+**Q4: FiD vs Long Context (2025)** - **100%** ✅
+**User's Answer**: "Choose FiD for one-shot/high QPS scenario where prefix caching not available; large document count where the startup O(N^2) attention won't scale/lost-in-the-middle problem is severe. Choose long-context model for simple architecture, no tuning; multi-turn conversation where prefix caching helps a lot; moderate document count"
+
+**Perfect!** User captured all 2025-specific trade-offs:
+- ✅ FiD: single-shot, high QPS, O(n²) scaling, lost-in-middle
+- ✅ Long context: prefix caching, multi-turn, simple architecture
+- ✅ Mentioned prefix caching advantage (critical 2025 update)
+- ✅ Mentioned lost-in-the-middle problem
+
+**Key Insight Demonstrated**: User understands prefix caching makes long context competitive for multi-turn use cases.
+
+---
+
+**Q5: GraphRAG Local vs Global** - **100%** ✅
+**User's Answer**: "Local search: for specific/entity center question: search the entity and trace its neighboring relations, return the neighbors. Example: what did Trump do in 2022? Global search: for holistic question/summary: search the community summaries, generate partial response, combine to get global response. Example: what are the 5 major themes?"
+
+**Perfect!** User captured:
+- ✅ Local: entity-centric, graph traversal, good example
+- ✅ Global: holistic/themes, community summaries, map-reduce, good example
+- ✅ Mentioned community summaries (Microsoft's key innovation)
+
+---
+
+**Q6: RAFT Training Format** - **100%** ✅
+**User's Answer**: "P: query, golden answer doc, multiple distractor docs, answer with CoT reasoning. 1-P: query, multiple distractor docs, answer with CoT reasoning. 1-P examples nudges the model to internalize domain knowledge instead of solely rely on retrieved doc. Typically P=0.8"
+
+**Perfect!** User nailed all components:
+- ✅ P% examples: golden + distractors + CoT
+- ✅ (1-P)% examples: distractors only + CoT
+- ✅ Why (1-P): internalize knowledge, not solely rely on retrieval
+- ✅ Typical P = 0.8
+
+---
+
+**Q7: Multi-Hop Implementations** - **100%** ✅
+**User's Answer**: Three implementations with trade-offs - Query decomposition (interpretable, not flexible), Agentic RAG (flexible, high latency), GraphRAG (fast/interpretable, high setup/maintenance cost)
+
+**Perfect!** User demonstrated:
+- ✅ Three implementations correctly identified
+- ✅ Clear pros and cons for each
+- ✅ Understanding that multi-hop is a capability, not single implementation
+
+---
+
+**Q8: Agentic RAG ReAct Loop** - **90%** 🟡
+**User's Answer**: Clear example with CEO book recommendation query, showing Thought → Action → Observe loop with 2 retrieve steps. Mentioned 3-5 rounds typical.
+
+**Very good!** Minor gap:
+- ✅ ReAct loop structure clear
+- ✅ Good concrete example
+- ✅ Mentioned 3-5 rounds
+- ⚠️ Missing: Explicit statement "3-5× more expensive than traditional RAG" (implied but not stated)
+
+**Improvement**: Could add explicit cost comparison: "Traditional RAG uses 1-2 LLM calls, Agentic uses 3-10+ calls, making it 3-5× more expensive."
+
+---
+
+**Q9: Parent Document Retrieval** - **100%** ✅
+**User's Answer**: "Vector store: stores the small chunks for retrieval: (chunk embedding, parent id, chunk text). Parent doc store: stores the parent doc text (whole doc or bigger chunk), indexed by id. Retrieval flow: search in vector store -> get small chunks and parent ids -> retrieve parent docs. Critical detail: dedupe the parent docs before return"
+
+**Perfect!** All components covered:
+- ✅ Two storage systems (vector store + parent doc store)
+- ✅ Retrieval flow correct
+- ✅ Critical detail: deduplication
+
+---
+
+**Q10: PDF Parsing vs Multi-Modal** - **100%** ✅
+**User's Answer**: "Parse to markdown: may lose complex formatting and visual info in charts. Keep as images: hard to index. I would choose hybrid: parse to markdown for easy retrieval, keep images that can be returned for best context"
+
+**Perfect!** User demonstrated:
+- ✅ Understanding of parse vs multi-modal trade-offs
+- ✅ Hybrid approach for financial reports (best choice!)
+- ✅ Reasoning: parse for retrieval + images for context
+
+---
+
+### Summary
+
+**Strengths** (98.6% on new content):
+- ✅ FiD vs long context (100%): All 2025 trade-offs (prefix caching, lost-in-middle, O(n) vs O(n²))
+- ✅ GraphRAG (100%): Both modes (local + global) with community summaries
+- ✅ RAFT (100%): Complete training scheme and rationale
+- ✅ Multi-hop (100%): Implementations and trade-offs clear
+- ✅ Parent doc (100%): Architecture and deduplication
+- ✅ PDF parsing (100%): Hybrid approach for financial reports
+- ✅ **Gap Q177 (FiD) closed**: 0% → 100% ✅
+
+**Minor Gaps**:
+- 🟡 Breusch-Pagan (75%): Missing test procedure (regress e²ᵢ on X, test R²)
+- 🟡 Agentic RAG cost (90%): Implied 3-5 rounds but could state "3-5× more expensive" explicitly
+
+**Critical Thinking Highlight**:
+- ⭐ **User caught scoring error**: Correctly identified that H₁ is implicit negation of H₀ in hypothesis testing - excellent critical evaluation!
+
+**Topics Mastered Today**:
+- 7 New: FiD, GraphRAG, RAFT, Agentic RAG, Multi-hop implementations, Parent document retrieval, PDF parsing strategies
+- 3 Consolidated: Multi-modal RAG, Standard RAG pipeline, Query decomposition
+
+**Action Items**:
+- Quick Breusch-Pagan refresh (2 min): Review test procedure (regress e²ᵢ, test R²)
+- Optional Day 3: Evaluation metrics (Recall@K, Precision@K, MRR, NDCG) if want to reach 82% high-priority target
+
+**Recommendation**: ✅ **Exceptional performance!** 96.3% overall with 98.6% on new Day 2 content demonstrates mastery of advanced RAG patterns. User successfully closed Gap Q177 (FiD: 0%→100%) and demonstrated strong systems thinking (prefix caching trade-offs, implementation comparisons). All 7 topics are interview-ready. Ready for optional Day 3 (evaluation metrics) or to proceed with Week 4 progress assessment.
+
+**Week 4 Advanced RAG Progress**:
+- Day 1: 11 topics mastered (21.3% → ~40-45% weighted)
+- Day 2: 7 topics + 3 consolidations mastered (~40-45% → **52-55% weighted**, **68-72% high-priority**)
+- Target by Day 3: 82% high-priority, 55-60% overall
+- Current: **On track** - 2 days achieved 18 topics total, excellent absorption rate
+
+**Last Updated**: 2025-11-19

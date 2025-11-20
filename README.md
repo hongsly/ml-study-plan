@@ -14,16 +14,16 @@ This repository documents a systematic approach to ML engineering interview prep
 
 ## Papers Read
 
-### Foundational (Read 2019)
+### Foundational (Reviewed)
 - **Attention Is All You Need** (Vaswani et al., 2017)
 - **BERT: Pre-training of Deep Bidirectional Transformers** (Devlin et al., 2018)
 
-### LLM Systems Optimization (Week 2)
+### LLM Systems Optimization
 - **Megatron-LM**: Training Multi-Billion Parameter Language Models Using Model Parallelism (Shoeybi et al., 2019)
 - **ZeRO**: Memory Optimizations Toward Training Trillion Parameter Models (Rajbhandari et al., 2020)
 - **vLLM**: Efficient Memory Management for Large Language Model Serving (Kwon et al., 2023)
 
-### Advanced RAG (Week 4)
+### Advanced RAG
 - **RRF**: Reciprocal Rank Fusion (Cormack et al., 2009) - Combined ranking method
 - **ColBERT**: Efficient and Effective Passage Search via Contextualized Late Interaction (Khattab & Zaharia, 2020) - *Skimmed*
 - **SPLADE**: Sparse Lexical and Expansion Model for First Stage Ranking (Formal et al., 2021) - *Skimmed*
@@ -98,5 +98,5 @@ This repository documents a systematic approach to ML engineering interview prep
 
 **Study Approach**: Systematic gap analysis → Targeted learning → Implementation practice → Spaced repetition  
 **Timeline**: 12 weeks (2-3 hours/day, 5-10 hours/week).  
-**Created**: October 2024  
-**Last Updated**: November 2024  
+**Created**: November 2025  
+**Last Updated**: November 2025  

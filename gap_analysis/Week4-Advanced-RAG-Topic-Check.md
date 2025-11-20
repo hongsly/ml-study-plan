@@ -50,9 +50,9 @@ For each subtopic, mark your current knowledge level:
 | Chunk overlap strategies ⭐ | ☐ | x | ☐ | 10-20% overlap, sliding windows |
 | Document structure preservation | ☐ | x | ☐ | Maintain headers, sections, metadata |
 | Chunk size vs retrieval quality | ☐ | x | ☐ | Trade-offs: precision vs context |
-| Multi-resolution chunking | ☐ | ☐ | x | Store chunks at multiple granularities |
+| Multi-resolution chunking | ☐ | x |  | Store chunks at multiple granularities |
 | Token vs character-based chunking | ☐ | x | ☐ | Alignment with model tokenizer |
-| **Complex PDF parsing / OCR** ⭐ | ☐ | ☐ | x | Real-world: tables, columns, unstructured.io, LlamaParse |
+| **Complex PDF parsing / OCR** ⭐ | x | ☐ |  | Real-world: tables, columns, unstructured.io, LlamaParse |
 
 **Category 2 Score**: Know: _/10 | Unsure: _/10 | Dunno: _/10
 
@@ -84,7 +84,7 @@ For each subtopic, mark your current knowledge level:
 | FAISS (Facebook AI Similarity Search) ⭐ | ☐ | ☐ | x | Open-source ANN library, index types |
 | Index types | ☐ | ☐ | x | Flat, IVF, HNSW, PQ trade-offs |
 | Metadata filtering | ☐ | ☐ | x | Pre-filter vs post-filter strategies |
-| Hybrid search in vector DBs | ☐ | ☐ | x | Combining vector + keyword + filters |
+| Hybrid search in vector DBs | ☐ | x |  | Combining vector + keyword + filters |
 | Sharding & replication | ☐ | x | ☐ | Scaling vector search horizontally |
 | Vector DB vs traditional DB | ☐ | ☐ | x | When to use which |
 
@@ -99,7 +99,7 @@ For each subtopic, mark your current knowledge level:
 | Query rewriting / reformulation ⭐ | ☐ | x | ☐ | LLM-based query enhancement |
 | Query decomposition | ☐ | x | ☐ | Multi-hop → sub-questions (related to FiD) |
 | Query expansion | ☐ | x | ☐ | Adding synonyms, related terms |
-| HyDE (Hypothetical Document Embeddings) ⭐ | ☐ | ☐ | x | Generate hypothetical answer, embed that |
+| HyDE (Hypothetical Document Embeddings) ⭐ | ☐ | x |  | Generate hypothetical answer, embed that |
 | Step-back prompting | ☐ | ☐ | x | Abstract question before retrieval |
 | Query intent classification | ☐ | x | ☐ | Factual vs conversational vs multi-hop |
 | Query understanding with LLMs | ☐ | x | ☐ | Extract entities, intent, constraints |
@@ -164,16 +164,16 @@ For each subtopic, mark your current knowledge level:
 
 | Subtopic | Know | Unsure | Dunno | Notes |
 |----------|------|--------|-------|-------|
-| Standard RAG pipeline ⭐ | ☐ | x | ☐ | Query → Retrieve → Augment → Generate |
-| **Fusion-in-Decoder (FiD)** ⭐ | ☐ | ☐ | x | **Gap Q177 (0%)** - Encode passages independently, decode jointly. **2025 note**: Discuss FiD vs Long Context trade-offs! |
+| Standard RAG pipeline ⭐ | x |  | ☐ | Query → Retrieve → Augment → Generate |
+| **Fusion-in-Decoder (FiD)** ⭐ | x | ☐ |  | **Gap Q177 (0%)** - Encode passages independently, decode jointly. **2025 note**: Discuss FiD vs Long Context trade-offs! |
 | Self-RAG | ☐ | ☐ | x | Model decides when to retrieve |
 | Corrective RAG (CRAG) | ☐ | ☐ | x | Verify retrieval quality, re-retrieve if needed |
 | Adaptive RAG | ☐ | ☐ | x | Dynamic retrieval strategy based on query |
-| **RAFT (Retrieval Augmented Fine Tuning)** ⭐ | ☐ | ☐ | x | **2025 hot topic** - Fine-tune model to be better at RAG (ignore distractors) |
-| **Agentic RAG** ⭐ | ☐ | ☐ | x | **2025 trend** - Autonomous agents, multi-step reasoning |
-| **GraphRAG** ⭐ | ☐ | ☐ | x | **2025 trend** - Knowledge graph-based retrieval |
+| **RAFT (Retrieval Augmented Fine Tuning)** ⭐ | x | ☐ |  | **2025 hot topic** - Fine-tune model to be better at RAG (ignore distractors) |
+| **Agentic RAG** ⭐ | x | ☐ |  | **2025 trend** - Autonomous agents, multi-step reasoning |
+| **GraphRAG** ⭐ | x | ☐ |  | **2025 trend** - Knowledge graph-based retrieval |
 | Streaming RAG | ☐ | ☐ | x | Real-time document updates |
-| Multi-modal RAG ⭐ | ☐ | x | ☐ | Text + images + tables |
+| Multi-modal RAG ⭐ | x |  | ☐ | Text + images + tables |
 | RAG with function calling | ☐ | ☐ | x | LLM calls APIs during generation |
 
 **Category 9 Score**: Know: _/11 | Unsure: _/11 | Dunno: _/11
@@ -184,9 +184,9 @@ For each subtopic, mark your current knowledge level:
 
 | Subtopic | Know | Unsure | Dunno | Notes |
 |----------|------|--------|-------|-------|
-| Multi-hop retrieval ⭐ | ☐ | ☐ | x | Iterative retrieval (retrieve → reason → retrieve) |
+| Multi-hop retrieval ⭐ | x | ☐ |  | Iterative retrieval (retrieve → reason → retrieve) |
 | **Long RAG** | ☐ | ☐ | x | **2025 trend** - Handling full documents vs chunks |
-| Parent document retrieval ⭐ | ☐ | ☐ | x | Retrieve small chunks, return full context |
+| Parent document retrieval ⭐ | x | ☐ |  | Retrieve small chunks, return full context |
 | Recursive retrieval | ☐ | ☐ | x | Hierarchical document structure |
 | Query routing | ☐ | ☐ | x | Route to different indexes/strategies |
 | Caching strategies | ☐ | ☐ | x | Query cache, embedding cache, result cache |

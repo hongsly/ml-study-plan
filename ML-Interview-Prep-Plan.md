@@ -969,15 +969,23 @@ This is where you need the most practice:
 - ✅ All 6 topics added to SM-2 schedule (fixed: ColBERT separate from reranking)
 - 📊 Estimated progress: 21.3% → 40-45% weighted overall after Day 1
 
-**Day 2 Topics** (7 new patterns + 3 consolidations) - 🎯 **NEXT SESSION**:
-- [ ] **FiD (Fusion-in-Decoder)** - Gap Q177, encode independently/decode jointly, FiD vs Long Context trade-offs
-- [ ] **GraphRAG** - Knowledge graph + embeddings, multi-hop reasoning
-- [ ] **RAFT** - Retrieval-augmented fine-tuning, teach model to ignore distractors
-- [ ] **Agentic RAG** - LLM as agent, ReAct pattern, when to retrieve
-- [ ] **Multi-hop retrieval** - Iterative retrieve → extract → retrieve
-- [ ] **Parent document retrieval** - Retrieve small chunks, return full context
-- [ ] **Complex PDF parsing** - Tables, multi-column, layout-aware chunking
-- [ ] Review 3 "unsure": Multi-modal RAG, Query decomposition, Standard RAG pipeline
+**Day 2 Topics** (7 new patterns + 3 consolidations) - ✅ **COMPLETED Day 23**:
+- [x] ✅ **FiD (Fusion-in-Decoder)** - Gap Q177 closed (0%→100%), encode independently/decode jointly, FiD vs Long Context with prefix caching
+- [x] ✅ **GraphRAG** - Two modes: Local (entity) + Global (themes via community summaries)
+- [x] ✅ **RAFT** - P=0.8 golden+distractors, (1-P)=0.2 distractors-only, teach model to ignore distractors
+- [x] ✅ **Agentic RAG** - ReAct loop (Thought→Action→Observation), 3-5× cost, multi-tool
+- [x] ✅ **Multi-hop retrieval** - Three implementations (query decomp, agentic, GraphRAG) with trade-offs
+- [x] ✅ **Parent document retrieval** - Two storage systems (vector+parent), deduplication critical
+- [x] ✅ **Complex PDF parsing** - Parse vs multi-modal vs hybrid, table problem
+- [x] ✅ Review 3 "unsure": Multi-modal RAG, Query decomposition, Standard RAG pipeline
+
+**Day 2 Achievement (Day 23)**: 96.3% knowledge check (A+)
+- ✅ Studied 7 new topics: FiD, GraphRAG, RAFT, Agentic RAG, Multi-hop, Parent doc, PDF parsing
+- ✅ Consolidated 3 "unsure" topics: Multi-modal RAG, Standard RAG pipeline, Query decomposition
+- ✅ Knowledge check: 98.6% on new content (exceptional mastery)
+- ✅ Created `references/Day23-Advanced-RAG-Day2.md` quick reference (comprehensive)
+- ⭐ **Gap Q177 (FiD) closed: 0% → 100%**
+- 📊 Estimated progress: 40-45% → **52-55% weighted overall**, **68-72% high-priority** after Day 2
 
 **Day 3 Topics (Optional)** - Evaluation + Final Consolidation:
 - [ ] **Retrieval metrics** - Recall@K, Precision@K, MRR, NDCG (formulas + hand calculation)
@@ -992,9 +1000,10 @@ This is where you need the most practice:
 **Progress Targets**:
 - **Baseline**: 21.3% weighted (23.2% high-priority)
 - **After Day 1**: ~40-45% weighted ✅
-- **After Day 2**: Target 50-55% weighted, 65-70% high-priority
+- **After Day 2**: **52-55% weighted**, **68-72% high-priority** ✅ **ACHIEVED**
 - **After Day 3 (optional)**: Target 55-60% weighted overall, **82% high-priority**
 - **Success Criteria**: ≥82% high-priority (23/28 topics), ≥55% weighted overall
+- **Current Status**: 68-72% high-priority is functional for interviews, Day 3 optional for polish
 
 ---
 
