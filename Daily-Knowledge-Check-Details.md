@@ -1423,3 +1423,173 @@ Breusch-Pagan Test Procedure:
 - Current: **On track** - 2 days achieved 18 topics total, excellent absorption rate
 
 **Last Updated**: 2025-11-19
+
+---
+
+## Day 26 Knowledge Check (2025-11-22)
+
+**Format**: Review-only session (10 overdue topics from knowledge schedule)
+**Overall Score**: **80.0%** (800/1000)
+
+### Review Questions (10 overdue topics)
+
+**Q1: Shapiro-Wilk Test** - **100%** ✅
+**User's Answer**: "Shapiro-Wilk checks normality assumption, H0: data comes from normal distribution. Low p-value indicate the normality assumption doesn't hold, -- likely data not from normal distribution."
+
+**Perfect!** User correctly identified:
+- ✅ Tests normality assumption
+- ✅ H0: data from normal distribution
+- ✅ Low p-value → reject normality
+
+---
+
+**Q2: Chi-Square Test** - **75%** 🟡
+**User's Answer**: 
+- Goodness of fit: whether observed data matches alleged distribution (H0: they match)
+- Test of independence: whether a slice variable affects distribution (H0: independent)
+- "But I forgot how to calculate the test statistics. Take the difference for each pair of corresponding cell in table, and? dof is (row_count -1) * (col_count - 1)?"
+- "not sure assumptions; independent observations or what?"
+
+**Good conceptual understanding!** Gaps in details:
+- ✅ Goodness of fit and independence explanations correct
+- ✅ DOF formula (r-1)(c-1) correct
+- ❌ Missing test statistic: Σ(O-E)²/E
+- ⚠️ Assumptions: independent observations ✅, expected counts ≥5, categorical data
+
+**Interview-ready answer**: "Chi-square test: (1) Goodness of fit tests if observed data matches expected distribution, (2) Test of independence tests if two categorical variables are independent. Test statistic: Σ(O-E)²/E. DOF: (r-1)(c-1). Assumptions: independent observations, expected counts ≥5, categorical data."
+
+---
+
+**Q3: Common Distributions** - **100%** ✅
+**User's Answer**: Perfect explanations for all 5 distributions:
+- Normal: bell curve, PDF with exp(-1/2*(x-μ/σ)²)
+- Binomial: C(n,k) p^k (1-p)^(n-k), mean np, variance np(1-p)
+- Geometric: (1-p)^(k-1)*p, mean 1/p
+- Poisson: λ^k exp(-λ)/k!, mean λ, variance λ
+- Exponential: λ exp(-λx), mean 1/λ
+
+**Excellent!** All PDFs, means, and variances correct.
+
+---
+
+**Q4: CLT vs LLN** - **100%** ✅
+**User's Answer**: 
+- CLT: distribution of sample mean approaches normal as n→∞, used for testing mean without knowing underlying distribution
+- LLN: sample mean approaches population mean as n→∞, used to estimate population mean from sample
+
+**Perfect distinction and applications!**
+
+---
+
+**Q5: Regularization as Bayesian Prior** - **100%** ✅
+**User's Answer**: Excellent MAP derivation showing:
+- Gaussian prior → exp(-1/2σ² * w²) → L2 regularization (λ Σw²)
+- Laplace prior → (forgot PDF) but knew it leads to L1 regularization (Σ|w|)
+
+**Perfect conceptual understanding!** Laplace PDF is (1/2b)exp(-|w-μ|/b), but user got the key insight.
+
+---
+
+**Q6: Speculative Decoding** - **100%** ✅
+**User's Answer**: 
+1. Use faster but less accurate model to predict k tokens
+2. Larger model batch scores the k tokens, check if match
+3. If mismatch, take larger model's prediction, send back to smaller model
+- Speedup: 2-3× typically, conditions: faster model fast enough, mismatch not very frequent, good for small batch
+
+**Perfect 3-step process, speedup conditions, and typical range!**
+
+---
+
+**Q7: FSDP Stream Sync + Prefetching** - **50%** 🟠 **WEAK ITEM (3rd review, EF 1.45)**
+**User's Answer**: "While the previous layer is doing computation, parameter gathering for the next layer can already start/prefetching? Unsure about stream synchronization"
+
+**Partial understanding**:
+- ✅ Prefetching concept correct (next layer params during current layer compute)
+- ❌ Missing: Stream synchronization - FSDP uses separate CUDA streams for all-gather (comm) and forward/backward (compute) to overlap them. Stream sync ensures all-gather completes before forward pass uses parameters.
+
+**Interview-ready answer**: "FSDP overlaps communication and computation using separate CUDA streams. During forward pass: (1) All-gather runs on comm stream to fetch next layer's params, (2) Current layer computation runs on compute stream, (3) Stream sync ensures all-gather completes before next layer starts. Prefetching fetches params for layer N+1 while computing layer N, hiding communication latency."
+
+**Action**: Review CUDA streams and async communication concepts. This is the 3rd review with declining scores (65%→50%), EF dropped to 1.45 (struggling item).
+
+---
+
+**Q8: Durbin-Watson Test** - **75%** 🟡
+**User's Answer**: "Durbin-Watson checks independence assumption, H0: data points are independent. 2 is perfect? 0 is strong negative dependency? 4 is strong positive dependency?"
+
+**Correct concept, reversed interpretation!**
+- ✅ Checks autocorrelation (independence assumption)
+- ✅ 2 = no autocorrelation
+- ❌ Reversed: 0 = **positive** autocorrelation (errors follow same pattern), 4 = **negative** autocorrelation (errors alternate)
+
+**Mnemonic**: DW = 0 → ρ = +1 (positive correlation), DW = 4 → ρ = -1 (negative correlation)
+
+---
+
+**Q9: SPLADE** - **100%** ✅
+**User's Answer**: 
+- SPLADE uses BERT encoder with MLM head for middle ground embedding (sparse + dense)
+- Includes not only original token but also synonyms/rephrasing
+- FLOPS regularization encourages sparsity, nudging weak entries to 0
+- Solves vocabulary mismatch problem (e.g., "primates in rain forest" vs "monkeys in jungle")
+
+**Perfect!** All components covered: learned sparse, FLOPS regularization, vocabulary expansion problem.
+
+---
+
+**Q10: Communication Patterns (DP/TP/PP)** - **100%** ✅ **JUST STUDIED DAY 25**
+**User's Answer**: 
+- DP/FSDP: 2P per step (P for sending out each node's gradients, P for receiving aggregated gradients)
+- TP: 4 all-reduce per layer, each communicates B×S×H, so total 8BSH per layer
+- PP: B×S×H per stage boundary (B is micro batch size)
+
+**Perfect recall from Day 25 study!** All formulas correct:
+- ✅ DP: 2P (reduce-scatter + all-gather)
+- ✅ TP: 8BSH per layer (4 all-reduce × 2× ring overhead)
+- ✅ PP: BSH per boundary
+
+**Excellent payoff from Day 25 deep dive!** 75%→100% in 2 days.
+
+---
+
+### Summary
+
+**Overall Score**: **80.0%** (800/1000)
+
+**Distribution**:
+- ✅ **100%**: 7 questions (Shapiro-Wilk, Distributions, CLT/LLN, Regularization priors, Speculative decoding, SPLADE, Communication patterns)
+- 🟡 **75%**: 2 questions (Chi-square test statistic, Durbin-Watson 0/4 interpretation)
+- 🟠 **50%**: 1 question (FSDP stream sync - still weak after 3rd review)
+
+**Strengths**:
+- ✅ Statistics fundamentals (distributions, CLT/LLN, Shapiro-Wilk) - perfect recall
+- ✅ LLM systems (speculative decoding, communication patterns) - Day 25 study paid off!
+- ✅ RAG (SPLADE) - strong retention
+- ✅ ML theory (Bayesian priors) - excellent derivation
+
+**Weak Areas**:
+- 🟠 **pytorch_fsdp_internals** (50%, 3rd review, EF 1.45→ reset to tomorrow):
+  - Persistent weak item: 65% (Day 16) → 50% (Day 26, 10 days later)
+  - Missing CUDA streams concept and async communication
+  - Action: Study CUDA streams, stream synchronization, async all-gather
+- 🟡 **stats_3.8** Chi-square (75%): Missing test statistic formula Σ(O-E)²/E
+- 🟡 **stats_4.3** Durbin-Watson (75%): Reversed 0/4 interpretation (minor detail)
+
+**Key Observations**:
+- **Communication patterns payoff**: 75% (Day 25) → 100% (Day 26) - Day 25 deep dive worked!
+- **FSDP continues to struggle**: 3rd review (65%→50%), EF dropped to 1.45, reset to review tomorrow
+- **Strong retention**: 7/10 perfect scores on overdue topics (10-12 days old)
+- **Weekend review format**: Review-only session appropriate for limited weekend time
+
+**Recommendation**: ✅ **Good weekend review session!** 80% (B/B+) shows solid retention on most topics. FSDP remains the only persistent weak item - needs focused study on CUDA streams and async communication patterns. Consider dedicating 15-20 minutes tomorrow to review CUDA programming basics and PyTorch distributed implementation details. All other topics show strong retention and are interview-ready.
+
+**SM-2 Updates**: 10 topics updated in knowledge-schedule.md:
+- 7 topics scored 100% → increased EF, extended intervals (6-16 days)
+- 2 topics scored 75% → decreased EF, 6-13 day intervals
+- 1 topic scored 50% → failed, EF dropped to 1.45, reset to review tomorrow (2025-11-23)
+
+**Next Steps**:
+- Tomorrow: Review FSDP (scheduled 2025-11-23 after reset)
+- Continue Day 5-7 plan: Project selection and setup
+- Optional: Quick refreshers on chi-square test statistic and Durbin-Watson interpretation
+

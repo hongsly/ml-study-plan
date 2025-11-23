@@ -1007,7 +1007,7 @@ This is where you need the most practice:
 
 ---
 
-**Day 3-4 (Day 24-25): Gap Re-assessment (2-3 hours)** ✅ **COMPLETED (2025-11-20 to 2025-11-22)**
+**Day 3-4 (Day 24-25): Gap Re-assessment (2-3 hours)** ✅ **COMPLETED (2025-11-20 to 2025-11-21)**
 
 **Activity**:
 - [x] Re-test on ALL weak areas (45 questions over 2 days)
@@ -1028,9 +1028,6 @@ This is where you need the most practice:
   - TP: 8×B×S×H per layer (4 all-reduces × 2× ring overhead)
   - PP: B×S×H per stage boundary (point-to-point, no ring overhead)
 - [x] Created comprehensive reference: `references/Day25-Communication-DynamicBatching.md`
-
-**Knowledge Schedule Updates**:
-- [x] Updated 18 topics with SM-2 spaced repetition (17 review + 1 new llm_comm_patterns)
 
 **Assessment Results Summary**:
 
@@ -1063,28 +1060,82 @@ This is where you need the most practice:
 
 ---
 
-**Day 5-7: Option A - Projects or Additional Topics (if gaps closed)**
+**Day 5-7 (Day 26-28): Start Projects** ✅ **OPTION A CHOSEN** (gap reassessment: 85% readiness)
 
-**Choice 1: Start Projects**
-- [ ] Image Classification with transfer learning (ResNet/EfficientNet)
-- [ ] Deploy to HuggingFace Spaces or Gradio
-- [ ] Clean code, README, evaluation metrics
+**Day 5 (Sat, Nov 22 - 30 min)** ✅ **COMPLETED**
 
-**OR Choice 2: ML Evaluation & Problem Reframing (2-3 hours)**
-- [ ] Read: BERTScore paper (Zhang et al., 2020) - focus on formula, when to use
-- [ ] Watch: Fairness in ML talk - demographic parity, equalized odds
-- [ ] List 10 problem reframing examples from production ML experience
-- [ ] Create: Personal evaluation metrics cheat sheet
+**Knowledge Check (15-20 min)**:
+- [X] 10 review questions from knowledge schedule (prioritize items due/overdue)
+- Score: **80.0% (800/1000)** - B/B+
+- Perfect scores (100%): 7 topics - Shapiro-Wilk, Distributions, CLT/LLN, Regularization, Speculative decoding, SPLADE, Communication patterns
+- Good scores (75%): Chi-square, Durbin-Watson
+- Weak item: FSDP stream sync (50%) - 3rd review, still struggling with CUDA streams
 
-**OR**
+**Project Selection (15-30 min)**:
+- [X] Choose: **Full Project 4 (Option B, ~12 hours over 2 weeks)** - Changed from Mini RAG
+- [X] Decision rationale: 1 day insufficient for quality portfolio project, extended timeline realistic
+- [X] Plan: Data source (ArXiv papers on RAG/LLMs), architecture (hybrid retrieval + RRF fusion + Ragas evaluation), tech stack (sentence-transformers, FAISS, rank-bm25, OpenAI API, Ragas)
+- [X] Created subfolder: `projects/rag-qa-system/`
+- [X] Created comprehensive `project-plan.md` (450+ lines)
+  - Problem statement, architecture overview, tech stack decisions
+  - Complete timeline (Weekend + Week 5, 12 hours total)
+  - ArXiv papers list (20-30 URLs)
+  - Full code structure (~800 lines)
+  - Requirements list, evaluation plan, interview talking points
 
-**Day 3-7: Option B - Continue Gap Closure (if gaps remain)**
+**Day 5 Summary**:
+- ⏱️ Total time: ~30 min (knowledge check + project planning)
+- 📊 Knowledge check: 80% (7 perfect scores, communication patterns improved 75%→100%)
+- 📝 Project plan: Comprehensive specification document created
+- 🎯 Progress: Ready for Day 6 light prep
 
-**Flexible study based on remaining gaps**:
-- [ ] More LLM systems topics (if < 70%): Flash Attention, pipeline parallelism, gradient checkpointing, data loading optimization
-- [ ] More statistical tests (if < 90%): Chi-square, ANOVA, non-parametric tests
-- [ ] More RAG architectures (if < 75%): ColBERT, DPR, query expansion, reranking strategies
-- [ ] More system design practice (if < 85%): 2-3 additional problems
+---
+
+**Day 6 (Sun, Nov 23 - 30 min)** - Light weekend day
+- [ ] Knowledge Check (15-20 min)
+  - 10 review questions from knowledge schedule (prioritize items due/overdue)
+- [ ] RAG Project Setup (30 min)
+  - Download 20-30 ArXiv papers (PDFs to `data/raw/`)
+  - Create folder structure: data/, src/, evaluation/, tests/, outputs/
+  - Create `requirements.txt` stub (list libraries, don't install yet)
+
+**Day 7 (Mon, Nov 24 - 2-3 hours)** - Main implementation day
+- [ ] Core Implementation (60 min)
+  - Data loading & chunking
+  - Embedding generation (sentence-transformers)
+  - Vector store setup (FAISS or Chroma)
+- [ ] Retrieval Pipeline (45 min)
+  - Semantic search + optional BM25 for hybrid
+  - RRF fusion (you know the formula perfectly)
+  - Optional: Cross-encoder reranking
+- [ ] Generation & Testing (30 min)
+  - LLM integration (OpenAI API or Ollama)
+  - Test end-to-end pipeline
+  - Create evaluation notebook (3-5 test questions)
+- [ ] Commit & Documentation (15 min)
+  - Push initial working version to GitHub
+  - Update README with architecture
+
+**Project Details**:
+
+**Full Project 4: RAG Q&A System** (Option B, ~12 hours over 2 weeks)
+- **Data source**: 20-30 ArXiv papers on RAG/LLMs
+- **Architecture**: Hybrid retrieval (Dense + BM25) → RRF fusion → GPT-3.5-turbo
+- **Tech stack**: sentence-transformers, FAISS, rank-bm25, OpenAI API, Ragas
+- **Evaluation**: Ragas framework (context precision, faithfulness, answer relevance) + retrieval metrics (Recall@K, MRR, NDCG)
+- **Deployment**: Docker containerization, Streamlit Cloud
+- **Timeline**: Weekend (1 hour light) + Week 5 (12 hours implementation)
+- **Deliverables**: Working RAG system, comprehensive README, evaluation report, GitHub repo
+
+**Rationale**:
+- Respects weekend constraints (light knowledge checks 15-20 min/day)
+- Leverages RAG mastery (99.2% - can implement immediately)
+- Monday momentum (2-3 hour focused block when more time available)
+- Portfolio-ready project showcasing end-to-end ML engineering
+- Addresses evaluation metrics gap through Ragas integration
+
+**Project Folder**: `/Users/menghanw/Documents/1. Projects/🤖 GenAI learning/projects/rag-qa-system/`
+**Project Plan**: See `projects/rag-qa-system/project-plan.md` for complete specification
 
 ---
 

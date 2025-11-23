@@ -13,6 +13,15 @@ These projects are chosen to:
 4. **Relate to your background**: Leverage your production ML experience where possible
 5. **Be interview-ready**: Can discuss architecture, trade-offs, improvements
 
+**Modern MLE Focus (40% Modeling / 60% Engineering)**:
+Modern senior MLE roles require production-ready systems, not just high-accuracy models. These projects emphasize:
+- **MLOps**: CI/CD, model versioning, artifact management
+- **Serving**: APIs, latency optimization, cost-performance trade-offs
+- **Infrastructure**: Docker, cloud deployment, monitoring
+- **Production patterns**: Feature stores, drift detection, evaluation frameworks
+
+This 40/60 split reflects real-world senior MLE work: building robust, scalable ML systems.
+
 **Timeline**: Complete all 4 projects over 10 weeks (Weeks 1-10 of study plan)
 
 ---
@@ -76,11 +85,36 @@ Classify images into categories (e.g., different types of food, animals, or obje
 - [ ] Requirements.txt with dependencies
 - [ ] Command-line interface (argparse) for training/inference
 
+**6. MLOps & Deployment** (Mandatory):
+- [ ] **Docker**: Containerize application with Dockerfile
+  - Multi-stage build (training vs. inference images)
+  - Include model serving endpoint in container
+- [ ] **CI/CD**: GitHub Actions workflow
+  - Linting (flake8, black)
+  - Unit tests (pytest)
+  - Trigger on push to main
+- [ ] **Model Serving**: FastAPI endpoint
+  - POST /predict with image upload
+  - Return predictions with confidence scores
+  - Add input validation and error handling
+- [ ] **Model Versioning**: DVC for artifact management
+  - Track model checkpoints
+  - Version datasets
+  - Remote storage (S3, GCS, or DVC remote)
+- [ ] **Cloud Deployment**: Deploy to cloud platform
+  - AWS (EC2, Lambda, or SageMaker)
+  - GCP (Cloud Run or Vertex AI)
+  - Hugging Face Spaces (easiest)
+  - Include deployment instructions in README
+
 ### Tech Stack
 - **Framework**: PyTorch (preferred) or TensorFlow/Keras
 - **Pre-trained models**: torchvision.models or tf.keras.applications
 - **Visualization**: matplotlib, seaborn
-- **Experiment tracking**: Weights & Biases or TensorBoard (optional but impressive)
+- **Experiment tracking**: Weights & Biases or TensorBoard
+- **MLOps**: Docker, GitHub Actions, DVC
+- **Serving**: FastAPI, uvicorn
+- **Cloud**: AWS/GCP/Hugging Face Spaces
 
 ### Deliverables
 
@@ -90,6 +124,11 @@ image-classifier/
 ├── README.md
 ├── requirements.txt
 ├── config.yaml
+├── Dockerfile           # Docker container
+├── .dockerignore
+├── .github/
+│   └── workflows/
+│       └── ci.yml       # CI/CD pipeline
 ├── data/
 │   └── download_data.py
 ├── src/
@@ -97,15 +136,23 @@ image-classifier/
 │   ├── model.py         # Model architectures
 │   ├── train.py         # Training loop
 │   ├── evaluate.py      # Evaluation metrics
+│   ├── api.py           # FastAPI endpoint
 │   └── utils.py         # Helper functions
+├── tests/
+│   ├── test_dataset.py  # Unit tests
+│   ├── test_model.py
+│   └── test_api.py
 ├── notebooks/
 │   └── exploration.ipynb  # Data exploration
 ├── scripts/
 │   ├── train.sh         # Training script
-│   └── evaluate.sh      # Evaluation script
-└── outputs/
-    ├── checkpoints/     # Saved models
-    └── results/         # Visualizations
+│   ├── evaluate.sh      # Evaluation script
+│   └── deploy.sh        # Deployment script
+├── outputs/
+│   ├── checkpoints/     # Saved models (tracked by DVC)
+│   └── results/         # Visualizations
+└── .dvc/                # DVC config
+    └── config
 ```
 
 **README.md should include**:
@@ -128,9 +175,13 @@ image-classifier/
 - "Why did you choose ResNet over other architectures?"
 - "How did you decide which layers to fine-tune?"
 - "What data augmentation techniques did you use and why?"
-- "How would you deploy this model?"
-- "How would you handle new classes?"
+- "Walk me through your CI/CD pipeline. What tests do you run?"
+- "How does your Docker multi-stage build work? Why separate training/inference?"
+- "How do you version your models and datasets with DVC?"
+- "What's your FastAPI endpoint design? How do you handle errors?"
+- "How would you handle new classes in production?"
 - "What's the model's inference time? How could you optimize it?"
+- "How do you monitor model performance in production?"
 
 ---
 
@@ -203,11 +254,38 @@ Classify text into categories. Compare performance of different approaches.
 - [ ] Error analysis: Where does each model fail?
 - [ ] Create comparison table and visualizations
 
+**6. Production Serving & Optimization** (Mandatory):
+- [ ] **Model Quantization**: Optimize transformer model
+  - INT8 quantization using PyTorch or ONNX Runtime
+  - Compare FP32 vs INT8: accuracy drop vs. speedup
+  - Target: <5% accuracy drop, 2-4× speedup
+- [ ] **Serving API**: FastAPI endpoint
+  - POST /classify endpoint with text input
+  - Return prediction + confidence + latency
+  - Batch inference support (process multiple texts)
+- [ ] **Load Testing**: Measure throughput vs. latency
+  - Use Locust or Apache Bench
+  - Test scenarios: 1, 10, 50, 100 concurrent users
+  - Generate graphs: QPS vs. latency, batch size impact
+  - Compare: Classical ML (low latency) vs. Transformer (high accuracy)
+- [ ] **Dynamic Batching** (Optional):
+  - Implement batch collection with timeout
+  - Measure: collection time, batch size, average latency
+  - Apply Day 25 learnings: QPS = Batch Size / Inference Time
+- [ ] **Docker & Deployment**:
+  - Containerize serving endpoint
+  - Deploy to cloud (AWS Lambda, GCP Cloud Run, or HF Spaces)
+  - Include deployment instructions
+
 ### Tech Stack
 - **Classical ML**: scikit-learn
 - **Deep Learning**: PyTorch or TensorFlow
 - **Transformers**: Hugging Face Transformers
 - **Tokenization**: NLTK, spaCy, or Hugging Face tokenizers
+- **Optimization**: ONNX Runtime, PyTorch quantization, TensorRT (optional)
+- **Serving**: FastAPI, uvicorn
+- **Load Testing**: Locust, Apache Bench
+- **Deployment**: Docker, AWS/GCP/HF Spaces
 
 ### Deliverables
 
@@ -216,26 +294,43 @@ Classify text into categories. Compare performance of different approaches.
 text-classifier/
 ├── README.md
 ├── requirements.txt
+├── Dockerfile
+├── .github/
+│   └── workflows/
+│       └── ci.yml
 ├── data/
 │   └── download_data.py
 ├── notebooks/
 │   ├── 01_eda.ipynb
 │   ├── 02_classical_ml.ipynb
 │   ├── 03_deep_learning.ipynb
-│   └── 04_transformers.ipynb
+│   ├── 04_transformers.ipynb
+│   └── 05_quantization.ipynb
 ├── src/
 │   ├── preprocessing.py
 │   ├── classical_models.py
 │   ├── dl_models.py
 │   ├── transformer_models.py
 │   ├── train.py
-│   └── evaluate.py
+│   ├── evaluate.py
+│   ├── quantize.py         # Quantization scripts
+│   ├── api.py              # FastAPI serving endpoint
+│   └── serving.py          # Inference logic
+├── tests/
+│   ├── test_models.py
+│   └── test_api.py
+├── load_tests/
+│   ├── locustfile.py       # Load testing scenarios
+│   └── run_load_test.sh
 ├── outputs/
 │   ├── results/
-│   │   └── comparison_table.csv
+│   │   ├── comparison_table.csv
+│   │   └── load_test_results/  # QPS vs latency graphs
 │   └── visualizations/
 └── models/
-    └── best_model.pth
+    ├── best_model.pth
+    ├── quantized_model.onnx    # INT8 quantized model
+    └── model_comparison.json   # FP32 vs INT8 metrics
 ```
 
 **README should include**:
@@ -256,7 +351,11 @@ text-classifier/
 - "How do you handle out-of-vocabulary words?"
 - "What's the difference between BERT and GPT?"
 - "How would you handle class imbalance?"
-- "How would you deploy this in production with <100ms latency?"
+- "Walk me through your quantization approach. What accuracy-speed trade-off did you achieve?"
+- "Show me your load testing results. How does QPS relate to latency?"
+- "How does batch size affect throughput and latency in your serving endpoint?"
+- "When would you choose classical ML over transformers in production?"
+- "How would you deploy this with <100ms p99 latency at 10K QPS?"
 
 ---
 
@@ -342,14 +441,45 @@ Predict outcome on structured/tabular data. Show strong feature engineering and 
 - [ ] Save model (joblib or pickle)
 - [ ] Inference script (load model, predict on new data)
 - [ ] Unit tests for key functions
-- [ ] API endpoint (Flask or FastAPI) - optional but impressive
+- [ ] API endpoint (Flask or FastAPI)
+
+**6. ML Infrastructure & Monitoring** (Mandatory):
+- [ ] **Orchestration with Airflow**:
+  - Create DAG for training pipeline
+  - Tasks: data extraction → preprocessing → feature engineering → training → evaluation
+  - Schedule: daily or weekly retraining
+  - Implement idempotency (Day 18 learnings)
+  - Handle failures with retries and alerts
+- [ ] **Feature Store Pattern**:
+  - Separate feature computation from model training
+  - Store features: online (Redis/low-latency) + offline (S3/batch)
+  - Implement point-in-time correctness (Day 17 learnings)
+  - Ensure train/serve consistency
+- [ ] **Drift Detection**:
+  - Use EvidentlyAI or Alibi Detect
+  - Monitor: data drift (input distributions) + concept drift (target distribution)
+  - Generate drift reports: compare training vs. production data
+  - Set up alerts for drift thresholds
+  - Example: If house price median shifts >20%, trigger alert
+- [ ] **Model Monitoring**:
+  - Track performance metrics over time
+  - Log predictions for analysis
+  - A/B testing setup (shadow deployment)
+- [ ] **Docker & Deployment**:
+  - Containerize training pipeline and serving endpoint
+  - Deploy to cloud (AWS SageMaker, GCP Vertex AI, or custom)
+  - Include Airflow deployment instructions
 
 ### Tech Stack
 - **Data**: pandas, numpy
 - **Visualization**: matplotlib, seaborn, plotly
 - **ML**: scikit-learn, XGBoost, LightGBM, CatBoost
 - **Hyperparameter tuning**: Optuna or scikit-learn
-- **API** (optional): Flask or FastAPI
+- **Orchestration**: Apache Airflow
+- **Feature Store**: Redis (online), S3/Parquet (offline)
+- **Drift Detection**: EvidentlyAI or Alibi Detect
+- **API**: FastAPI
+- **Deployment**: Docker, AWS/GCP
 
 ### Deliverables
 
@@ -359,26 +489,42 @@ structured-ml-pipeline/
 ├── README.md
 ├── requirements.txt
 ├── config.yaml
+├── Dockerfile
+├── docker-compose.yml     # Airflow + Redis setup
 ├── data/
 │   ├── raw/
-│   └── processed/
+│   ├── processed/
+│   └── monitoring/        # Drift reports
 ├── notebooks/
 │   ├── 01_eda.ipynb
 │   ├── 02_feature_engineering.ipynb
-│   └── 03_modeling.ipynb
+│   ├── 03_modeling.ipynb
+│   └── 04_drift_analysis.ipynb
+├── dags/
+│   ├── training_pipeline.py      # Airflow DAG
+│   └── feature_refresh_dag.py    # Feature store updates
 ├── src/
 │   ├── data_preprocessing.py
 │   ├── feature_engineering.py
+│   ├── feature_store.py          # Feature store logic
 │   ├── models.py
 │   ├── train.py
 │   ├── evaluate.py
-│   └── predict.py
+│   ├── predict.py
+│   ├── drift_detection.py        # EvidentlyAI integration
+│   └── monitoring.py             # Performance tracking
 ├── tests/
-│   └── test_preprocessing.py
+│   ├── test_preprocessing.py
+│   ├── test_features.py
+│   └── test_api.py
 ├── models/
-│   └── best_model.pkl
-└── api/
-    └── app.py             # Flask/FastAPI endpoint (optional)
+│   ├── best_model.pkl
+│   └── model_metadata.json       # Version, metrics, training date
+├── api/
+│   └── app.py                    # FastAPI endpoint
+└── monitoring/
+    ├── drift_reports/            # Generated drift reports
+    └── performance_logs/         # Model performance over time
 ```
 
 **README highlights**:
@@ -399,9 +545,13 @@ structured-ml-pipeline/
 - "Walk me through your feature engineering process"
 - "Why did you choose XGBoost over Random Forest?"
 - "How did you handle missing values?"
+- "Explain your Airflow DAG. How do you ensure idempotency?"
+- "How does your feature store work? How do you ensure train/serve consistency?"
+- "Walk me through your drift detection approach. What triggers a model retrain?"
 - "How would you handle new categories at inference time?"
-- "How would you update this model in production?"
-- "What's the risk of data leakage in your pipeline?"
+- "How would you update this model in production without downtime?"
+- "What's the risk of data leakage in your pipeline? How did you prevent it?"
+- "Show me a drift report. What would you do if you detected significant drift?"
 
 ---
 
@@ -465,14 +615,38 @@ Build a practical LLM application demonstrating understanding of modern AI techn
   - Ask for citations
 - [ ] Handle context window limits
 
-**5. Evaluation**:
-- [ ] Create test question set
-- [ ] Metrics:
-  - Retrieval: Recall@K, MRR
-  - Generation: Human eval (relevance, correctness)
-  - End-to-end: Answer correctness
-- [ ] Compare different embedding models
-- [ ] Compare different retrieval strategies
+**5. Automated Evaluation with Frameworks** (Mandatory):
+- [ ] **Create Test Question Set**:
+  - 50-100 questions with ground truth answers
+  - Include: simple factual, complex reasoning, multi-hop
+  - Negative samples (questions with no answer in corpus)
+- [ ] **Retrieval Metrics** (Manual):
+  - Recall@K (K=3,5,10): Are correct docs in top K?
+  - Precision@K: How many retrieved docs are relevant?
+  - MRR (Mean Reciprocal Rank): Position of first correct doc
+  - NDCG: Normalized Discounted Cumulative Gain
+- [ ] **RAG Evaluation with Ragas** (Automated LLM-as-judge):
+  - **Context Precision**: Are retrieved contexts relevant to question?
+  - **Context Recall**: Does retrieved context contain answer?
+  - **Faithfulness**: Is answer grounded in retrieved context (no hallucination)?
+  - **Answer Relevance**: Does answer address the question?
+  - **Answer Correctness**: Semantic similarity with ground truth
+- [ ] **Alternative: DeepEval Framework**:
+  - Similar metrics to Ragas
+  - G-Eval: Custom evaluation criteria
+  - Hallucination detection
+- [ ] **Comparison Studies**:
+  - Compare embedding models (sentence-transformers vs. OpenAI)
+  - Compare retrieval strategies (dense vs. hybrid vs. reranking)
+  - Ablation: retrieval-only vs. full RAG
+- [ ] **Error Analysis**:
+  - Categorize failures: retrieval miss, poor generation, hallucination
+  - Analyze: which question types fail most?
+  - Visualize: score distributions, failure modes
+- [ ] **Cost-Performance Trade-off**:
+  - Track: API calls, tokens used, latency per query
+  - Calculate: cost per 1K queries
+  - Compare: GPT-4 (expensive, accurate) vs. GPT-3.5 (cheap, fast)
 
 **6. User Interface**:
 - [ ] CLI interface (minimum)
@@ -480,36 +654,70 @@ Build a practical LLM application demonstrating understanding of modern AI techn
 - [ ] Show sources/citations
 - [ ] Conversation history (optional)
 
+**7. Deployment & Infrastructure** (Mandatory):
+- [ ] **Docker**: Containerize RAG application
+  - Include vector DB (FAISS/Chroma) or connect to cloud DB
+  - Environment variables for API keys
+  - Multi-stage build if using local models
+- [ ] **Cloud Deployment**:
+  - Streamlit: Deploy to Streamlit Cloud or HF Spaces (easiest)
+  - API: Deploy FastAPI to AWS Lambda, GCP Cloud Run, or Railway
+  - Vector DB: Use cloud service (Pinecone, Weaviate Cloud) for production
+- [ ] **Monitoring**:
+  - Log queries, retrieval results, and responses
+  - Track latency and costs
+  - Optional: Set up feedback mechanism for users
+
 **Tech Stack**:
 - **Embeddings**: sentence-transformers, OpenAI API
 - **Vector DB**: FAISS, Chroma, Pinecone, or Weaviate
 - **LLM**: OpenAI API, Anthropic API, or local (Ollama)
 - **Orchestration**: LangChain or LlamaIndex (optional, can do from scratch)
+- **Evaluation**: Ragas, DeepEval, BEIR (retrieval benchmark)
 - **UI**: Streamlit or Gradio
+- **Deployment**: Docker, Streamlit Cloud, HF Spaces, AWS/GCP
 
 **Code Structure**:
 ```
 rag-qa-system/
 ├── README.md
 ├── requirements.txt
+├── Dockerfile
+├── docker-compose.yml    # Optional: multi-service setup
 ├── .env.example          # API keys template
+├── .github/
+│   └── workflows/
+│       └── ci.yml        # CI for testing
 ├── data/
 │   ├── raw/              # Original documents
-│   └── processed/        # Chunked documents
+│   ├── processed/        # Chunked documents
+│   └── eval/             # Test question sets
 ├── src/
 │   ├── data_loader.py    # Load and chunk documents
 │   ├── embeddings.py     # Generate embeddings
 │   ├── vector_store.py   # Vector DB operations
 │   ├── retriever.py      # Retrieve relevant docs
 │   ├── generator.py      # LLM generation
-│   └── rag_pipeline.py   # End-to-end pipeline
+│   ├── rag_pipeline.py   # End-to-end pipeline
+│   └── api.py            # FastAPI endpoint (optional)
+├── evaluation/
+│   ├── test_questions.json
+│   ├── evaluate_retrieval.py    # Recall@K, MRR, NDCG
+│   ├── evaluate_rag.py          # Ragas/DeepEval integration
+│   ├── error_analysis.py        # Categorize failures
+│   └── cost_analysis.py         # Track API costs
 ├── app.py                # Streamlit/Gradio UI
 ├── notebooks/
 │   ├── 01_data_preparation.ipynb
-│   └── 02_evaluation.ipynb
-└── tests/
-    ├── test_questions.json
-    └── evaluate.py
+│   ├── 02_embedding_comparison.ipynb
+│   ├── 03_retrieval_tuning.ipynb
+│   └── 04_evaluation_analysis.ipynb
+├── tests/
+│   ├── test_pipeline.py
+│   └── test_api.py
+└── outputs/
+    ├── eval_results/     # Evaluation metrics and reports
+    └── logs/             # Query logs and monitoring
 ```
 
 ### Option B: Fine-tuning
@@ -542,9 +750,11 @@ rag-qa-system/
 - Understanding of embeddings and similarity search
 - Prompt engineering skills
 - Chunking strategy rationale
-- Retrieval evaluation (not just generation)
+- **Rigorous evaluation methodology** (Ragas, retrieval metrics)
+- Ability to measure and improve each component (retrieval, generation)
+- Error analysis and failure mode understanding
 - Handling context window limits
-- Production considerations (cost, latency)
+- Production considerations (cost, latency, monitoring)
 
 **For Fine-tuning**:
 - Data preparation for fine-tuning
@@ -554,13 +764,18 @@ rag-qa-system/
 - Preventing catastrophic forgetting
 
 ### Discussion Points
-- "How do you handle hallucinations?"
-- "How do you ensure retrieved documents are relevant?"
+- "How do you handle hallucinations?" (Answer: Faithfulness metric in Ragas)
+- "How do you ensure retrieved documents are relevant?" (Context precision, Recall@K)
 - "What's your chunking strategy and why?"
+- "Walk me through your evaluation methodology. Show me your Ragas scores."
+- "What's the difference between context recall and answer relevance?"
+- "How did you measure retrieval quality independently of generation?"
+- "Show me your error analysis. What are the main failure modes?"
 - "How would you scale this to millions of documents?"
-- "How do you measure quality of RAG system?"
+- "What's the cost-accuracy trade-off between GPT-4 and GPT-3.5?"
+- "How do you measure quality of RAG system?" (Automated eval frameworks!)
 - "What's the cost of this system at scale?"
-- "How would you update the knowledge base?"
+- "How would you update the knowledge base without downtime?"
 
 ---
 
@@ -621,12 +836,14 @@ For all projects:
 - [ ] .gitignore (don't commit data, models, credentials)
 - [ ] Branches for features (optional but professional)
 
-**Extras (Impressive)**:
-- [ ] CI/CD (GitHub Actions)
-- [ ] Docker container
-- [ ] Tests with pytest
-- [ ] Documentation (Sphinx or MkDocs)
-- [ ] Blog post explaining project
+**Additional Enhancements** (Optional but impressive):
+- [ ] Advanced monitoring dashboards (Grafana, Prometheus)
+- [ ] A/B testing framework for model updates
+- [ ] Comprehensive documentation (Sphinx or MkDocs)
+- [ ] Technical blog post explaining architecture and learnings
+- [ ] Performance profiling and optimization reports
+- [ ] Multi-region deployment setup
+- [ ] Auto-scaling configurations
 
 ---
 
