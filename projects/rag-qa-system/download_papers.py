@@ -26,7 +26,7 @@ PAPERS = [
     ("2004.12832", "colbert_khattab"),
     ("2004.04906", "dpr_karpukhin"),
     ("2107.05720", "splade_formal"),
-    ("2104.08663", "hybrid_retrieval_ma"),
+    ("2104.05740", "hybrid_retrieval_ma"),
 
     # Evaluation & Metrics
     ("2309.15217", "ragas_es"),

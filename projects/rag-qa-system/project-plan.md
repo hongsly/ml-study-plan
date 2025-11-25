@@ -124,8 +124,8 @@ ArXiv Papers (PDF) → Chunking (500 tokens, 50 overlap)
 - [x] Decision: Option B confirmed
 
 **Day 27 (Sun, Nov 24) - 30 min**
-- [ ] Download 20-30 ArXiv papers (PDFs to `data/raw/`)
-- [ ] Create folder structure:
+- [x] Download 20-30 ArXiv papers (PDFs to `data/raw/`)
+- [x] Create folder structure:
   ```
   rag-qa-system/
   ├── data/
@@ -137,15 +137,14 @@ ArXiv Papers (PDF) → Chunking (500 tokens, 50 overlap)
   ├── tests/
   └── outputs/
   ```
-- [ ] Create `requirements.txt` stub (list libraries, don't install yet)
+- [x] Create `requirements.txt` stub (list libraries, don't install yet)
 
 ### Week 5 (Main Implementation - 12 hours)
 
 **Day 1 (Mon, Nov 25) - 2 hours**
-- [ ] `src/data_loader.py`: Parse PDFs, chunk by 500 tokens with 50 overlap
-- [ ] `src/embeddings.py`: Load sentence-transformers, generate embeddings
-- [ ] Build FAISS index, save to disk
-- [ ] Test: Search for 1 query, verify top-5 results
+- [x] `src/data_loader.py`: Parse PDFs, chunk by 500 tokens with 50 overlap
+- [x] `src/vector_store.py`: Generate embeddings, build FAISS index, save to disk
+- [x] Test: Search for 1 query, verify top-5 results
 - [ ] Commit: "Add data loading and embedding generation"
 
 **Day 2 (Tue, Nov 26) - 2 hours**
