@@ -72,8 +72,3 @@ class CorpusLoader:
             "min_tokens": min(token_counts),
             "mean_tokens": sum(token_counts) / len(token_counts),
         }
-
-
-def generate_embeddings(chunks: list[str]) -> np.ndarray:
-    model = SentenceTransformer("all-MiniLM-L6-v2")
-    return model.encode(chunks)

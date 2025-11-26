@@ -1060,7 +1060,41 @@ This is where you need the most practice:
 
 ---
 
-**Day 5-7 (Day 26-28): Start Projects** ✅ **OPTION A CHOSEN** (gap reassessment: 85% readiness)
+**Phase 1 Revised Deliverables**: ✅ **ALL ACHIEVED**
+- ✅ **Critical gaps closed**: 81.7% overall, all studied areas ≥80% (target: 80%+) **EXCEEDED**
+- ✅ **Interview readiness**: 85% overall (up from 75% Week 1) **EXCEEDED**
+- ✅ **Strong system design skills**: Can design 3-5 ML systems (YouTube, fraud detection, Instagram)
+- 🎯 **Projects**: 0 projects (Week 4 Day 5-7 to begin) - **Acceptable**, gap closure prioritized
+
+**Key Success Metric**: ✅ **Confidence to start applying to senior-level ML roles by Week 5** (target exceeded!)
+
+**Key Insight**: **Gap closure > Projects** for senior roles. Projects demonstrate skills but don't close knowledge gaps.
+
+**Week 4 Day 3-4 Decision**: Option A - Start Projects (all critical gaps closed, all targets met or exceeded)
+
+---
+
+## Phase 2: Portfolio Project 1 - RAG System (remainder of Week 4 + Week 5)
+
+✅ **DECISION MADE** after Week 4 checkpoint (85% readiness achieved)
+- All critical gaps closed: LLM Systems 89%, Statistics 82%, RAG 99%, ML Infrastructure 90%
+- Ready to start portfolio projects
+- Skip redundant coursework, focus on implementation and interview prep
+
+**Goal**: Build production-quality RAG Q&A system demonstrating modern ML engineering skills
+**Time**: ~13 hours total (Week 4 Day 7: 2 hours + Week 5: 11 hours)
+
+**Project**: RAG Q&A System over ArXiv Papers
+- 32 ArXiv papers (2020-2025) on RAG and LLM techniques
+- Hybrid retrieval (Dense FAISS + Sparse BM25 + RRF fusion)
+- Tech stack: sentence-transformers, FAISS, rank-bm25, OpenAI API, Ragas
+- Generation with GPT-3.5-turbo
+- Evaluation: Ragas framework (context precision, faithfulness, answer relevance) + retrieval metrics (Recall@K, MRR, NDCG)
+- Docker deployment to Streamlit Cloud
+
+**Project Plan**: See `projects/rag-qa-system/project-plan.md` for complete specification
+
+---
 
 **Day 5 (Sat, Nov 22 - 30 min)** ✅ **COMPLETED**
 
@@ -1119,7 +1153,13 @@ This is where you need the most practice:
 - 📊 Knowledge check: 87.5% (FSDP breakthrough 50%→100%, Adam optimizer gap identified)
 - 📚 Papers: 32 ArXiv papers downloaded (600-800 pages corpus)
 - 📁 Project: Complete folder structure + requirements ready
-- 🎯 Progress: Ready for Week 5 Day 1 implementation
+- 🎯 Progress: Ready for implementation
+
+--
+
+### Week 4 Day 7 (Mon, Nov 24) - ✅ **COMPLETED**
+
+
 
 **Day 7 (Mon, Nov 24 - 2-3 hours)** ✅ **COMPLETED** - Main implementation day
 
@@ -1130,33 +1170,20 @@ This is where you need the most practice:
 - Perfect scores: Memory calc, batch size, Chinchilla, activation mem, residual plots, PyTorch training, Kafka
 - User caught 3 scoring errors (Q2, Q5, Q9 - all valid corrections)
 
-**Core Implementation (2 hours)**:
-- [X] Data loading & chunking with PyMuPDF4LLM (layout-aware parsing)
-  - 33 ArXiv papers → 1541 chunks
-  - Token-based chunking: 500 tokens, 50 overlap (tiktoken)
-  - Error handling for corrupted PDFs
-- [X] Embedding generation (sentence-transformers)
-  - Model: all-MiniLM-L6-v2 (384-dim)
-  - Normalized embeddings for cosine similarity
-- [X] Vector store setup (FAISS)
-  - IndexFlatIP (inner product) - avoided L2 distance bug
-  - Save/load functionality with metadata
-- [X] Search quality verification
-  - Test query: "What is RAG?"
-  - Top-5 results all highly relevant
-  - All from authoritative RAG survey paper
+**Data Loading + Embeddings + FAISS Index (2 hours)**:
+- [x] Parse 32 PDFs with PyMuPDF4LLM (layout-aware parsing for two-column papers)
+- [x] Token-based chunking (500 tokens, 50 overlap using tiktoken)
+- [x] Generate embeddings with sentence-transformers (all-MiniLM-L6-v2)
+- [x] Build FAISS IndexFlatIP with normalized embeddings
+- [x] Validate search quality (top-5 results all relevant, 0.75 cosine similarity)
+- [x] Create reference documentation: `references/day28-rag-implementation.md`
 
 **Code Structure**:
 - [X] Clean OOP design: PDFDocument, CorpusLoader, VectorStore classes
 - [X] Separate modules: utils.py, data_loader.py, vector_store.py
 - [X] Main scripts: build_index.py, test_search.py
 
-**Documentation**:
-- [X] Created comprehensive reference sheet: `references/day28-rag-implementation.md`
-  - 4 critical technical decisions (PyMuPDF4LLM, tiktoken, IndexFlatIP, normalization)
-  - 5 common pitfalls avoided
-  - Interview talking points
-- [X] Updated all progress files
+**Result**: 1541 chunks indexed, high-quality semantic search validated ✅
 
 **Day 7 Summary**:
 - ⏱️ Total time: ~2 hours (implementation + knowledge check + docs)
@@ -1172,239 +1199,294 @@ This is where you need the most practice:
 - [ ] Implement RRF fusion (combine dense + sparse)
 - [ ] Compare retrieval quality: dense-only vs hybrid
 
-**Project Details**:
-
-**Full Project 4: RAG Q&A System** (Option B, ~12 hours over 2 weeks)
-- **Data source**: 20-30 ArXiv papers on RAG/LLMs
-- **Architecture**: Hybrid retrieval (Dense + BM25) → RRF fusion → GPT-3.5-turbo
-- **Tech stack**: sentence-transformers, FAISS, rank-bm25, OpenAI API, Ragas
-- **Evaluation**: Ragas framework (context precision, faithfulness, answer relevance) + retrieval metrics (Recall@K, MRR, NDCG)
-- **Deployment**: Docker containerization, Streamlit Cloud
-- **Timeline**: Weekend (1 hour light) + Week 5 (12 hours implementation)
-- **Deliverables**: Working RAG system, comprehensive README, evaluation report, GitHub repo
-
-**Rationale**:
-- Respects weekend constraints (light knowledge checks 15-20 min/day)
-- Leverages RAG mastery (99.2% - can implement immediately)
-- Monday momentum (2-3 hour focused block when more time available)
-- Portfolio-ready project showcasing end-to-end ML engineering
-- Addresses evaluation metrics gap through Ragas integration
-
-**Project Folder**: `/Users/menghanw/Documents/1. Projects/🤖 GenAI learning/projects/rag-qa-system/`
-**Project Plan**: See `projects/rag-qa-system/project-plan.md` for complete specification
-
 ---
 
-**Phase 1 Revised Deliverables** (End of Week 4): ✅ **ALL ACHIEVED**
-- ✅ **Critical gaps closed**: 81.7% overall, all studied areas ≥80% (target: 80%+) **EXCEEDED**
-- ✅ **Interview readiness**: 85% overall (up from 75% Week 1) **EXCEEDED**
-- ✅ **Strong system design skills**: Can design 3-5 ML systems (YouTube, fraud detection, Instagram)
-- 🎯 **Projects**: 0 projects (Week 4 Day 5-7 to begin) - **Acceptable**, gap closure prioritized
+### Week 5 (Nov 25-29)
 
-**Key Success Metric**: ✅ **Confidence to start applying to senior-level ML roles by Week 5** (target exceeded!)
+**Day 1 (Mon, Nov 25) - Hybrid Retrieval (2.5 hours)** ✅ **COMPLETE**:
+- [X] Implement BM25 sparse retrieval (rank-bm25) with NLTK tokenization
+- [X] Implement RRF fusion: score = Σ 1/(k + rank_i), k=60, 1-based ranking
+- [X] Compare retrieval quality: Dense-only vs Sparse-only vs Hybrid (2 query sets)
+  - General NLP queries: Hybrid 40% < Dense 60% (query-corpus mismatch)
+  - RAG-focused queries: Hybrid 80% > Dense 67% ✅
+- [X] Key finding: Query-corpus alignment critical (BM25: 13%→67% with aligned queries)
+- [X] Decision: Use Hybrid for production (80% > 67% for RAG queries)
+- [X] **Daily knowledge check**: 96% (A+) - Exceptional hybrid retrieval mastery
 
-**Key Insight**: **Gap closure > Projects** for senior roles. Projects demonstrate skills but don't close knowledge gaps.
+**Day 2 (Tue, Nov 26) - Generation Pipeline (2 hours)**:
+- [ ] Design prompt template for RAG Q&A with citations
+- [ ] Test zero-shot vs few-shot approaches (prompt engineering integrated here)
+- [ ] Implement generation pipeline with GPT-3.5-turbo
+- [ ] Test on 3-5 sample questions
 
-**Week 4 Day 3-4 Decision**: Option A - Start Projects (all critical gaps closed, all targets met or exceeded)
+**Day 3 (Wed, Nov 27) - Ragas Evaluation (3 hours)**:
+- [ ] Create test question set (10 questions: factual, reasoning, multi-hop, negative)
+- [ ] Run Ragas metrics: context precision, context recall, faithfulness, answer relevance
+- [ ] Optimize prompts if scores <0.80 (prompt optimization integrated here)
+- [ ] Compare Dense vs Hybrid retrieval on evaluation metrics
 
----
+**Day 4 (Thu, Nov 28) - Docker + Streamlit (2 hours)**:
+- [ ] Create Streamlit UI for Q&A interface
+- [ ] Add Docker containerization
+- [ ] Test locally with docker-compose
 
-## Phase 2: Modern AI & LLMs (Weeks 5-6)
-
-⚠️ **SUBJECT TO CHANGE** based on Week 4 progress check
-- If gaps remain after Week 4: Continue gap closure, defer Phase 2
-- If gaps closed (85%+ readiness): Proceed with Phase 2 as planned OR compress/skip if ready to interview
-
-**Original Goal**: Get current with LLM technology and build modern AI applications
-**Time**: 10-20 hours total
-
-**Gap Analysis Update**: Day 6-7 revealed we're already strong on LLM *applications* (75-85%) but weak on LLM *systems* (30%). Phase 2 may need to focus on systems-level topics instead of application-level.
-
-### Week 5: LLM Fundamentals + Prompt Engineering
-
-**Learning (3-4 hours)**:
-- [ ] DeepLearning.AI: "ChatGPT Prompt Engineering for Developers" (2 hours)
-- [ ] DeepLearning.AI: "Building Systems with ChatGPT API" (1-2 hours)
-- [ ] HuggingFace Course Chapter 1: Transformer models
-- [ ] Read: "Attention is All You Need" paper (at least abstract + intro)
-
-**Hands-on (3-4 hours)**:
-- [ ] Experiment with OpenAI API / Anthropic API
-- [ ] Build simple chatbot with system prompts
-- [ ] Try few-shot learning and prompt optimization
-- [ ] Start Project 4: LLM-based application
-
-**Resources**:
-- DeepLearning.AI Short Courses: https://www.deeplearning.ai/short-courses/
-- HuggingFace Course: https://huggingface.co/learn/nlp-course/
-- OpenAI Cookbook: https://cookbook.openai.com/
-
----
-
-### Week 6: RAG, Vector DBs & Fine-tuning
-
-**Learning (3-4 hours)**:
-- [ ] DeepLearning.AI: "LangChain for LLM Application Development"
-- [ ] DeepLearning.AI: "Vector Databases from Embeddings to Applications"
-- [ ] HuggingFace Course Chapter 2: Using transformers
-- [ ] Read about RAG (Retrieval-Augmented Generation)
-
-**Hands-on (4-5 hours)**:
-- [ ] Complete Project 4: RAG system or fine-tuned model
-  - Option A: Document Q&A system with vector DB
-  - Option B: Fine-tune small model (BERT/DistilBERT) for specific task
-  - Option C: Multi-agent system with LangChain
-- [ ] Polish Project 4 for portfolio
+**Day 5 (Fri, Nov 29) - Deploy + Polish (2 hours)**:
+- [ ] Deploy to Streamlit Cloud
+- [ ] Write comprehensive README with architecture, results, evaluation metrics
+- [ ] Add interview talking points document
+- [ ] GitHub commit with all code and documentation
 
 **Phase 2 Deliverable**:
-- ✅ 1 modern LLM application on GitHub
-- ✅ Can discuss: transformers, attention, embeddings, RAG, fine-tuning
-- ✅ Familiar with LangChain, vector DBs, prompt engineering
-
----
-
-## Phase 3: Interview Prep (Weeks 7-10)
-
-⚠️ **SUBJECT TO CHANGE** based on Week 4-6 progress
-- May start earlier (Week 5-6) if gaps close fast
-- System design already practiced in Week 3, ML coding validated in Week 1
-- Main focus: Mock interviews and application preparation
-
-**Goal**: Master interview formats and build interview-specific skills
-**Time**: 28-40 hours total (may be compressed to 2-3 weeks)
-
-### Week 7: ML System Design (Part 1)
-
-**Learning (2-3 hours)**:
-- [ ] Read "Machine Learning System Design Interview" (Chapters 1-3)
-- [ ] Study ML system design framework
-- [ ] Watch example system design interviews on YouTube
-
-**Practice (4-5 hours)**:
-- [ ] Practice problem: Design a video recommendation system
-- [ ] Practice problem: Design a search ranking system
-- [ ] Write out full solutions with diagrams
-- [ ] Review sample solutions and compare
-
-**Topics to master**:
-- Data collection and labeling
-- Feature engineering pipeline
-- Model selection and training
-- Evaluation metrics and A/B testing
-- Deployment and serving architecture
-- Monitoring and retraining
-
----
-
-### Week 8: ML System Design (Part 2) + ML Coding Prep
-
-**System Design Practice (3-4 hours)**:
-- [ ] Practice problem: Design a fraud detection system
-- [ ] Practice problem: Design a feed ranking system (e.g., Facebook/LinkedIn)
-- [ ] Record yourself explaining solutions (simulate interview)
-
-**ML Coding Practice (3-4 hours)**:
-- [ ] Implement linear regression from scratch (no sklearn)
-- [ ] Implement logistic regression from scratch
-- [ ] Implement k-means clustering from scratch
-- [ ] Implement decision tree from scratch (optional)
-- [ ] Practice on LeetCode ML problems (if available)
+- ✅ Production-quality RAG system on GitHub
+- ✅ Demonstrates: Hybrid retrieval, RRF fusion, automated evaluation, Docker deployment
+- ✅ Interview-ready talking points (architecture, evaluation rigor, results)
+- ✅ Real metrics: Recall@K, MRR, Ragas scores
 
 **Resources**:
-- ML System Design questions: See `ML-System-Design-Questions.md`
-- ML Coding questions: See `ML-Coding-Questions.md`
+- Project folder: `projects/rag-qa-system/`
+- Papers: 32 ArXiv PDFs in `projects/rag-qa-system/data/raw/`
 
 ---
 
-### Week 9: ML Theory + Algorithm Implementation
+## Phase 3: Portfolio Project 2 + Interview Prep (Weeks 6-8)
 
-**Theory Review (3-4 hours)**:
-- [ ] Review bias-variance tradeoff
-- [ ] Review regularization (L1, L2, dropout)
-- [ ] Review optimization algorithms (SGD, Adam, etc.)
-- [ ] Review evaluation metrics (precision, recall, F1, AUC-ROC, etc.)
-- [ ] Review common ML algorithms and when to use them
-- [ ] Go through 30+ theory questions in `ML-Theory-Questions.md`
+**Goal**: Build 2nd portfolio project + master interview formats
+**Time**: 24.5-30 hours total (8-10 hours/week, matches Week 1-4 pace)
+**Rationale**: Address hands-on freshness across ML areas, prepare for Big Tech + AI-first interviews
 
-**Coding Practice (3-4 hours)**:
-- [ ] **Implement neural network with backpropagation from scratch** (2-3 hours priority)
-  - **Rationale**: Week 2 Day 9 practice exercises revealed need for hands-on coding beyond conceptual derivation
-  - Forward pass: Input → Hidden layer(s) → Output
-  - Backward pass: Derive all gradients (∂L/∂W, ∂L/∂b) using chain rule
-  - Manual gradient check: Compare analytical gradients to numerical gradients
-  - Test on simple dataset (XOR or MNIST)
-  - **Goal**: Solidify backprop understanding with actual implementation
-- [ ] Implement cross-validation from scratch
-- [ ] Practice feature engineering problems
-- [ ] Practice data preprocessing tasks (handling missing data, scaling, encoding)
+### Week 6: LeetCode Assessment + Neural Network Start (8-10 hours)
 
----
+**Mon-Tue: LeetCode Assessment (2.5-3 hours)**:
+- [ ] **Monday** (1.5 hrs): 3 Medium problems (arrays, hashmaps, two pointers)
+- [ ] **Tuesday** (1-1.5 hrs): 2 Medium problems (trees/graphs, DP or recursion)
+- [ ] **Goal**: Assess current proficiency - if 7+/10 solved in <30 min, skills retained
+- [ ] **Outcome**: Determine if intensive LeetCode prep needed or light ongoing practice sufficient
 
-### Week 10: Mock Interviews + Portfolio Polish
+**Wed-Fri: Neural Network Implementation Part 1 (5.5-7 hours)**:
+- [ ] **Wednesday** (2 hrs): Forward pass
+  - Matrix multiplication for fully-connected layers
+  - Activation functions (ReLU, sigmoid, softmax)
+  - Loss calculation (cross-entropy)
+  - Test on toy data (XOR or synthetic)
+- [ ] **Thursday** (2.5 hrs): Backpropagation
+  - Gradient calculations for each layer (∂L/∂W, ∂L/∂b)
+  - Chain rule implementation
+  - Numerical gradient check for correctness
+  - Validate gradients match numerical approximation
+- [ ] **Friday** (1.5-2 hrs): Basic training loop
+  - SGD optimizer implementation
+  - Batch processing
+  - Train on simple dataset (XOR or small synthetic)
+  - Verify loss decreases
 
-**Mock Interviews (4-5 hours)**:
-- [ ] Schedule 2-3 mock interviews on Pramp or interviewing.io
-- [ ] Do at least one ML system design mock
-- [ ] Do at least one ML coding mock
-- [ ] Record feedback and areas for improvement
-
-**Portfolio Work (3-4 hours)**:
-- [ ] Final polish on all 4 projects
-- [ ] Write comprehensive READMEs with:
-  - Problem statement
-  - Approach and methodology
-  - Results and evaluation
-  - Technologies used
-  - Future improvements
-- [ ] Add visualizations and demo gifs/screenshots
-- [ ] Ensure code is clean and well-commented
-
-**Resume & LinkedIn (1-2 hours)**:
-- [ ] Update resume with ML projects
-- [ ] Update LinkedIn with skills and projects
-- [ ] Prepare 2-minute elevator pitch
+**Week 6 Checkpoint**: LeetCode proficiency assessed, Neural network 60% complete
 
 ---
 
-## Phase 4: Active Job Search (Weeks 11-12+)
+### Week 7: Neural Network Completion + ML Coding Drills (8.5-10 hours)
 
-⚠️ **SUBJECT TO CHANGE** - May start as early as Week 8-9 if readiness hits 85%+
-- Gap analysis showed 75% readiness after Week 1
-- Target: 85%+ after Weeks 2-4 (gap closure)
-- Can start applying to mid-level roles while continuing senior-level prep
+**Mon-Tue: Neural Network Part 2 (4-5 hours)**:
+- [ ] **Monday** (2-3 hrs): MNIST training + visualization
+  - Load MNIST dataset
+  - Train full network (2-3 hidden layers)
+  - Generate loss curves and accuracy plots
+  - Decision boundary visualization (if 2D projection)
+  - Achieve >95% accuracy on MNIST
+- [ ] **Tuesday** (2 hrs): Documentation + polish
+  - Write comprehensive README:
+    - Architecture diagram
+    - Math formulas (forward pass, backprop equations)
+    - Training results and convergence analysis
+    - Comparison with theoretical backprop derivations
+  - Add code comments and docstrings
+  - GitHub upload with clear usage examples
 
-**Goal**: Apply to jobs, interview, and iterate based on feedback
-**Time**: 10-20+ hours/week
+**Deliverable**: ✅ 2nd portfolio project complete (Neural Network from scratch)
 
-**Flexible Strategy**:
-- **Week 8-10**: Start applications to mid-level ML Engineer roles (already 75% ready)
-- **Week 10-12+**: Apply to senior roles after closing LLM systems gap
-- Use early interviews as practice, iterate based on feedback
+**Wed-Fri: ML Coding Speed Drills (4-5 hours)**:
+- [ ] **Wednesday** (1.5 hrs): Logistic regression from scratch
+  - Implement gradient descent for logistic regression
+  - Practice until can complete in <15 min
+  - Compare results with sklearn
+- [ ] **Thursday** (1.5 hrs): k-NN and k-means
+  - k-NN: 30 min implementation target
+  - k-means: 45 min implementation target
+  - Validate correctness against sklearn
+- [ ] **Friday** (1.5 hrs): Neural network from memory + LeetCode
+  - Reimplement simple neural network without looking at code (1 hr)
+  - 2 LeetCode Medium problems (30 min)
 
-### Week 11-12: Applications + Interviews
+**Week 7 Checkpoint**: 2 portfolio projects complete, speed validated on core algorithms
 
-**Applications (2-3 hours/week)**:
-- [ ] Apply to 10-15 positions per week
-- [ ] Target: ML Engineer, Applied Scientist, AI Engineer roles
-- [ ] Track applications in spreadsheet
+---
 
-**Interview Practice (3-4 hours/week)**:
-- [ ] Continue mock interviews
-- [ ] Review and practice weak areas
-- [ ] Practice explaining projects clearly and concisely
-- [ ] Prepare behavioral stories using STAR format
+### Week 8: System Design + Mock Interviews (8-10 hours)
 
-**Ongoing Learning (2-3 hours/week)**:
-- [ ] Stay current: read ML papers, blog posts
-- [ ] Follow ML on Twitter/LinkedIn
-- [ ] Participate in ML communities (Reddit, Discord)
-- [ ] Continue Fast.AI or other courses if time permits
+**Monday: ML System Design Framework Study (1.5 hours)**:
+- [ ] Review problem-solving framework:
+  - Problem definition and requirements
+  - Data collection and labeling
+  - Feature engineering pipeline
+  - Model selection and training
+  - Evaluation metrics and A/B testing
+  - Deployment and serving architecture
+  - Monitoring and retraining
+- [ ] Watch 1-2 example ML system design interviews on YouTube
+- [ ] Study solutions from `ML-System-Design-Questions.md`
 
-**After Each Interview**:
-- [ ] Document questions asked
-- [ ] Identify knowledge gaps
-- [ ] Study gaps immediately
-- [ ] Update interview prep materials
+**Tuesday: Search Ranking System Design (1.5 hours)**:
+- [ ] Design full search ranking system (Google/Bing style):
+  - Query understanding (spelling correction, intent classification)
+  - Candidate generation (inverted index, ~1000 documents)
+  - Ranking model (learning-to-rank, BM25 + neural features)
+  - Real-time constraints (<100ms latency)
+  - Personalization and diversity
+  - Evaluation (NDCG, MAP, user engagement metrics)
+- [ ] Draw architecture diagram
+- [ ] Record yourself explaining (simulate interview, 45 min)
+
+**Wednesday: ML Model Serving at Scale (1.5 hours)**:
+- [ ] Design system to serve recommendation model at 100K QPS:
+  - Load balancing strategy (regional load balancers + model replicas)
+  - Caching layer (Redis for user/item features, model predictions)
+  - A/B testing infrastructure (experiment framework, traffic splitting)
+  - Model versioning and rollback (canary deployment, shadow mode)
+  - Monitoring and alerting (latency, throughput, model quality drift)
+  - Auto-scaling and resource management
+- [ ] Infrastructure focus (leverages your 90% ML Infrastructure strength)
+- [ ] Write full solution with diagrams
+
+**Thursday: Mock Interviews (2-3 hours)**:
+- [ ] Schedule 2 mock interviews on Pramp or interviewing.io:
+  - 1× ML system design (45 min)
+  - 1× ML theory + coding (45 min)
+- [ ] Record detailed feedback:
+  - Communication clarity
+  - Technical depth
+  - Areas for improvement
+- [ ] Buffer time for scheduling and setup
+
+**Friday: Review + Behavioral Prep (2 hours)**:
+- [ ] Review mock interview feedback thoroughly
+- [ ] Identify gaps and create action items
+- [ ] Polish 8-10 STAR stories from `Behavioral-Questions.md`:
+  - Google ML projects (BERT, neural networks in production)
+  - Netflix LLM/RAG integration experience
+  - Cross-team collaboration examples
+  - Technical leadership and mentorship
+- [ ] Prepare thoughtful questions for interviewers (based on company research)
+- [ ] 2 LeetCode Medium problems (30 min) for maintenance
+
+**Phase 3 Deliverables**:
+- ✅ 2 portfolio projects (RAG + Neural Network) on GitHub
+- ✅ LeetCode proficiency assessed (ongoing practice if needed)
+- ✅ 2 fresh system design solutions (Search Ranking + Model Serving)
+- ✅ Mock interview feedback captured and action items identified
+- ✅ Behavioral stories polished and ready for interviews
+
+**Resources**:
+- ML System Design: `ML-System-Design-Questions.md`
+- ML Coding: `ML-Coding-Questions.md`
+- Behavioral: `Behavioral-Questions.md`
+- Mock interviews: Pramp (https://www.pramp.com/), interviewing.io (https://interviewing.io/)
+
+---
+
+## Phase 4: Job Search & Iteration (Week 9-10+)
+
+✅ **READY TO START** - 85% readiness achieved, 2 portfolio projects complete
+- Target companies: Big Tech (Google, Meta, Amazon) + AI-first (OpenAI, Anthropic, Cohere)
+- Strategy: Tailored applications + network referrals + ongoing interview prep
+
+**Goal**: Apply to target companies, interview, and iterate based on feedback
+**Time**: Ongoing (varies based on interview pipeline)
+
+### Week 9: Applications (Variable time)
+
+**Company Identification (1-2 hours)**:
+- [ ] Identify 10-15 target companies:
+  - **Big Tech**: Google (ML Engineer), Meta (ML Engineer), Amazon (Applied Scientist)
+  - **AI-first**: OpenAI (Applied Scientist), Anthropic (ML Engineer), Cohere (ML Engineer)
+  - **Top ML startups**: Scale AI, Hugging Face, Weights & Biases, etc.
+- [ ] Research each company: products, ML use cases, team structure, culture
+- [ ] Prioritize by fit: role level (senior), team (ML systems/infrastructure), location
+
+**Resume & Materials (2-3 hours)**:
+- [ ] Tailor resume for each application:
+  - Highlight 2 portfolio projects (RAG + Neural Network)
+  - Emphasize 9.5 years experience (7 years Google production ML + 2.5 years Netflix LLM/RAG)
+  - Quantify impact where possible
+  - Adjust keywords based on job description
+- [ ] Write company-specific cover letters (optional for some)
+- [ ] Prepare LinkedIn profile with projects and updated skills
+
+**Network Outreach (2-3 hours)**:
+- [ ] Reach out to Google network for referrals (7 years = strong network)
+- [ ] Reach out to Netflix contacts for referrals or intros
+- [ ] Use LinkedIn to find connections at target companies
+- [ ] Send personalized messages (not generic templates)
+
+**Submit Applications (1-2 hours)**:
+- [ ] Submit 5-10 applications in Week 9
+- [ ] Track applications in spreadsheet:
+  - Company, role, date applied, status, referral (Y/N)
+  - Recruiter contact, interview stages, feedback notes
+- [ ] Follow up on referrals after 1 week if no response
+
+---
+
+### Week 10+: Interview Loop & Ongoing Maintenance
+
+**Interview Preparation (Variable based on pipeline)**:
+- [ ] **If Big Tech interviews scheduled**: Ramp up LeetCode practice
+  - Daily practice: 1 Medium problem per day (30-45 min)
+  - Focus on company-specific patterns:
+    - Google: Graphs, trees, dynamic programming
+    - Meta: Arrays, hashmaps, system design
+    - Amazon: Leadership principles + coding (2 easy-medium)
+  - Review common patterns: sliding window, two pointers, DFS/BFS, DP
+- [ ] **If AI-first interviews scheduled**: Focus on ML implementation + theory
+  - Review transformer architecture, attention mechanisms
+  - Practice implementing backprop, loss functions, optimizers
+  - Prepare to discuss recent papers and LLM trends
+
+**Knowledge Retention (15 min/day)**:
+- [ ] Daily knowledge checks with SM-2 spaced repetition
+- [ ] Review items due from `data/knowledge-schedule.md`
+- [ ] Maintain 85%+ readiness across all topics
+- [ ] Focus on weak areas (<80%) with more frequent reviews
+
+**Interview Response & Iteration**:
+- [ ] Respond quickly to interview requests (within 24 hours)
+- [ ] Schedule interviews strategically:
+  - Less preferred companies first (practice interviews)
+  - Top choice companies after 2-3 practice rounds
+- [ ] After each interview:
+  - Document all questions asked (coding, theory, system design, behavioral)
+  - Identify knowledge gaps or weak responses
+  - Study gaps immediately (within 24-48 hours)
+  - Update interview prep materials with new questions
+- [ ] Add targeted study based on feedback:
+  - If LeetCode struggles: Add 1-2 weeks intensive practice
+  - If system design gaps: Practice 2-3 more problems
+  - If ML theory weak: Deep dive on specific topics
+
+**Ongoing Portfolio Updates**:
+- [ ] Add second project if specific gap identified in interviews
+- [ ] Update project READMEs based on interviewer questions
+- [ ] Consider adding blog post explaining RAG system architecture
+
+**Expected Timeline**:
+- **Week 9**: Applications submitted (5-10 companies)
+- **Week 10**: First recruiter screens + phone interviews
+- **Week 11-12**: On-site interview loops
+- **Week 13+**: Offer negotiations + decision
+
+**Flexible Approach**:
+- Start with 5-10 applications, adjust volume based on response rate
+- If high interview load: Reduce new applications, focus on current pipeline
+- If low response rate: Expand target list, improve resume/materials, seek more referrals
+- Use early interviews as calibration, iterate on weak areas before top choice companies
 
 ---
 
@@ -1416,7 +1498,7 @@ This is where you need the most practice:
 - ❌ **Critical Gaps**: LLM systems (0% know, 82% dunno), statistical testing (65%), advanced RAG (30%)
 - 🎯 **Target**: 80-85% readiness for ML Engineer roles by Week 4
 
-**Revised Timeline** (Updated after Week 4 Day 3-4 completion):
+**Revised Timeline** (Updated after Week 4 Day 7 completion, Nov 24):
 
 | Week | Focus | Goal | Readiness Target | Status |
 |------|-------|------|------------------|--------|
@@ -1425,10 +1507,12 @@ This is where you need the most practice:
 | **Week 3** | System design + ML infrastructure + statistics | Strengthen system design to 85% | 78% → 82% | ✅ Completed |
 | **Week 4 Day 1-2** | Advanced RAG | Close RAG gap (21% → 55%+) | 82% → 83% | ✅ Completed (99.2% RAG!) |
 | **Week 4 Day 3-4** | Gap reassessment | Measure progress, decide next steps | 83% → **85%** | ✅ **COMPLETED** ⭐ |
-| **Week 4 Day 5-7** | **Start Projects** | Build portfolio project | Maintain 85%+ | 🎯 **READY TO BEGIN** |
-| **Week 5-6** | Continue projects OR advanced topics | Build 1-2 portfolio projects | Maintain 85%+ | 📅 Planned |
-| **Week 7-10** | Mock interviews + applications | Practice + iterate | 85%+ → 90% | 📅 Planned |
-| **Week 5+** | **Start job search (senior-level roles)** | Apply to target companies | **85% achieved** ✅ | 🎯 **READY** |
+| **Week 4 Day 5-7** | RAG project planning + setup + Day 1 implementation | Start portfolio project 1 | Maintain 85%+ | ✅ **COMPLETED** |
+| **Week 5** | Complete RAG project (hybrid retrieval, generation, evaluation, deploy) | Finish portfolio project 1 | Maintain 85%+ | 🎯 **IN PROGRESS (Day 1 today)** |
+| **Week 6** | LeetCode assessment + Neural Network start | Start portfolio project 2 | Maintain 85%+ | 📅 Planned |
+| **Week 7** | Neural Network completion + ML coding drills | Complete portfolio project 2 | Maintain 85%+ | 📅 Planned |
+| **Week 8** | System design practice + mock interviews | Interview format mastery | 85%+ → 90% | 📅 Planned |
+| **Week 9+** | **Job search + interview loops** | Apply and iterate | **90%+ target** | 🎯 **On track** |
 
 **Key Decisions Made**:
 1. ✅ **Day 8 Topic Coverage Check** revealed 82% dunno in LLM Systems → foundational learning needed
@@ -1437,8 +1521,12 @@ This is where you need the most practice:
 4. ✅ **Week 3-4 marked subject to adjustment** based on Week 2 progress
 5. ✅ **Gap closure > Projects** - reassessed at Week 4 checkpoint
 6. ✅ **Week 4 Day 3-4 Decision**: Start Projects (Option A) - all critical gaps closed ⭐
+7. ✅ **Week 4 Day 7-Week 5 (Day 28-Nov 24)**: RAG project started - data loading/FAISS complete
+8. ✅ **Phase 2-4 Revamp (Day 29-Nov 25)**: 2 projects + LeetCode + fresh system design problems
+9. ✅ **Prompt engineering integrated**: Zero-shot/few-shot testing in Week 5 Day 2-3 (not separate)
+10. ✅ **Timeline accelerated**: 12 weeks → 8-9 weeks (job search starts Week 9 instead of Week 11)
 
-**Success Metrics**: ✅ **ALL ACHIEVED**
+**Success Metrics**: 
 - **Week 2 (Day 14)**: LLM systems 83% ✅ (exceeded 60-70% target), statistics 81.7% ✅
 - **Week 4 (Day 25)**: **85% readiness** ✅ (exceeded 80-85% target)
   - LLM Systems: 89.4% ✅
@@ -1446,76 +1534,87 @@ This is where you need the most practice:
   - Advanced RAG: 99.2% ✅✅
   - ML Infrastructure: 90.0% ✅
   - System Design: 86% ✅
-- **Week 4 Day 5-7**: Start portfolio projects 🎯
-- **Week 5+**: **Ready to apply to senior-level ML roles** ✅
+- **Week 4 Day 7 (Day 28)**: RAG Day 1 complete - 1541 chunks indexed, search validated ✅
+- **Week 5 (ongoing)**: Complete RAG project (Days 2-5)
+- **Week 6-8**: 2nd project + interview prep
+- **Week 9+**: **Ready to apply to senior-level ML roles** (2 projects complete) 
 
 ---
 
-## Weekly Schedule Template
+## Key Milestones & Checkpoints (Revised)
 
-### For 7-8 hours/week:
+**End of Week 4** (✅ ACHIEVED):
+- ✅ 85% overall readiness (exceeded 80-85% target)
+- ✅ All critical gaps closed (LLM Systems 89%, Statistics 82%, RAG 99%, ML Infrastructure 90%)
+- ✅ System design practice (86% readiness)
+- ✅ ML fundamentals validated (95%)
+- ✅ Decision made: Start portfolio projects
 
-**Weekdays (3-4 hours)**:
-- Monday: 1 hour - Watch lectures/read materials
-- Tuesday: 1 hour - Coding exercises or practice problems
-- Wednesday: 1 hour - Watch lectures/read materials
-- Thursday: 1-2 hours - Coding exercises or practice problems
+**End of Week 5** (Target: Dec 1):
+- [ ] Portfolio project 1 complete (RAG Q&A system)
+- [ ] Hybrid retrieval (FAISS + BM25 + RRF)
+- [ ] Automated evaluation (Ragas metrics)
+- [ ] Docker deployment
+- [ ] Comprehensive README and interview talking points
 
-**Weekend (4-5 hours)**:
-- Saturday: 2-3 hours - Project work
-- Sunday: 2 hours - Project work or interview practice (later phases)
+**End of Week 6** (Target: Dec 8):
+- [ ] LeetCode proficiency assessed (5 Medium problems)
+- [ ] Neural network 60% complete (forward, backward, basic training)
+- [ ] Know if intensive LeetCode prep needed
 
-### For 10 hours/week:
+**End of Week 7** (Target: Dec 15):
+- [ ] Portfolio project 2 complete (Neural Network from scratch)
+- [ ] ML coding speed validated (<15 min logistic regression, <45 min k-means)
+- [ ] Can implement neural network from memory in <1 hour
+- [ ] 2 portfolio projects ready to showcase
 
-Add:
-- Friday: 1 hour - Review week's learnings, plan next week
-- Weekend: +1-2 hours more on projects
+**End of Week 8** (Target: Dec 22):
+- [ ] 2 fresh system design solutions (Search Ranking + Model Serving at Scale)
+- [ ] 2 mock interviews completed with feedback
+- [ ] Behavioral stories polished (8-10 STAR examples)
+- [ ] Ready for technical interviews (all formats)
 
----
+**Week 9** (Target: Dec 29):
+- [ ] 5-10 applications submitted
+- [ ] Target companies identified
+- [ ] Network referrals requested
+- [ ] Resume tailored for each company
 
-## Key Milestones & Checkpoints
-
-**End of Week 4**:
-- ✅ 3 ML projects completed
-- ✅ Comfortable with ML pipeline end-to-end
-- ✅ Can train, evaluate, and compare models
-
-**End of Week 6**:
-- ✅ 4 projects total (including 1 LLM project)
-- ✅ Can discuss modern AI/LLM concepts
-- ✅ Portfolio ready to show
-
-**End of Week 8**:
-- ✅ Can design ML systems for common problems
-- ✅ Can implement ML algorithms from scratch
-- ✅ Ready for technical interviews
-
-**End of Week 10**:
-- ✅ Completed mock interviews
-- ✅ Resume and LinkedIn updated
-- ✅ Ready to apply
-
-**Week 11+**:
-- ✅ Actively interviewing
-- ✅ Iterating based on feedback
+**Week 10+** (Jan 2025+):
+- [ ] Actively interviewing
+- [ ] Daily LeetCode if Big Tech interviews (30-45 min)
+- [ ] Daily knowledge checks (15 min)
+- [ ] Iterating based on feedback
 
 ---
 
-## Resources Summary
+## Resources Summary (Revised)
 
-### Primary Courses:
-1. **Fast.AI Practical Deep Learning** - https://course.fast.ai/
-2. **DeepLearning.AI Short Courses** - https://www.deeplearning.ai/short-courses/
-3. **HuggingFace NLP Course** - https://huggingface.co/learn/nlp-course/
+### Portfolio Projects:
+1. **RAG Q&A System** - `projects/rag-qa-system/`
+   - 32 ArXiv papers corpus
+   - Hybrid retrieval (FAISS + BM25 + RRF)
+   - Ragas evaluation framework
+   - Reference: `references/day28-rag-implementation.md`
+2. **Neural Network from Scratch** (Week 6-7)
+   - Forward/backward pass implementation
+   - MNIST training and visualization
+   - Demonstrates ML fundamentals depth
 
-### Supplementary:
-4. **Stanford CS229** - https://www.youtube.com/playlist?list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU
-5. **DeepLearning.AI ML Specialization** (Coursera) - If you need more structure
+### LeetCode Practice:
+- **LeetCode Top Interview Questions**: https://leetcode.com/problem-list/top-interview-questions/
+- **Focus patterns**: Arrays, hashmaps, two pointers, trees/graphs, DFS/BFS, DP
+- **Company-specific**: Use company tags for Google, Meta, Amazon
 
-### Books & Readings:
+### Books & Papers:
 - "Machine Learning System Design Interview" by Ali Aminian & Alex Xu
 - "Designing Machine Learning Systems" by Chip Huyen
-- Papers: "Attention is All You Need", "BERT", "GPT" papers (at least abstracts)
+- Key papers already studied (Megatron-LM, ZeRO, FiD, RAPTOR, GraphRAG, Self-RAG, etc.)
+
+### Knowledge Retention:
+- **SM-2 Spaced Repetition**: `data/knowledge-schedule.md`
+- **Daily Protocol**: `Daily-Knowledge-Check-Protocol.md`
+- **Progress Tracking**: `00-CONVERSATION-SUMMARY.md`
 
 ### Practice Platforms:
 - **LeetCode** - For coding practice
@@ -1617,16 +1716,6 @@ Use this checklist to track your progress:
 - [ ] 20+ applications submitted
 - [ ] 5+ phone screens completed
 - [ ] 3+ onsite/virtual onsites completed
-
----
-
-## Next Steps
-
-1. **Start today** with Week 1, Day 1 tasks
-2. **Set up tracking** - Use this document or create a Notion/spreadsheet
-3. **Block calendar** - Schedule your 7-10 hours/week now
-4. **Join communities** - Get support and accountability
-5. **Tell someone** - Accountability partner or mentor
 
 ---
 

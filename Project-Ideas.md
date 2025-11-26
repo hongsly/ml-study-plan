@@ -870,6 +870,9 @@ If you finish early or want a 5th project:
 5. **ML Deployment**: Dockerize model, create REST API, deploy to cloud
 6. **AutoML**: Build simple AutoML pipeline
 7. **Anomaly Detection**: Isolation Forest or Autoencoder for outlier detection
+8. **Distributed Training Demo**: LLM systems and infrastructure
+9. **LLM Fine-tuning**: modern LLM skills (LoRA/PEFT)
+10. **Multi-agent system**: e.g. with LangChain
 
 ---
 

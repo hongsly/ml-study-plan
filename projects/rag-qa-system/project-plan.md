@@ -141,22 +141,28 @@ ArXiv Papers (PDF) → Chunking (500 tokens, 50 overlap)
 
 ### Week 5 (Main Implementation - 12 hours)
 
-**Day 1 (Mon, Nov 25) - 2 hours**
+**Day 1 (Mon, Nov 25, Week 4 Day 7) - 2 hours**
 - [x] `src/data_loader.py`: Parse PDFs, chunk by 500 tokens with 50 overlap
 - [x] `src/vector_store.py`: Generate embeddings, build FAISS index, save to disk
 - [x] Test: Search for 1 query, verify top-5 results
-- [ ] Commit: "Add data loading and embedding generation"
+- [x] Commit: "Add data loading and embedding generation"
 
-**Day 2 (Tue, Nov 26) - 2 hours**
-- [ ] `src/retriever.py`: Implement hybrid retrieval
-  - [ ] FAISS dense search (top-20)
-  - [ ] BM25 sparse search (top-20)
-  - [ ] RRF fusion: Score = Σ 1/(60 + rank_i)
-  - [ ] Return top-K docs with scores
-- [ ] Test: Compare dense-only vs. BM25-only vs. hybrid+RRF
-- [ ] Commit: "Add hybrid retrieval with RRF fusion"
+**Day 2 (Mon, Nov 25, Week 5 Day 1 / Day 29) - 2.5 hours** ✅ **COMPLETE**
+- [x] `src/sparse_retrieval.py`: BM25 with NLTK tokenization
+- [x] `src/hybrid_search.py`: RRF fusion (k=60, retrieve 4×k candidates)
+- [x] Evaluation framework: Precision@5, MRR
+- [x] Test: Compare dense vs BM25 vs hybrid on 2 query sets
+  - General NLP queries: Hybrid 40% < Dense 60% (query-corpus mismatch)
+  - RAG-focused queries: Hybrid 80% > Dense 67% ✅ (aligned queries)
+- [x] Key finding: Query-corpus alignment is critical for BM25 performance
+- [x] Folder reorganization: Created `experiments/` for analysis scripts
+- [x] Commit: "Add hybrid retrieval with RRF fusion"
 
-**Day 3 (Wed, Nov 27) - 2 hours**
+**Decision**: Use **Hybrid (RRF)** for production - performs better (80% vs 67%) with RAG-focused queries
+**Rationale**: User queries will be RAG-related (e.g., "How does ColBERT work?"), not general NLP
+**See**: `references/day29-hybrid-retrieval-findings.md` for details
+
+**Day 3 (Wed, Nov 27, Week 5 Day 2) - 2 hours**
 - [ ] `src/generator.py`: OpenAI API wrapper
 - [ ] `src/rag_pipeline.py`: End-to-end pipeline
 - [ ] Create test question set (10 questions in `data/eval/test_questions.json`)
@@ -167,7 +173,7 @@ ArXiv Papers (PDF) → Chunking (500 tokens, 50 overlap)
 - [ ] Run end-to-end test on all 10 questions
 - [ ] Commit: "Add generation and end-to-end pipeline"
 
-**Day 4 (Thu, Nov 28) - 3 hours**
+**Day 4 (Thu, Nov 28, Week 5 Day 3) - 3 hours**
 - [ ] `evaluation/evaluate_retrieval.py`: Calculate Recall@K, MRR, NDCG
 - [ ] `evaluation/evaluate_rag.py`: Ragas integration
   - Context precision, context recall, faithfulness, answer relevance
@@ -176,7 +182,7 @@ ArXiv Papers (PDF) → Chunking (500 tokens, 50 overlap)
 - [ ] Run full evaluation, generate reports
 - [ ] Commit: "Add Ragas evaluation and error analysis"
 
-**Day 5 (Fri, Nov 29) - 3 hours**
+**Day 5 (Fri, Nov 29, Week 5 Day 4) - 3 hours**
 - [ ] `Dockerfile`: Containerize application
 - [ ] `docker-compose.yml`: Multi-service setup (optional)
 - [ ] `app.py`: Streamlit UI with citations
