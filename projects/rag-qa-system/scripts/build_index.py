@@ -15,10 +15,16 @@ def build_index():
     # pdf_paths = pdf_paths[:2]  # TODO: remove
     corpus_loader = CorpusLoader()
     corpus_loader.parse_pdfs(pdf_paths)
-    print(f"Parsing complete")
+    print(f"Parsing complete\n\n")
+
+    print(f"Number of chunks before filtering: {len(corpus_loader.get_chunks())}")
+    corpus_loader.filter_reference_chunks()
+    print(f"Number of chunks after filtering: {len(corpus_loader.chunks)}\n\n")
+
+    print(f"Statistics: {corpus_loader.get_statistics()}")
+
     corpus_loader.save_chunks(PROCESSED_DATA_DIR / "chunks.jsonl")
     print(f"Saved {len(corpus_loader.get_chunks())} chunks")
-    print(f"Statistics: {corpus_loader.get_statistics()}")
 
     chunks = corpus_loader.get_chunks()
     vector_store = VectorStore()

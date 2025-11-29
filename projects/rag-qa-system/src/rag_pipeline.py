@@ -1,13 +1,9 @@
 import os
-from pathlib import Path
 from typing import Literal
 
 from src.generator import Generator
 from src.hybrid_search import HybridRetriever
-from src.utils import get_openai_api_key
-
-PROJECT_ROOT = Path(__file__).parent.parent
-DATA_DIR = PROJECT_ROOT / "data" / "processed"
+from src.utils import PROCESSED_DATA_DIR, get_openai_api_key
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
@@ -29,7 +25,7 @@ class RagAssistant:
         if retrieval_mode != "none":
             self.retriever = HybridRetriever()
             self.retriever.load_from_file(
-                DATA_DIR / "rag_index.faiss", DATA_DIR / "chunks.jsonl"
+                PROCESSED_DATA_DIR / "rag_index.faiss", PROCESSED_DATA_DIR / "chunks.jsonl"
             )
 
     def query(self, query: str) -> str:

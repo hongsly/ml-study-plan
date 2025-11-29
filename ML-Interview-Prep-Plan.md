@@ -1201,7 +1201,7 @@ This is where you need the most practice:
 
 ---
 
-### Week 5 (Nov 25-29)
+### Week 5 (Nov 25-Dec 1)
 
 **Day 1 (Tue, Nov 25) - Hybrid Retrieval (2.5 hours)** ✅ **COMPLETE**:
 - [X] Implement BM25 sparse retrieval (rank-bm25) with NLTK tokenization
@@ -1225,29 +1225,35 @@ This is where you need the most practice:
 **Day 3 (Thu, Nov 27) - Planning & Cost Analysis (1 hour)**: ✅ **COMPLETE**
 - [X] Add ArXiv metadata to chunks (title, authors, year, URL)
 - [X] Research Ragas 0.3.9 API (generate_with_langchain_docs, Ollama investigation)
-- [X] **Critical discovery**: Ragas cost explosion ($10-15 for 1500 chunks vs expected $0.13)
-- [X] Design sampling strategy (250 chunks, 7-8 per paper → $1.25 total cost)
+- [X] **Critical discovery**: Ragas cost underestimate
+- [X] Design sampling strategy (250 chunks, 7-8 per paper)
 - [X] Analyze manual vs Ragas test format differences
 - [X] Clarify ground truth requirements for metrics (Context Recall needs it, Context Precision better with it)
 - [X] **Daily knowledge check**: 94% (A) - Excellent overdue item retention, caught error on Context Precision
 
-**Day 4 (Fri, Nov 28) - Ragas Evaluation (3 hours)**: (moved from Day 3)
-- [ ] Implement sampling strategy (250 chunks from 32 papers)
-- [ ] Generate 20 Ragas questions from sampled chunks (~$0.85)
-- [ ] Run Ragas metrics on 30 questions (10 manual + 20 Ragas): context precision, recall, faithfulness, answer relevance (~$0.40)
-- [ ] Calculate retrieval metrics: Recall@K, MRR, NDCG
-- [ ] Optimize prompts if scores <0.80 (prompt optimization integrated here)
-- [ ] Compare Dense vs Hybrid vs No-RAG
-- [ ] Error analysis and reporting
+**Day 4 (Fri, Nov 28) - Retrieval Evaluation (2 hours)**: ✅ **COMPLETE**
+- [X] Add reference filtering to corpus (Ollama-based, 9.5% filtered out)
+- [X] Rebuild index with filtered chunks (1395 remaining)
+- [X] Implement sampling strategy (~250 chunks from 32 papers)
+- [X] Generate 42 Ragas questions with Ollama (free, exceeded target)
+- [X] Create evaluate_retrieval.py: Recall@5, MRR, NDCG
+- [X] Run retrieval evaluation on 41 questions (3 modes: sparse, dense, hybrid)
+- [X] **Critical insight**: incomplete ground truth (metrics are lower bounds)
+- [ ] RAG evaluation deferred to Day 5 (use LLM-based context_recall)
 
-**Day 5 (Sat, Nov 29) - Docker + Streamlit (2 hours)**: (moved from Day 4)
-- [ ] Create Streamlit UI for Q&A interface
+**Day 5 (Sat, Nov 29) - RAG Evaluation & Deployment (3 hours)**:
+- [ ] Create evaluate_rag.py: Ragas metrics (LLM-based, avoids incomplete ground truth)
+- [ ] Run RAG evaluation on 52 questions (10 manual + 42 Ragas)
+- [ ] Error analysis: Categorize failure modes
+- [ ] Decision: Use SPARSE only or keep HYBRID with documented findings
+- [ ] Create Streamlit UI for Q&A interface (if time)
+- [ ] Write comprehensive README with architecture, results, key findings
+
+**Day 6 (Sun, Nov 30) - Deploy + Polish (2 hours)**:
 - [ ] Add Docker containerization
 - [ ] Test locally with docker-compose
-
-**Day 6 (Sun, Nov 30) - Deploy + Polish (2 hours)**: (moved from Day 5)
-- [ ] Deploy to Streamlit Cloud
-- [ ] Write comprehensive README with architecture, results, evaluation metrics
+- [ ] Deploy to Streamlit Cloud or GitHub (static demo)
+- [ ] Polish documentation (evaluation limitations, future improvements)
 - [ ] Add interview talking points document
 - [ ] GitHub commit with all code and documentation
 

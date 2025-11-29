@@ -182,42 +182,42 @@ ArXiv Papers (PDF) → Chunking (500 tokens, 50 overlap)
 - [x] Regenerate chunks with metadata (`scripts/build_index.py`)
 - [x] Researched Ragas 0.3.9 API (`generate_with_langchain_docs`, gpt-4o-mini setup)
 - [x] Investigated Ollama support (not reliable - missing `agenerate_prompt`)
-- [x] **Critical discovery**: Ragas cost explosion ($10-15 for 1500 chunks)
-  - Test run: 200 chunks → 200K tokens → $0.70 (SummaryExtractor phase only)
-  - Extrapolated: 1500 chunks × 2-3 phases = $10-15 total
-- [x] **Solution**: Sampling strategy (250 chunks, 7-8 per paper → $1.25 total)
+- [x] Ragas cost underestimate
+  - Test run: 200 chunks → 200K tokens → $0.70 (SummaryExtractor phase only) (but was using gpt-4o instead of gpt-4o-mini)
 - [x] Analyzed manual vs Ragas test format differences
 - [x] Discussed ground truth requirements for metrics
 - [x] **Daily knowledge check**: 94% (A) - Excellent overdue item retention
-- [ ] Implementation deferred to Day 5 (evaluation code, run metrics)
+- Implementation deferred to Day 5 (evaluation code, run metrics)
 
 **Key Decision**: Sample 250 representative chunks instead of all 1500 → 8× cost savings ($1.25 vs $10-15)
 
-**Day 5 (Fri, Nov 28, Week 5 Day 4) - 3 hours** - **EVALUATION IMPLEMENTATION** (moved from Day 4)
-- [ ] Implement sampling: `sample_chunks_by_paper()` (250 chunks, 7-8 per paper) - 15 min
-- [ ] Generate 20 Ragas questions from sampled chunks - 30 min (~$0.85)
-- [ ] Create `evaluation/evaluate_rag.py`: Ragas metrics (context precision, recall, faithfulness, answer relevance) - 45 min
-- [ ] Create `evaluation/evaluate_retrieval.py`: Recall@K, MRR, NDCG - 30 min
-- [ ] Run full evaluation on 30 questions (10 manual + 20 Ragas) - 30 min (~$0.40)
-- [ ] Create `evaluation/error_analysis.py`: Categorize failures - 15 min
-- [ ] Generate evaluation reports and summary
-- [ ] Commit: "Add comprehensive Ragas evaluation with sampling"
+**Day 5 (Fri, Nov 28, Week 5 Day 4) - 2 hours** ✅ **RETRIEVAL EVALUATION**
+- [x] Add reference filtering to `CorpusLoader.filter_reference_chunks()` (Ollama-based)
+- [x] Rebuild index with filtered chunks (1395 remaining, 9.5% references removed)
+- [x] Implement sampling: `_sample_chunks()` in generate_testset.py
+- [x] Generate 42 Ragas questions with Ollama (free, exceeded target of 40)
+- [x] Create `evaluation/evaluate_retrieval.py`: Recall@K, MRR, NDCG
+- [x] Run retrieval evaluation on 41 questions (3 modes: sparse, dense, hybrid)
+- [x] **Critical insight**: Sampled testset → incomplete ground truth (metrics are lower bounds)
+- [ ] RAG evaluation deferred to Day 6 (use LLM-based context_recall)
+- [ ] Error analysis deferred to Day 6
 
-**Total cost**: ~$1.25 (generation + evaluation)
+**Total cost**: $0 (Ollama for filtering + generation)
 
-**Day 6 (Sat, Nov 29, Week 5 Day 5) - 3 hours** - **DEPLOYMENT & DOCUMENTATION** (moved from Day 5)
-- [ ] `Dockerfile`: Containerize application
-- [ ] `docker-compose.yml`: Multi-service setup (optional)
-- [ ] `app.py`: Streamlit UI with citations
-- [ ] `.github/workflows/ci.yml`: Basic CI (linting, tests)
-- [ ] Deploy to Streamlit Cloud or Hugging Face Spaces
+**Day 6 (Sat, Nov 29, Week 5 Day 5) - 3 hours** - **RAG EVALUATION & DEPLOYMENT**
+- [ ] Create `evaluation/evaluate_rag.py`: Ragas metrics (LLM-based, avoids incomplete ground truth issue)
+  - Context Precision, Context Recall, Faithfulness, Answer Relevance
+- [ ] Run RAG evaluation on 52 questions (10 manual + 42 Ragas)
+- [ ] Error analysis: Categorize failure modes
+- [ ] Decision: Use SPARSE only or keep HYBRID with documented findings
+- [ ] `app.py`: Streamlit UI with citations (if time)
 - [ ] Write comprehensive `README.md`:
   - Problem, architecture, tech stack
-  - Results (retrieval metrics, Ragas scores)
-  - How to run locally and in Docker
-  - Future improvements
+  - Results (retrieval metrics, Ragas scores, key finding: BM25 > Hybrid)
+  - Evaluation limitations (sampled ground truth)
+  - Future improvements (fine-tuned embeddings, learned fusion)
 - [ ] Push to GitHub
-- [ ] Commit: "Add deployment and documentation"
+- [ ] Commit: "Complete RAG evaluation and documentation"
 
 ---
 
