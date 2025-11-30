@@ -33,7 +33,7 @@ class Generator:
                 instructions=instructions,
                 metadata={"retrieval_mode": retrieval_mode}
             )
-            print(f"Tokens used: {response.usage}")
+            # print(f"Tokens used: {response.usage}")
             return response.output_text
         except OpenAIError as e:
             raise RuntimeError(f"OpenAI API error: {e}")

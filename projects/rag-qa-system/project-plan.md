@@ -204,20 +204,45 @@ ArXiv Papers (PDF) → Chunking (500 tokens, 50 overlap)
 
 **Total cost**: $0 (Ollama for filtering + generation)
 
-**Day 6 (Sat, Nov 29, Week 5 Day 5) - 3 hours** - **RAG EVALUATION & DEPLOYMENT**
-- [ ] Create `evaluation/evaluate_rag.py`: Ragas metrics (LLM-based, avoids incomplete ground truth issue)
-  - Context Precision, Context Recall, Faithfulness, Answer Relevance
-- [ ] Run RAG evaluation on 52 questions (10 manual + 42 Ragas)
-- [ ] Error analysis: Categorize failure modes
-- [ ] Decision: Use SPARSE only or keep HYBRID with documented findings
-- [ ] `app.py`: Streamlit UI with citations (if time)
+**Day 6 (Sat, Nov 29, Week 5 Day 5) - 3 hours** ✅ **RAG EVALUATION & ERROR ANALYSIS**
+- [x] Run RAG evaluation on 10 manual + 41 Ragas questions (4 modes: sparse, dense, hybrid, none)
+  - Initial results: answer_correctness 0.39-0.58 (unexpectedly low)
+- [x] **Question quality analysis**: Discovered 46% of Ragas questions were low-quality
+  - Created `experiments/analyze_question_quality.py` (citation pattern detection)
+  - Found 19/41 suspicious questions (from bibliography/table/footnote chunks)
+  - **Root cause identified**: Generated from 500-token chunks instead of whole documents
+  - Ragas needs whole documents to build knowledge graph
+- [x] Manual review and filtering
+  - Created `experiments/review_suspicious_questions.py` (interactive review)
+  - Categorized: 11 definitely bad, 4 moderate, 4 contaminated, 1 false positive
+  - Filtered 13 low-quality questions → 28 clean questions (68% retention)
+  - Created `experiments/filter_ragas_testset.py` (generates filtered testset)
+- [x] Metrics recalculation on filtered testset
+  - Created `experiments/filter_and_recalculate.py`
+  - ~13% average improvement across all metrics
+  - SPARSE: 66.8% answer_correctness, HYBRID: 62.8%, DENSE: 53.0%
+- [x] **Error analysis**: Categorize failure modes
+  - Created `experiments/analyze_errors.py` (pattern-based categorization)
+  - Key finding: **Dense 29.6% retrieval failures vs Sparse 10.7%** (3× worse!)
+  - SPARSE success rate: 57.1% (best), HYBRID: 46.4%, DENSE: 25.9%
+  - Failure patterns: retrieval failure, generation failure, hallucination, ranking issue
+- [x] **Decision**: Default to SPARSE (best performance), keep HYBRID as option (highest recall 92%)
+- [ ] Streamlit UI (deferred to next session)
+- [ ] Docker deployment (deferred to next session)
 - [ ] Write comprehensive `README.md`:
   - Problem, architecture, tech stack
-  - Results (retrieval metrics, Ragas scores, key finding: BM25 > Hybrid)
-  - Evaluation limitations (sampled ground truth)
+  - Results (retrieval metrics, Ragas scores)
   - Future improvements (fine-tuned embeddings, learned fusion)
-- [ ] Push to GitHub
-- [ ] Commit: "Complete RAG evaluation and documentation"
+  - License note (MIT + PyMuPDF4LLM AGPL acknowledgment)
+- [ ] Push to GitHub (deferred until project complete)
+
+**Key Insights**:
+1. Testset generation methodology matters: chunks vs whole documents is critical
+2. SPARSE > DENSE for small technical corpus (keyword matching advantage)
+3. Question quality filtering improved metrics by ~13%
+4. Evaluation requires both correctness AND faithfulness (parametric knowledge edge case)
+
+**Status**: RAG evaluation complete, ready for UI + deployment
 
 ---
 

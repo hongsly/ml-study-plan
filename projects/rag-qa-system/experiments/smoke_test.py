@@ -55,7 +55,7 @@ def main():
             print("-" * 80)
 
             try:
-                answer = assistant.query(q["question"])
+                answer, _context = assistant.query(q["question"])
                 print(f"[Answer] {answer}\n")
             except Exception as e:
                 print(f"[ERROR] {e}\n")

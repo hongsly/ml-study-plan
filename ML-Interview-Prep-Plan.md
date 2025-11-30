@@ -1241,13 +1241,19 @@ This is where you need the most practice:
 - [X] **Critical insight**: incomplete ground truth (metrics are lower bounds)
 - [ ] RAG evaluation deferred to Day 5 (use LLM-based context_recall)
 
-**Day 5 (Sat, Nov 29) - RAG Evaluation & Deployment (3 hours)**:
-- [ ] Create evaluate_rag.py: Ragas metrics (LLM-based, avoids incomplete ground truth)
-- [ ] Run RAG evaluation on 52 questions (10 manual + 42 Ragas)
-- [ ] Error analysis: Categorize failure modes
-- [ ] Decision: Use SPARSE only or keep HYBRID with documented findings
-- [ ] Create Streamlit UI for Q&A interface (if time)
-- [ ] Write comprehensive README with architecture, results, key findings
+**Day 5 (Sat, Nov 29) - RAG Evaluation & Error Analysis (5 hours)**: ✅ **COMPLETE**
+- [X] Run RAG evaluation on 10 manual + 41 Ragas questions (4 modes)
+- [X] **Question quality analysis**: Discovered 46% low-quality questions from bibliography sections
+- [X] **Root cause identified**: Generated from 500-token chunks instead of whole documents
+- [X] Manual review and filtering: 13 questions removed → 28 clean questions
+- [X] Metrics recalculation: ~13% improvement after filtering
+- [X] **Error analysis**: Categorized failure modes
+  - Key finding: Dense 29.6% retrieval failures vs Sparse 10.7% (3× worse!)
+  - SPARSE success rate: 57.1% (best), HYBRID: 46.4%, DENSE: 25.9%
+- [X] **Decision**: Default to SPARSE (best performance), keep HYBRID as option
+- [ ] Streamlit UI (deferred to Day 6)
+- [ ] Docker deployment (deferred to Day 6)
+- [ ] Write comprehensive README (architecture, results, error analysis, technical decisions)
 
 **Day 6 (Sun, Nov 30) - Deploy + Polish (2 hours)**:
 - [ ] Add Docker containerization

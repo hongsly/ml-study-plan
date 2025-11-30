@@ -40,4 +40,4 @@ class RagAssistant:
         answer = self.generator.generate(
             query, context, model=self.model, retrieval_mode=self.retrieval_mode
         )
-        return answer
+        return answer, context
