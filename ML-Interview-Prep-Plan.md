@@ -1255,14 +1255,14 @@ This is where you need the most practice:
 - [X] **Docker containerization**: Dockerfile + docker-compose.yml
 - [X] **Comprehensive README.md**: Architecture, results, technical decisions
 - [X] **File structure**: Created outputs/eval_results/ for clean separation
-- [ ] Push to GitHub (deferred - will create separate portfolio repo)
+- [X] Push to GitHub (separate portfolio repo: https://github.com/hongsly/rag-qa-system)
 - [ ] Streamlit Cloud deployment (optional)
 
 **Phase 2 Deliverable**:
 - ✅ Production-quality RAG system on GitHub
 - ✅ Demonstrates: Hybrid retrieval, RRF fusion, automated evaluation, Docker deployment
 - ✅ Interview-ready talking points (architecture, evaluation rigor, results)
-- ✅ Real metrics: Recall@K, MRR, Ragas scores
+- ✅ Real metrics: Recall@K, Ragas scores
 
 **Resources**:
 - Project folder: `projects/rag-qa-system/`

@@ -1,5 +1,13 @@
 # RAG Q&A System
 
+> **📌 Note**: This project has been moved to a separate portfolio repository:
+> **https://github.com/hongsly/rag-qa-system**
+>
+> This copy remains in the study repo as a historical snapshot (completed Nov 30, 2025).
+> All future development and improvements will happen in the portfolio repo.
+
+---
+
 A production-quality **Retrieval-Augmented Generation (RAG)** system for question-answering over research papers, featuring hybrid retrieval (BM25 + Dense), comprehensive evaluation, and Docker deployment.
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
