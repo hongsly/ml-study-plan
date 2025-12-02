@@ -1276,32 +1276,50 @@ This is where you need the most practice:
 **Time**: 24.5-30 hours total (8-10 hours/week, matches Week 1-4 pace)
 **Rationale**: Address hands-on freshness across ML areas, prepare for Big Tech + AI-first interviews
 
+**Ongoing Practice Throughout Phase 3 (Weeks 6-8)**:
+- **Algorithmic coding**: 1-2 problems/week from NeetCode 150 (20-30 min each)
+  - Mid-week (Wed/Thu) + Weekend (Sat/Sun)
+  - Maintain speed on validated patterns: arrays, two pointers, trees, DP
+- **ML coding**: 1 problem/week from [NeetCode ML](https://neetcode.io/practice) (starting Week 8)
+  - Examples: Gradient Descent, Linear Regression Training, Self Attention
+  - Goal: 15-30 min per problem
+
+---
+
 ### Week 6: LeetCode Assessment + Neural Network Start (8-10 hours)
 
-**Day 1-2: LeetCode Assessment (2.5-3 hours)**:
-- [ ] **Day 1** (1.5 hrs): 3 Medium problems (arrays, hashmaps, two pointers)
-- [ ] **Day 2** (1-1.5 hrs): 2 Medium problems (trees/graphs, DP or recursion)
-- [ ] **Goal**: Assess current proficiency - if 7+/10 solved in <30 min, skills retained
-- [ ] **Outcome**: Determine if intensive LeetCode prep needed or light ongoing practice sufficient
+**Day 1: LeetCode Assessment (1.5 hrs)** ✅ COMPLETE:
+- [x] **Completed 5/5 problems** (Two Sum, Three Sum, Product Except Self, Binary Tree Level Order, Coin Change)
+- [x] **Average time**: ~15-20 min per problem (under 30 min target)
+- [x] **Outcome**: Skills retained → Light ongoing practice sufficient (1-2 problems/week)
 
-**Day 3-5: Neural Network Implementation Part 1 (5.5-7 hours)**:
-- [ ] **Day 3** (2 hrs): Forward pass
+**Day 2-4: Neural Network Implementation Part 1 (5.5-7 hours)**:
+- [ ] **Day 2** (2 hrs): Forward pass
   - Matrix multiplication for fully-connected layers
   - Activation functions (ReLU, sigmoid, softmax)
   - Loss calculation (cross-entropy)
   - Test on toy data (XOR or synthetic)
-- [ ] **Day 4** (2.5 hrs): Backpropagation
+- [ ] **Day 3** (2.5 hrs): Backpropagation
   - Gradient calculations for each layer (∂L/∂W, ∂L/∂b)
   - Chain rule implementation
   - Numerical gradient check for correctness
   - Validate gradients match numerical approximation
-- [ ] **Day 5** (1.5-2 hrs): Basic training loop
+- [ ] **Day 4** (1.5-2 hrs): Basic training loop
   - SGD optimizer implementation
   - Batch processing
   - Train on simple dataset (XOR or small synthetic)
   - Verify loss decreases
 
-**Week 6 Checkpoint**: LeetCode proficiency assessed, Neural network 60% complete
+**Ongoing Practice (Weeks 6-12)**:
+- [ ] **Algorithmic coding**: 1-2 problems/week to maintain speed
+  - Mid-week (Wed/Thu): 1 problem, 20-30 min
+  - Weekend (Sat/Sun): 1 problem, 20-30 min
+  - **Source**: NeetCode 150 (validated patterns: arrays, two pointers, trees, DP)
+- [ ] **ML coding** (starting Week 8): 1 problem/week from NeetCode ML section
+  - Examples: Gradient Descent, Linear Regression Training, Self Attention
+  - **Goal**: 15-30 min per problem, validate implementation speed
+
+**Week 6 Checkpoint**: LeetCode proficiency assessed ✅, Neural network 60% complete
 
 ---
 
@@ -1334,9 +1352,13 @@ This is where you need the most practice:
   - k-NN: 30 min implementation target
   - k-means: 45 min implementation target
   - Validate correctness against sklearn
-- [ ] **Friday** (1.5 hrs): Neural network from memory + LeetCode
+- [ ] **Friday** (1.5 hrs): Neural network from memory + coding practice
   - Reimplement simple neural network without looking at code (1 hr)
-  - 2 LeetCode Medium problems (30 min)
+  - 1 NeetCode algorithmic + 1 NeetCode ML problem (30 min)
+
+**Ongoing Practice**:
+- [ ] **Algorithmic LeetCode**: 1-2 problems/week (NeetCode 150)
+- [ ] **ML Coding**: 1 problem/week (NeetCode ML: https://neetcode.io/practice)
 
 **Week 7 Checkpoint**: 2 portfolio projects complete, speed validated on core algorithms
 
@@ -1397,7 +1419,7 @@ This is where you need the most practice:
   - Cross-team collaboration examples
   - Technical leadership and mentorship
 - [ ] Prepare thoughtful questions for interviewers (based on company research)
-- [ ] 2 LeetCode Medium problems (30 min) for maintenance
+- [ ] Coding practice (30 min): 1 NeetCode algorithmic + 1 NeetCode ML problem
 
 **Phase 3 Deliverables**:
 - ✅ 2 portfolio projects (RAG + Neural Network) on GitHub
@@ -1409,6 +1431,8 @@ This is where you need the most practice:
 **Resources**:
 - ML System Design: `ML-System-Design-Questions.md`
 - ML Coding: `ML-Coding-Questions.md`
+- Algorithmic Coding: NeetCode 150 (https://neetcode.io/practice)
+- ML Coding Practice: NeetCode ML (https://neetcode.io/practice) - Gradient Descent, Linear Regression, Self Attention, etc.
 - Behavioral: `Behavioral-Questions.md`
 - Mock interviews: Pramp (https://www.pramp.com/), interviewing.io (https://interviewing.io/)
 
