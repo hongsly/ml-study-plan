@@ -1294,21 +1294,30 @@ This is where you need the most practice:
 - [x] **Outcome**: Skills retained → Light ongoing practice sufficient (1-2 problems/week)
 
 **Day 2-4: Neural Network Implementation Part 1 (5.5-7 hours)**:
-- [ ] **Day 2** (2 hrs): Forward pass
-  - Matrix multiplication for fully-connected layers
-  - Activation functions (ReLU, sigmoid, softmax)
-  - Loss calculation (cross-entropy)
-  - Test on toy data (XOR or synthetic)
-- [ ] **Day 3** (2.5 hrs): Backpropagation
-  - Gradient calculations for each layer (∂L/∂W, ∂L/∂b)
-  - Chain rule implementation
-  - Numerical gradient check for correctness
-  - Validate gradients match numerical approximation
-- [ ] **Day 4** (1.5-2 hrs): Basic training loop
-  - SGD optimizer implementation
-  - Batch processing
-  - Train on simple dataset (XOR or small synthetic)
-  - Verify loss decreases
+- [x] **Day 2** (2.5 hrs): Forward pass + initialization ✅ COMPLETE (2025-12-02)
+  - Implemented PyTorch-like Module base class with flexible signatures
+  - Xavier/He initialization (plain functions, not modules)
+  - Linear layer with forward pass (y = x @ W + b)
+  - Activation functions (ReLU, Sigmoid, Softmax) - forward + backward
+  - Loss calculation (CrossEntropyLoss, MSELoss) with epsilon and batch normalization
+  - **Design decisions**: Losses as Modules (PyTorch pattern), flexible `*args` signatures
+  - **Reference created**: `references/Week6-Day2-NN-Day1-Reference.md`
+- [ ] **Day 3** (3 hrs): Backpropagation + numerical gradient checking
+  - Implement Linear.backward() with gradient derivations (∂L/∂W, ∂L/∂b, ∂L/∂x)
+  - Activation backward passes (ReLU, Sigmoid)
+  - Loss backward passes (CrossEntropyLoss with combined softmax-CE)
+  - **Numerical gradient checking** ⭐ (THE critical verification)
+    - Implement `numerical_gradient()` with finite differences
+    - Test on 2-layer toy network
+    - Target: Relative error < 1e-7
+  - End-to-end test: Run 10 gradient descent steps, verify loss decreases
+  - **Action item**: Reinforce He/Xavier initialization math (today's weak area)
+- [ ] **Day 4** (2 hrs): Training loop + optimizers
+  - SGD optimizer with momentum
+  - Adam optimizer with bias correction (portfolio differentiator)
+  - Training loop with mini-batches, shuffling, loss tracking
+  - Train on XOR or synthetic data to 95%+ accuracy
+  - Compare SGD vs Adam convergence (simple plot)
 
 **Ongoing Practice (Weeks 6-12)**:
 - [ ] **Algorithmic coding**: 1-2 problems/week to maintain speed
